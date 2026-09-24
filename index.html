@@ -9,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <!-- Google Fonts: Bodoni Moda -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;1,6..96,600&display=swap" rel="stylesheet">
   <style>
     :root {
       --text-main: #444444;
@@ -88,7 +91,119 @@
       justify-content: flex-start;
       align-items: center;
     }
+.animated-brand {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 700;
+      font-style: normal;
+      /* Pinning optical size gives heavy, solid stems like your PNG */
+      font-variation-settings: 'opsz' 18;
+      font-size: 1.45rem;
+      letter-spacing: -0.01em;
+      color: #111111;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
 
+    .brand-first,
+    .brand-last {
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .brand-first {
+      margin-right: 0.2em;
+    }
+
+    .brand-last {
+      margin-left: 0.2em;
+    }
+
+    .typewriter-middle {
+      display: inline-block;
+      color: #111111;
+      font-weight: 700;
+      white-space: pre;
+    }
+
+    @media (min-width: 992px) {
+      .animated-brand {
+        font-size: 1.85rem;
+      }
+    }
+
+.brand-first,
+.brand-last {
+  font-weight: 600;
+  color: #111111;
+}
+
+.brand-first {
+  margin-right: 0.15em;
+}
+
+.brand-last {
+  margin-left: 0.15em;
+}
+
+.typewriter-middle {
+  display: inline-block;
+  color: #111111;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: pre;
+}
+
+/* --- Animated Brand Header --- */
+    .animated-brand {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Bodoni Moda', Georgia, serif;
+      font-weight: 600;
+      font-optical-sizing: none;
+      font-variation-settings: 'opsz' 10;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-size: clamp(1.25rem, 3.8vw, 1.85rem);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: #111111;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-first,
+    .brand-last {
+      font-weight: 600;
+      font-variation-settings: 'opsz' 10;
+      color: #111111;
+    }
+
+    .brand-first {
+      margin-right: 0.18em;
+    }
+
+    .brand-last {
+      margin-left: 0.18em;
+    }
+
+    .typewriter-middle {
+      display: inline-block;
+      color: #111111;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 10;
+      white-space: pre;
+    }
+
+
+    @media (min-width: 992px) {
+      .animated-brand {
+        font-size: 1.65rem;
+        height: 2rem;
+      }
+    }
     .logo {
       width: 150px;
       height: auto;
@@ -550,9 +665,11 @@
   <div class="sticky-header-container" id="header-container">
     <!-- Top Row: Brand & Unified Links Row -->
     <header class="top-header-row">
-      <div class="brand-bar">
-        <a href="#top" class="js-scroll-link">
-          <img src="img/PAVEELAI_logo.svg" alt="Yat Fung LAI" class="logo">
+<div class="brand-bar">
+        <a href="#top" class="js-scroll-link animated-brand" aria-label="Pavee Yat Fung LAI">
+          <span class="brand-first">Pavee</span>
+          <span class="typewriter-middle" id="typewriter"></span>
+          <span class="brand-last">LAI</span>
         </a>
       </div>
       
@@ -1231,62 +1348,48 @@
   </footer>
 
   <!-- Precision Navigation & Category Filter Logic -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const headerContainer = document.getElementById('header-container');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const projectBlocks = document.querySelectorAll('.project-block');
-      const scrollLinks = document.querySelectorAll('.js-scroll-link');
+<script>
+    (function () {
+      function startTypewriter() {
+        const el = document.getElementById('typewriter');
+        if (!el) return;
 
-      // 1. Precise Smooth Scrolling for Nav Links
-      scrollLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          
-          if (targetId === '#top') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        const phrase = '• Yat Fung';
+        let i = 0;
+        let isDeleting = false;
+
+        function run() {
+          if (!isDeleting) {
+            el.textContent = phrase.slice(0, i + 1);
+            i++;
+
+            if (i === phrase.length) {
+              setTimeout(() => { isDeleting = true; run(); }, 5000);
+              return;
+            }
+            setTimeout(run, 75);
           } else {
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-              const headerHeight = headerContainer.offsetHeight;
-              const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-              const offsetPosition = elementPosition - headerHeight - 15;
+            el.textContent = phrase.slice(0, i - 1);
+            i--;
 
-              window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-              });
+            if (i === 0) {
+              el.textContent = '';
+              setTimeout(() => { isDeleting = false; run(); }, 3500);
+              return;
             }
+            setTimeout(run, 40);
           }
-        });
-      });
+        }
 
-      // 2. Category Filter Logic with Smooth Auto-Reset
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
+        setTimeout(run, 1500);
+      }
 
-          const filterValue = this.getAttribute('data-filter');
-
-          projectBlocks.forEach(block => {
-            const blockCategory = block.getAttribute('data-category');
-            if (filterValue === 'all' || blockCategory === filterValue) {
-              block.classList.remove('is-hidden');
-            } else {
-              block.classList.add('is-hidden');
-            }
-          });
-
-          // Reset to top smoothly on filter change
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        });
-      });
-    });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startTypewriter);
+      } else {
+        startTypewriter();
+      }
+    })();
   </script>
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e1bb45461858401f868a96f307b440cb"}'></script>
