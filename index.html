@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAVEE LAI | Creative & Art Director</title>
+  
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --text-main: #444444;
+      --text-muted: #666666;
+      --text-highlight: #00a1e0;
+      --bg-color: #ffffff;
+      --border-light: #f0f0f0;
+      --font-stack: "Roboto", "Helvetica", "Arial", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Desktop font size boosted by +2pt (~122% base) */
+    html {
+      font-size: 122%;
+      scroll-behavior: smooth;
+      scroll-padding-top: 10rem;
+    }
+
+    /* Mobile typography remains untouched */
+    @media (max-width: 768px) {
+      html {
+        font-size: 105%;
+        scroll-padding-top: 8.5rem;
+      }
+    }
+
+    body {
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      background-color: var(--bg-color);
+      line-height: 1.6;
+      font-size: 0.9375rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--text-highlight);
+    }
+
+    /* Unified Sticky Top Header Container */
+    .sticky-header-container {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    /* Top Row: Brand & Navigation */
+    .top-header-row {
+      pointer-events: auto;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      width: 100%;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .brand-bar {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .logo {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    /* Header Nav Links Group */
+    .top-links-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .top-links-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-divider {
+      display: none;
+      color: #ddd;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+    }
+
+    .contact-link img {
+      display: none;
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Sub-Row: Transparent Category Filter Bar */
+    .sub-top-banner {
+      pointer-events: auto;
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .sub-top-banner::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Floating Filter Buttons */
+    .filter-btn {
+      flex-shrink: 0;
+      white-space: nowrap;
+      background-color: #ffffff;
+      border: 1px solid #dcdcdc;
+      color: var(--text-muted);
+      font-family: var(--font-stack);
+      font-size: 0.775rem;
+      letter-spacing: 0.02em;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-highlight);
+      color: var(--text-highlight);
+    }
+
+    .filter-btn.active {
+      background-color: #222222 !important;
+      border-color: #222222 !important;
+      color: #ffffff !important;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Main Container */
+    .main-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 1.5rem 1.25rem 3rem 1.25rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    /* Project Block */
+    .project-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+      width: 100%;
+      transition: opacity 0.25s ease;
+    }
+
+    .project-block.is-hidden {
+      display: none !important;
+    }
+
+    /* Text Block Column */
+    .project-info {
+      width: 100%;
+      background-color: #ffffff;
+      background-image: linear-gradient(135deg, #e3e3e3 0%, #ffffff 140px);
+      background-repeat: no-repeat;
+      padding: 1.125rem 1rem 1.25rem 1rem;
+      align-self: flex-start;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.85rem;
+      line-height: 1.25;
+    }
+
+    .project-meta {
+      font-size: 0.8125rem;
+      margin-bottom: 1.125rem;
+      letter-spacing: 0.04em;
+      line-height: 1.55;
+    }
+
+    .project-details {
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    .project-details h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-details p {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Media Area */
+    .project-media {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-width: 0;
+    }
+
+    .media-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .media-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .media-item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .media-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .media-caption {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Video Embeds */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background-color: #000;
+    }
+
+    .video-wrapper.square {
+      padding-bottom: 100%;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* About Section */
+    .about-wrapper {
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-light);
+      width: 100%;
+    }
+
+    .about-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .about-photo-col {
+      width: 100%;
+      align-self: flex-start;
+    }
+
+    .about-portrait {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .about-content {
+      width: 100%;
+      max-width: 980px;
+    }
+
+    .about-logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .about-role {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 1.25rem;
+    }
+
+    .about-heading {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-body-text {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      letter-spacing: 0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+      background: #fafafa;
+      padding: 1.25rem;
+      border: 1px solid #ededed;
+    }
+
+    .strength-item h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #222222;
+      margin-bottom: 0.35rem;
+    }
+
+    .strength-item p {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .site-footer {
+      width: 100%;
+      margin-top: 5rem;
+      padding: 2rem 1.25rem;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.75rem;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    /* Desktop Viewport Alignment */
+    @media (min-width: 992px) {
+      .top-header-row {
+        padding: 1.25rem 3rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        width: 200px;
+      }
+
+      /* Desktop: Portfolio About | [Icon] Email */
+      .top-links-row {
+        gap: 1.25rem;
+        overflow-x: visible;
+        margin-left: auto;
+      }
+
+      .header-nav {
+        gap: 1.5rem;
+      }
+
+      .nav-divider {
+        display: inline-block;
+      }
+
+      .contact-link img {
+        display: inline-block;
+      }
+
+      /* Desktop: Right-align filter pills */
+      .sub-top-banner {
+        padding: 0.85rem 3rem 0.5rem 3rem;
+        gap: 0.75rem;
+        overflow-x: visible;
+        justify-content: flex-end;
+      }
+
+      .filter-btn {
+        font-size: 0.8125rem;
+        padding: 0.4rem 1.15rem;
+      }
+
+      .main-container {
+        padding: 2.5rem 3rem 3rem 3rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .project-block {
+        flex-direction: row;
+        gap: 2.5rem;
+      }
+
+      .project-info {
+        flex: 0 0 calc(25% - 1.875rem);
+        width: calc(25% - 1.875rem);
+      }
+
+      .project-media {
+        flex: 0 0 calc(75% - 0.625rem);
+        width: calc(75% - 0.625rem);
+      }
+
+      .media-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .media-grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .about-row {
+        flex-direction: row;
+        gap: 2.5rem;
+      }
+
+      .about-photo-col {
+        flex: 0 0 calc(25% - 1.875rem);
+        width: calc(25% - 1.875rem);
+      }
+
+      .about-portrait {
+        max-width: 100%;
+      }
+
+      .about-content {
+        flex: 0 0 calc(75% - 0.625rem);
+        width: calc(75% - 0.625rem);
+      }
+
+      .strengths-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .site-footer {
+        padding: 2.5rem 3rem;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Unified Sticky Header Container -->
+  <div class="sticky-header-container" id="header-container">
+    <!-- Top Row: Brand & Unified Links Row -->
+    <header class="top-header-row">
+      <div class="brand-bar">
+        <a href="#top" class="js-scroll-link">
+          <img src="img/PAVEELAI_logo.svg" alt="Yat Fung LAI" class="logo">
+        </a>
+      </div>
+      
+      <!-- Right-Aligned Group: Portfolio About | [Gmail Icon] yatfung.lai@gmail.com -->
+      <div class="top-links-row">
+        <ul class="header-nav">
+          <li><a href="#top" class="js-scroll-link">Portfolio</a></li>
+          <li><a href="#about" class="js-scroll-link">About</a></li>
+        </ul>
+        <span class="nav-divider">|</span>
+        <a href="mailto:yatfung.lai@gmail.com" class="contact-link">
+          <img src="img/icon_gmail.png" alt="Email">
+          <span>yatfung.lai@gmail.com</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Sub-Row: Single-Line Horizontal Filter Bar (Right-aligned on desktop) -->
+    <nav class="sub-top-banner" aria-label="Portfolio Categories">
+      <button type="button" class="filter-btn active" data-filter="all">All</button>
+      <button type="button" class="filter-btn" data-filter="automotive">Automotive</button>
+      <button type="button" class="filter-btn" data-filter="cpg">CPG & Healthcare</button>
+    </nav>
+  </div>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    
+    <h1 class="section-title">Portfolio</h1>
+
+    <!-- Project 1: Chevrolet Montana 2025 -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Let's go with<br/>Chevrolet Montana 2025</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Brazil, Mexico, Colombia & South America)<br/>
+          <strong>Date:</strong> Aug 2023<br/>
+          <strong>Platform:</strong> TVC 15 sec, CGI Library, Website System
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Chevrolet Montana as the ultimate sport-utility truck, transforming everyday life into adventure by blending work, life, and play seamlessly.</p>
+          <h3>Strategy</h3>
+          <p>With the Montana, routine becomes exciting. Whether navigating city streets for work, running errands, or escaping to nature, it’s the pickup for those craving freedom and spontaneity.</p>
+          <h3>Solution</h3>
+          <p>Follow Rodrigo, an entrepreneur who shifts seamlessly from weekdays running his business to weekend adventures. Designed master TV templates, photorealistic CGI asset systems, and responsive website rollouts across Latin American markets.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/UGKPv-ERVbM?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+          <div class="media-caption">TV commercial (Brazil version) 15 sec</div>
+        </div>
+        <div class="media-grid-2">
+          <div class="media-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube-nocookie.com/embed/Q7ZPyb1cS28?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="media-caption">TV commercial (Master version) 60 sec</div>
+          </div>
+          <div class="media-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube-nocookie.com/embed/uGsz04gzr8I?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="media-caption">Product features video 24 sec</div>
+          </div>
+        </div>
+        <div class="media-grid-2">
+          <div class="media-item">
+            <img src="img/work/montana_00.jpg" alt="Photorealistic CGI product shoot" loading="lazy">
+            <div class="media-caption">Photorealistic CGI product shoot with human models</div>
+          </div>
+          <div class="media-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube-nocookie.com/embed/mVSWGZzU930?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="media-caption">Montana Brazil product website</div>
+          </div>
+        </div>
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/montana_01.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/montana_02.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/montana_03.jpg" loading="lazy" alt=""></div>
+        </div>
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/montana_04.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/montana_05.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/montana_06.jpg" loading="lazy" alt=""></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2: Chevrolet Spin 2025 -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Spin 2025 :<br/>The Vehicle That Changes With You</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Argentina, Brazil, Colombia & South America)<br/>
+          <strong>Date:</strong> Aug 2024<br/>
+          <strong>Platform:</strong> Website Architecture & CGI Asset Pipeline
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Chevrolet Spin as the ultimate 7-seater crossover, offering versatility, comfort, and practicality to adapt to every family’s needs.</p>
+          <h3>Strategy</h3>
+          <p>Designed for families on the go, the Spin fits seamlessly into daily routines and special moments, ensuring every journey is smooth and enjoyable.</p>
+          <h3>Solution</h3>
+          <p>Follow a family's day as the Spin adapts from school runs to outdoor getaways. Directed master web architecture and photorealistic CGI suites deployed across South American regional portals.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/ELfEkfptyt8?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+          <div class="media-caption">Spin Argentina product website walk-through</div>
+        </div>
+        <div class="media-item">
+          <img src="img/work/spin_00.jpg" loading="lazy" alt="Spin CGI">
+          <div class="media-caption">Photorealistic CGI product shoot</div>
+        </div>
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/spin_01.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/spin_02.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/spin_03.jpg" loading="lazy" alt=""></div>
+        </div>
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/spin_04.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/spin_05.jpg" loading="lazy" alt=""></div>
+          <div class="media-item"><img src="img/work/spin_06.jpg" loading="lazy" alt=""></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3: Know Your Chevrolet -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Know Your Chevrolet<br/>How Things Work</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet<br/>
+          <strong>Date:</strong> Mar 2022 - Jan 2024<br/>
+          <strong>Platform:</strong> YouTube Master Playlist (46 Episodes)
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Demystify advanced automotive technology by educating users on how to safely and effectively operate complex vehicle features like Automatic Parking Assist and HD Surround Vision.</p>
+          <h3>Strategy</h3>
+          <p>Translate dense user manuals into bite-sized, visual step-by-step video tutorials. Build an easily searchable "living" digital library.</p>
+          <h3>Solution</h3>
+          <p>Directed and produced 46 short-form instructional videos pairing clean visual hierarchy and on-screen graphics to transform hard engineering data into accessible knowledge.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/CE_6yMilMIs?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 4: Dettol Antiseptic Liquid -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Antiseptic Liquid :<br/>Protect Everything You Love</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand & Southeast Asia)<br/>
+          <strong>Date:</strong> May 2022<br/>
+          <strong>Platform:</strong> TVC 30 sec & Regional Print Key Visuals
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Reinforce Dettol Antiseptic Liquid as a trusted protector for Thai families, highlighting its role in safeguarding loved ones against 100 illness-causing germ strains.</p>
+          <h3>Strategy</h3>
+          <p>Appeal to parents by showing how protection and health empower children to pursue their ambitions without interruption.</p>
+          <h3>Solution</h3>
+          <p>Featured the inspiring journey of Panipak Wongpattanakit, Thailand’s two-time Olympic taekwondo champion, framing Dettol as the quiet guardian behind her resilience.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/_tDc2fGa3WA?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <div class="media-item">
+          <img src="img/work/dasl_p.jpg" loading="lazy" alt="Dettol Print">
+          <div class="media-caption">Print: Key Visual with Olympic taekwondo champion Panipak Wongpattanakit for Thai Market</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 5: Dettol Soap -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Soap : <br/>Never Stop Protecting</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand)<br/>
+          <strong>Date:</strong> Oct 2021<br/>
+          <strong>Platform:</strong> TVC 45 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position Dettol Soap as an accessible solution protecting families from hidden dirt and bacteria in everyday life.</p>
+          <h3>Strategy</h3>
+          <p>Emphasize continuous protection during daily outdoor adventures and social gatherings.</p>
+          <h3>Solution</h3>
+          <p>A narrative following a Thai family enjoying a temple fair. Dettol Soap is featured as their trusted companion, keeping family members safe while they immerse in the moment.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/I2BMkjvv07s?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 6: Enfagrow A+ IQ and EQ -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : <br/>Advancing Your Child’s IQ and EQ</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Jul 2021<br/>
+          <strong>Platform:</strong> TVC 40 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position Enfagrow A+ as the superior formula enriched with MFGM, DHA, and 2'-FL to support cognitive and physical development.</p>
+          <h3>Strategy</h3>
+          <p>Highlight how balanced nutrition powers both intellectual inquiry (IQ) and empathy (EQ).</p>
+          <h3>Solution</h3>
+          <p>Followed children exploring, asking insightful questions, and solving problems together—demonstrating compassion and curiosity fueled by proper nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/yVN1w63m7GY?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 7: Enfagrow A2 -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A2 : <br/>Gentle on the Stomach, Easy to Digest</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Apr 2021<br/>
+          <strong>Platform:</strong> TVC 40 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Introduce Enfagrow A2 as a gentle formula designed to support easy digestion and steady learning.</p>
+          <h3>Strategy</h3>
+          <p>Focus on smooth digestion as the foundation for uninterrupted brain development and stronger immunity.</p>
+          <h3>Solution</h3>
+          <p>Partnered with spokesperson Chompoo Araya and her sons to showcase natural A2 beta-casein protein cows in an engaging, visually lighthearted countryside story.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/lMgAgump97Q?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 8: Dettol Range -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Range : <br/>The Loving List</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand, Indonesia & Southeast Asia)<br/>
+          <strong>Date:</strong> Oct 2020<br/>
+          <strong>Platform:</strong> TVC 120 sec (Brand Anthem)
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Educate 60 million Thai citizens on comprehensive hygiene while humanizing Dettol’s personal and surface care lines.</p>
+          <h3>Strategy</h3>
+          <p>Reflect on how pandemic restrictions distanced us from human connection, reframing hygiene as the enabler of safe touch.</p>
+          <h3>Solution</h3>
+          <p>Crafted "The Loving List," celebrating touch as an essential language of affection. Positioned Dettol as the trusted barrier that lets families embrace safely again.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/l64GSdqvkGk?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 9: Dettol Hand Hygiene -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Hand Hygiene : <br/> Do You Wanna Eat Germs?</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand, Indonesia & Southeast Asia)<br/>
+          <strong>Date:</strong> Sep 2020<br/>
+          <strong>Platform:</strong> TVC 45 sec & Print Campaign
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Build daily handwashing habits across Southeast Asia through high-energy, memorable public messaging.</p>
+          <h3>Strategy</h3>
+          <p>Modernize Dettol's heritage jingle into an upbeat dance track to cut through clinical hygiene fatigue.</p>
+          <h3>Solution</h3>
+          <p>Paired playful choreography with bright urban visuals, making hand hygiene feel lively, social, and second nature.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/cMmHv2jUgJ4?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <div class="media-item">
+          <img src="img/work/dhw_p.jpg" loading="lazy" alt="Dettol Print">
+          <div class="media-caption">Print: Key Visual for Thai Market</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 10: Enfagrow Train Track -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Train Track</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand & Southeast Asia)<br/>
+          <strong>Date:</strong> Sep 2020<br/>
+          <strong>Platform:</strong> TVC 30 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Reinforce Enfagrow A+ as the gold standard supporting children’s cognitive development and collaborative play.</p>
+          <h3>Strategy</h3>
+          <p>Highlight teamwork and shared ingenuity as natural reflections of strong mental and emotional growth.</p>
+          <h3>Solution</h3>
+          <p>Brought hundreds of children together with interconnected train track segments, visualizing collaborative problem-solving powered by proper nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/0yagjiWpGb4?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 11: Enfagrow iWonder -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : iWonder</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Aug 2020<br/>
+          <strong>Platform:</strong> TVC 30 sec (Millennial Parents)
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Connect with millennial mothers on a deeper emotional plane regarding future preparation.</p>
+          <h3>Strategy</h3>
+          <p>Acknowledge that while parents cannot predict the future world their children will inherit, they can build their inner foundation today.</p>
+          <h3>Solution</h3>
+          <p>Positioned Enfagrow A+ as emotional and cognitive groundwork, giving parents confidence that their children will navigate tomorrow with heart and mind.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/SfqY4p7d6Wc?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 12: Enfagrow Rally Cry -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Rally Cry</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> May 2020<br/>
+          <strong>Platform:</strong> TVC 45 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Provide authentic support to mothers navigating stay-at-home isolation during early COVID-19 lockdowns.</p>
+          <h3>Strategy</h3>
+          <p>Reframe extended time at home from a stressful obstacle into an opportunity to nurture children's milestones.</p>
+          <h3>Solution</h3>
+          <p>Spokesperson Chompoo shared candid parental encouragement, offering an uplifting rally cry for mothers supporting their children's daily learning.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/YFHlie6RXP4?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 13: Enfagrow Polar Bear -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ UHT: <br/> Polar Bear</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Nov 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec & Key Visual Print Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Highlight Enfagrow A+ UHT as portable brain nutrition for active on-the-go children.</p>
+          <h3>Strategy</h3>
+          <p>Use visual metaphor to illustrate resilience and adaptability in dynamic outdoor environments.</p>
+          <h3>Solution</h3>
+          <p>A curious boy encounters an illustrated polar bear spirit in nature, representing adaptability and strength nurtured by wholesome nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/32cJILRZZgE?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 14: Enfagrow Salmon -->
+    <article class="project-block" data-category="cpg">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : <br/> Salmon</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Nov 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Clarify the nutritional value of dietary DHA for growing brains in everyday terms.</p>
+          <h3>Strategy</h3>
+          <p>Contrast complex meal planning with convenient, reliable daily nutrition.</p>
+          <h3>Solution</h3>
+          <p>A warm kitchen story demonstrating how Enfagrow effortlessly supplements critical developmental nutrients like DHA for active children.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/lKojC4BDNpE?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 15: Chevrolet Trailblazer -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trailblazer : <br/>The Makings of a Leader</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia, Vietnam & Southeast Asia)<br/>
+          <strong>Date:</strong> May 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec & Regional Print Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Elevate Trailblazer consideration among executives and leaders seeking performance paired with advanced tech safety.</p>
+          <h3>Strategy</h3>
+          <p>Correlate Chevrolet’s engineering with decisive, forward-thinking executive qualities.</p>
+          <h3>Solution</h3>
+          <p>High-contrast industrial aesthetics and bold driving sequences showing command over both city boardrooms and mountain highways.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/gW5pJ_IsD70?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <div class="media-item">
+          <img src="img/work/tbz.jpg" loading="lazy" alt="Trailblazer Print">
+          <div class="media-caption">Print: Key Visual for Vietnam Market</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 16: Chevrolet Trax Choose Everything -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax : <br/>Choose Everything</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> Apr 2019<br/>
+          <strong>Platform:</strong> TVC & Social Campaign
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Trax as the crossover that refuses compromise between career needs and weekend adventures.</p>
+          <h3>Strategy</h3>
+          <p>Challenge young couples to expect versatility from their urban SUV.</p>
+          <h3>Solution</h3>
+          <p>A split-perspective concept revealing two contrasting lifestyles coexisting effortlessly inside the same Trax cabin.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/-lKhjrkcu5g?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 17: Chevrolet Trax 2018 -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax 2018 :<br/>Designed to Impress</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> Feb 2018<br/>
+          <strong>Platform:</strong> TVC 60 sec & Social Media Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Introduce the Trax copper edition as a design statement for style-conscious urban drivers.</p>
+          <h3>Strategy</h3>
+          <p>Anchor the vehicle colorway within golden hour coastal light and premium design cues.</p>
+          <h3>Solution</h3>
+          <p>Captured the Trax cruising along sunset coastlines, highlighting interior infotainment and exterior craftsmanship through a coordinated social campaign.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/yWpIbdDbex8?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/trax2018_1.gif" loading="lazy" alt="Trax GIF 1"></div>
+          <div class="media-item"><img src="img/work/trax2018_2.gif" loading="lazy" alt="Trax GIF 2"></div>
+          <div class="media-item"><img src="img/work/trax2018_3.gif" loading="lazy" alt="Trax GIF 3"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 18: Chevrolet Trax 2016 -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax 2016 : <br/>Unlock The City</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> 2016<br/>
+          <strong>Innovation:</strong> World's First Ever Virtual Test Drive
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Trax as the agile compact SUV for discovering hidden Jakarta culture and dining.</p>
+          <h3>Strategy</h3>
+          <p>Combine digital livestreaming, mobile game mechanics, and live broadcast entertainment.</p>
+          <h3>Solution</h3>
+          <p>Conceived and directed a live interactive celebrity game show where online viewers voted in real time to steer drivers through Jakarta, unlocking city secrets and proving vehicle handling.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/jyJGLm6eQaA?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 19: Chevrolet Spark 2018 -->
+    <article class="project-block" data-category="automotive">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Spark 2018</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Vietnam)<br/>
+          <strong>Date:</strong> Mar 2018<br/>
+          <strong>Platform:</strong> Facebook Instant Experience / Canvas
+        </div>
+        <div class="project-details">
+          <h3>Solution</h3>
+          <p>Crafted interactive mobile-first social units optimized for rapid thumb-stopping engagement and immediate showroom bookings.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper square">
+            <iframe src="https://www.youtube-nocookie.com/embed/8QHzUT3Je7U?controls=0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- About Section -->
+    <section id="about" class="about-wrapper">
+      <h2 class="section-title">About</h2>
+      
+      <div class="about-row">
+        <!-- 25% Left Column: Profile Picture -->
+        <div class="about-photo-col">
+          <img src="img/pavee_img.jpg" alt="Pavee Yat Fung LAI" class="about-portrait">
+        </div>
+
+        <!-- 75% Right Column: Content -->
+        <div class="about-content">
+          <img src="img/PAVEELAI_logo.svg" alt="Pavee Yat Fung LAI" class="about-logo">
+          
+          <p class="about-role">Creative / Art Director</p>
+          
+          <p class="about-heading">Profile</p>
+          <p class="about-body-text">
+            A Creative/Art Director with over 20 years of experience in integrated advertising, developing impactful brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, develop impactful campaigns, and drive brand growth.
+          </p>
+
+          <!-- Core Competencies Grid -->
+          <div class="strengths-grid">
+            <div class="strength-item">
+              <h4>💼 Proven Success with Global Brands</h4>
+              <p>Led impactful campaigns for top-tier brands including General Motors, Reckitt, and P&G—driving measurable brand growth across global markets.</p>
+            </div>
+            <div class="strength-item">
+              <h4>🎯 Mastery of Integrated Creative Direction</h4>
+              <p>From ATL to digital and 360° campaigns, I lead cross-channel creative initiatives—spanning social, web, and video—to deliver cohesive, innovative brand experiences.</p>
+            </div>
+            <div class="strength-item">
+              <h4>🌍 Deep Regional Insight</h4>
+              <p>Extensive experience in diverse markets like South America and Southeast Asia—crafting culturally relevant campaigns that connect deeply and deliver real results.</p>
+            </div>
+            <div class="strength-item">
+              <h4>🚀 Consistent Leadership & Career Growth</h4>
+              <p>Progressed steadily at McCann Worldgroup by consistently driving results, meeting strategic goals, and leading with vision and creativity.</p>
+            </div>
+          </div>
+
+          <p class="about-heading">Key Competencies</p>
+          <p class="about-body-text">
+            <strong>Digital Innovation:</strong> AI-Driven Concepting, Creative Automation, Virtual Production, Social Media Strategy<br/>
+            <strong>Creative Skills:</strong> Art Direction, Concept Development, Branding & Identity, UX Design<br/>
+            <strong>Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development
+          </p>
+
+          <div class="social-links">
+            <a href="mailto:yatfung.lai@gmail.com" target="_blank">
+              <img src="img/icon_gmail.png" alt="Email" width="16" height="16">
+              <span>yatfung.lai@gmail.com</span>
+            </a>
+            <a href="http://linkedin.com/in/paveelai/" target="_blank">
+              <img src="img/icon_linkedin.png" alt="LinkedIn" width="16" height="16">
+              <span>linkedin.com/in/paveelai</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Legal & Copyright Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Pavee Yat Fung LAI. All rights reserved. All trademarks, registered marks, and logos featured are property of their respective owners (General Motors, Reckitt, and client partners). Work produced during tenure at agency partners including McCann Worldgroup for portfolio archive and reference purposes.</p>
+  </footer>
+
+  <!-- Precision Navigation & Category Filter Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const headerContainer = document.getElementById('header-container');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectBlocks = document.querySelectorAll('.project-block');
+      const scrollLinks = document.querySelectorAll('.js-scroll-link');
+
+      // 1. Precise Smooth Scrolling for Nav Links
+      scrollLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          
+          if (targetId === '#top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              const headerHeight = headerContainer.offsetHeight;
+              const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+              const offsetPosition = elementPosition - headerHeight - 15;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+
+      // 2. Category Filter Logic with Smooth Auto-Reset
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const filterValue = this.getAttribute('data-filter');
+
+          projectBlocks.forEach(block => {
+            const blockCategory = block.getAttribute('data-category');
+            if (filterValue === 'all' || blockCategory === filterValue) {
+              block.classList.remove('is-hidden');
+            } else {
+              block.classList.add('is-hidden');
+            }
+          });
+
+          // Reset to top smoothly on filter change
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e1bb45461858401f868a96f307b440cb"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</body>
+</html>
