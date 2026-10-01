@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAVEE LAI | Creative & Art Director</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;1,6..96,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-main: #444444;
+      --text-muted: #666666;
+      --text-highlight: #00a1e0;
+      --bg-color: #ffffff;
+      --border-light: #f0f0f0;
+      --font-stack: "Roboto", "Helvetica", "Arial", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 122%; scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+
+    @media (max-width: 768px) { html { font-size: 105%; scroll-padding-top: 4.8rem; } }
+
+    body {
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      background-color: var(--bg-color);
+      line-height: 1.6;
+      font-size: 0.9375rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--text-main); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { color: var(--text-highlight); }
+
+    /* Frosted Sticky Top Bar (No Gray Bottom Line) */
+    .sticky-header-container { 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: none !important; 
+      pointer-events: auto !important; 
+    }
+    
+    .top-header-row { 
+      background: transparent !important; 
+      width: 100%; 
+      padding: 0.85rem 1.25rem; 
+      display: flex; 
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      box-sizing: border-box;
+    }
+    
+    .brand-bar { display: flex; justify-content: flex-start; align-items: center; }
+    .animated-brand { display: inline-flex; align-items: baseline; font-family: 'Bodoni Moda', Georgia, serif; font-weight: 600; font-optical-sizing: none; font-variation-settings: 'opsz' 10; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: clamp(1.4rem, 4vw, 2.1rem); letter-spacing: -0.01em; line-height: 1.2; color: #111111; text-decoration: none; white-space: nowrap; }
+    .brand-first { font-weight: 600; font-variation-settings: 'opsz' 10; color: #111111; }
+    .brand-last { font-weight: 600; font-variation-settings: 'opsz' 10; color: #111111; }
+    .typewriter-middle { display: inline-block; color: #111111; font-weight: 600; font-variation-settings: 'opsz' 10; white-space: pre; }
+    
+    .top-links-row { 
+      display: flex; 
+      align-items: center; 
+      justify-content: flex-start;
+      gap: 1.25rem; 
+      font-size: 0.825rem; 
+      letter-spacing: 0.02em; 
+      white-space: nowrap; 
+    }
+
+    .header-nav { display: flex; align-items: center; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+    .header-nav a { 
+      color: var(--text-main); 
+      font-weight: 400; 
+      text-decoration: none; 
+      transition: color 0.2s ease; 
+    }
+    .header-nav a:hover { color: var(--text-highlight); }
+    
+    #nav-dynamic-portfolio { 
+      color: #111111; 
+      font-weight: 400; 
+      text-decoration: underline; 
+      text-underline-offset: 4px;
+    }
+
+    /* Layout & Containers */
+    .main-container { width: 100%; max-width: 100%; margin: 0; }
+    .project-block { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 4.5rem; width: 100%; }
+    .project-info { width: 100%; background-color: #ffffff; background-image: linear-gradient(135deg, #e3e3e3 0%, #ffffff 140px); background-repeat: no-repeat; padding: 1.125rem 1rem 1.25rem 1rem; align-self: flex-start; }
+    .project-title { font-size: 1.2rem; font-weight: 500; margin-bottom: 0.85rem; line-height: 1.25; }
+    .project-meta { font-size: 0.8125rem; margin-bottom: 1.125rem; letter-spacing: 0.04em; line-height: 1.55; }
+    .project-details { font-size: 0.8125rem; letter-spacing: 0.04em; line-height: 1.6; }
+    .project-details h3 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1.125rem; margin-bottom: 0.25rem; }
+    .project-details p { margin-bottom: 0.75rem; }
+
+    /* Hobro-style Pill Tags */
+    .pill-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill-tag {
+      display: inline-block;
+      border: 1px solid #222222;
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #111111;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    /* Universal Spacing & Grids */
+    .project-media { 
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.75rem; 
+      min-width: 0; 
+    }
+
+    .media-item { 
+      display: flex; 
+      flex-direction: column; 
+      width: 100%; 
+      min-width: 0; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    .media-item img { 
+      width: 100%; 
+      height: auto; 
+      display: block; 
+    }
+
+    .media-grid-2 { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 0.75rem; 
+      width: 100%; 
+    }
+
+    .media-grid-3 { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 0.75rem; 
+      width: 100%; 
+    }
+
+    .media-caption,
+    .gallery-lead-caption {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      margin-bottom: 0;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+      text-align: left;
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+    }
+
+    /* Video Embeds & Facade */
+    .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 2px; overflow: hidden; }
+    .video-wrapper.square { padding-bottom: 100%; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-wrapper.custom-facade, .video-wrapper.lightbox-card { cursor: pointer; background-color: #111111; display: flex; align-items: center; justify-content: center; }
+    .facade-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.3s ease; }
+    .video-wrapper.custom-facade:hover .facade-poster, .video-wrapper.lightbox-card:hover .facade-poster { opacity: 0.6; }
+
+    .facade-play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.45); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      display: flex; align-items: center; justify-content: center; z-index: 2; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .facade-play::after {
+      content: ''; display: block; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent #ffffff; margin-left: 3px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); transition: border-color 0.25s ease;
+    }
+    .video-wrapper.custom-facade:hover .facade-play, .video-wrapper.lightbox-card:hover .facade-play {
+      transform: translate(-50%, -50%) scale(1.08); background: #ffffff; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: #ffffff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .video-wrapper.custom-facade:hover .facade-play::after, .video-wrapper.lightbox-card:hover .facade-play::after {
+      border-color: transparent transparent transparent #111111; filter: none;
+    }
+
+    .video-wrapper.mobile-vertical { padding-bottom: 172.77%; } 
+    .video-modal.is-vertical-mode .video-modal-content { max-width: 404px; }
+    .modal-video-frame.is-vertical-video { 
+      position: relative;
+      padding-bottom: 172.77%; 
+      height: 0;
+      width: 100%;
+      background: #000000; 
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); 
+      border-radius: 6px; 
+      overflow: hidden; 
+    }
+    .modal-video-frame.is-vertical-video iframe { 
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; 
+    }
+
+    .gallery-thumb-item { 
+      position: relative; 
+      cursor: pointer; 
+      overflow: hidden; 
+      display: block; 
+      width: 100%; 
+      aspect-ratio: 16 / 7; 
+      background: #111111; 
+      border-radius: 2px; 
+    }
+    
+    .gallery-thumb-item img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      display: block; 
+      transition: transform 0.3s ease, opacity 0.3s ease; 
+    }
+
+    .website-collapsible-content .gallery-thumb-item {
+      aspect-ratio: auto !important;
+      background: #f4f5f7; 
+    }
+
+    .website-collapsible-content .gallery-thumb-item img {
+      height: auto !important;
+      object-fit: contain !important;
+    }
+
+    .gallery-zoom-badge {
+      position: absolute; bottom: 8px; right: 8px; width: 26px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.4); color: #ffffff; font-size: 15px; font-weight: 400; line-height: 1; display: flex; align-items: center; justify-content: center; pointer-events: none; transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease; z-index: 2;
+    }
+    .gallery-thumb-item:hover .gallery-zoom-badge { transform: scale(1.15); background: #ffffff; color: #111111; }
+    
+    /* Box Accordion Drawer */
+    .website-accordion-wrapper {
+      width: 100%;
+      margin: 0 !important; 
+      background: #f4f5f7;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .website-accordion-wrapper.is-open {
+      background: #ffffff;
+      border-color: #d1d5db;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .expand-website-btn {
+      width: 100%;
+      margin: 0 !important; 
+      padding: 0.85rem 1.25rem;
+      background: transparent;
+      border: none;
+      font-family: var(--font-stack);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .expand-website-btn:hover { background: #f0f0f0; border-color: #d0d0d0; color: #111111; }
+    
+    .website-accordion-wrapper.is-open .expand-website-btn {
+      color: #111111;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .expand-website-btn .toggle-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+      color: #888888;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .website-accordion-wrapper.is-open .toggle-icon {
+      transform: rotate(45deg);
+      color: #111111;
+    }
+
+    .expand-website-btn .text-open { display: none; }
+    .website-accordion-wrapper.is-open .expand-website-btn .text-closed { display: none; }
+    .website-accordion-wrapper.is-open .expand-website-btn .text-open { display: inline-block; }
+
+    .website-collapsible-content {
+      display: none;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1.5rem 1.25rem; 
+      background: #ffffff;
+    }
+
+    .website-accordion-wrapper.is-open .website-collapsible-content {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(-6px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+
+    /* Lightbox Modal */
+    .video-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 999999; opacity: 0; transition: opacity 0.25s ease; }
+    .video-modal.is-active { display: flex !important; opacity: 1; }
+    
+    .video-modal-content { position: relative; width: calc(100% - 150px); max-width: 900px; display: flex; flex-direction: column; transition: max-width 0.3s ease; }
+    .video-modal.is-image-mode .video-modal-content { max-width: 1500px; }
+    
+    .modal-video-frame { position: relative; width: 100%; background: transparent; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .modal-video-frame.is-video { padding-bottom: 56.25%; background: #000000; }
+    .modal-video-frame.is-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    
+    .modal-video-frame.is-image { 
+      max-height: 85vh; 
+      overflow-y: auto; 
+      overflow-x: hidden;
+      align-items: flex-start; 
+      background: #0a0a0a; 
+    }
+    
+    .modal-video-frame.is-image::-webkit-scrollbar { width: 6px; }
+    .modal-video-frame.is-image::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+
+    .modal-video-frame.is-image img { 
+      width: 100%; 
+      height: auto; 
+      max-height: none !important; 
+      object-fit: contain; 
+      display: block; 
+      border-radius: 4px; 
+    }
+    .modal-caption { color: #ffffff; font-size: 0.85rem; letter-spacing: 0.04em; margin-top: 0.75rem; text-align: left; font-weight: 500; opacity: 0.9; }
+
+    .modal-close, .modal-prev, .modal-next {
+      position: absolute; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.85; transition: all 0.2s ease; z-index: 10; user-select: none;
+    }
+    .modal-close:hover, .modal-prev:hover, .modal-next:hover { opacity: 1; background: rgba(255, 255, 255, 0.3); transform: scale(1.08); }
+    
+    .modal-close { top: -54px; right: 0; font-size: 1.25rem; line-height: 1; }
+    .modal-prev { left: -60px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
+    .modal-next { right: -60px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
+
+    /* ==========================================================================
+       PROJECT GALLERY SECTION (No Top Gray Line)
+       ========================================================================== */
+    .gallery-section-wrapper {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: none !important;
+      width: 100%;
+    }
+
+    /* Submenu Bar without Bottom Divider Line */
+    .gallery-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.25rem;
+      border-bottom: none !important;
+      width: 100%;
+    }
+
+    .gallery-nav-left,
+    .gallery-nav-right {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .gallery-nav-middle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex-grow: 1;
+    }
+    .gallery-nav-middle::-webkit-scrollbar { display: none; }
+
+    .gallery-filter-btn {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #888888;
+      font-family: var(--font-stack);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      position: relative;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .gallery-filter-btn:hover { color: var(--text-highlight); }
+
+    .gallery-filter-btn.active {
+      color: var(--text-highlight) !important;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    #gallery-dynamic-left {
+      color: #111111;
+      font-weight: 400;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+    }
+
+    #gallery-dynamic-right-btn {
+      color: #888888;
+      font-weight: 400;
+      cursor: pointer;
+    }
+    #gallery-dynamic-right-btn:hover {
+      color: var(--text-highlight);
+    }
+
+    /* 6 Thumbnails Per Row (Gray Neutral Background, Zero Gutter) */
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      width: 100%;
+      background: #f4f5f7;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+
+    .archive-card {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: #f4f5f7;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .archive-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease, filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Dominant Color Overlay on Thumbnail Hover */
+    .archive-card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay-color, rgba(0, 0, 0, 0.72));
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 2;
+      box-sizing: border-box;
+    }
+
+    .archive-card-title {
+      color: #ffffff;
+      font-size: 0.725rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .archive-card:hover .archive-card-overlay {
+      opacity: 1;
+    }
+
+    .archive-card:hover img {
+      transform: scale(1.06);
+    }
+
+    /* Monotone & Dimmed States */
+    .archive-card.is-color img {
+      filter: grayscale(0%) contrast(100%);
+      opacity: 1;
+    }
+
+    .archive-card.is-dimmed img {
+      filter: grayscale(100%) brightness(0.68) contrast(110%);
+      opacity: 0.45;
+    }
+
+    /* ==========================================================================
+       DESKTOP & IPAD HORIZONTAL VIEWPORT (Landscape >= 992px OR Desktop Pointer)
+       ========================================================================== */
+    @media (min-width: 992px) and (orientation: landscape), (hover: hover) and (pointer: fine) and (min-width: 992px) {
+      .top-header-row { 
+        padding: 1.15rem 3rem; 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center; 
+        gap: 1.5rem; 
+      }
+      .main-container { padding: 2.5rem 3rem 3rem 3rem !important; }
+      
+      /* Project 2-Column Split: 25% / 75% */
+      .project-block { 
+        flex-direction: row !important; 
+        gap: 2.5rem !important; 
+      }
+      .project-info { 
+        display: block !important;
+        flex: 0 0 calc(25% - 1.875rem) !important; 
+        width: calc(25% - 1.875rem) !important; 
+      }
+      .project-media { 
+        display: flex !important;
+        flex: 0 0 calc(75% - 0.625rem) !important; 
+        width: calc(75% - 0.625rem) !important; 
+      }
+      .media-grid-2 { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+      .media-grid-3 { grid-template-columns: repeat(3, 1fr) !important; gap: 0.75rem !important; }
+      
+      /* About Section: Exact 25% Photo / 75% Content Split */
+      .about-row { 
+        display: flex !important;
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important;
+        align-items: flex-start !important;
+        gap: 2.5rem !important; 
+        width: 100% !important;
+      }
+      .about-photo-col { 
+        flex: 0 0 calc(25% - 1.875rem) !important; 
+        width: calc(25% - 1.875rem) !important; 
+        max-width: calc(25% - 1.875rem) !important;
+      }
+      .about-content { 
+        flex: 0 0 calc(75% - 0.625rem) !important; 
+        width: calc(75% - 0.625rem) !important; 
+        max-width: calc(75% - 0.625rem) !important;
+      }
+    }
+
+    /* ==========================================================================
+       MOBILE & IPAD VERTICAL (Strictly Portrait Orientation OR Screens < 992px)
+       ========================================================================== */
+    @media (orientation: portrait), (max-width: 991px) {
+      .top-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+        padding: 0.85rem 1.25rem;
+      }
+
+      .main-container { padding: 0.75rem 1.25rem 2.5rem 1.25rem !important; }
+      
+      .project-block { 
+        display: flex; 
+        flex-direction: column; 
+        position: relative; 
+        z-index: 1; 
+        gap: 0 !important; 
+        margin-bottom: 3.5rem; 
+      }
+      .project-block:first-of-type { margin-top: 0 !important; }
+      .project-block::before { 
+        content: ''; 
+        position: absolute; 
+        top: -0.5rem; 
+        left: -1.25rem; 
+        right: -1.25rem; 
+        height: 220px; 
+        background: linear-gradient(135deg, #e3e3e3 0%, rgba(255,255,255,0) 140px); 
+        z-index: -1; 
+      }
+      
+      .project-info, .project-media { display: contents; }
+      
+      /* 1. Header Title & Meta */
+      .project-title { order: 1; margin-top: 1.25rem !important; margin-bottom: 0.75rem !important; line-height: 1.35 !important; }
+      .project-block:first-of-type .project-title { margin-top: 0.5rem !important; }
+      .project-meta { order: 2; margin-bottom: 0.75rem !important; }
+
+      /* 2. Hero Video / Media */
+      .project-media > .media-item:first-child { order: 3; margin-bottom: 1.25rem !important; }
+
+      /* 3. Objective, Strategy, Execution under the first video */
+      .project-details { 
+        order: 4; 
+        margin-top: 0.5rem !important;
+        margin-bottom: 1.75rem !important; 
+        max-width: 780px; 
+      }
+
+      /* 4. Subsequent Media & Drawers */
+      .project-media > *:not(:first-child) { order: 5; margin-bottom: 0.85rem !important; }
+
+      /* Mobile & iPad Vertical Gallery: 3 per row */
+      .archive-grid { grid-template-columns: repeat(3, 1fr); }
+      
+      /* Mobile Sub-menu: Horizontal Scrollable Row */
+      .gallery-filter-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+      }
+      .gallery-filter-bar::-webkit-scrollbar { display: none; }
+      
+      .gallery-nav-left { display: none !important; }
+      .gallery-nav-middle { display: contents; }
+      .gallery-nav-right { flex-shrink: 0; display: inline-flex; }
+      .gallery-filter-btn { flex-shrink: 0; }
+
+      .modal-close { top: -46px; right: 0; }
+      .modal-prev { left: 8px; }
+      .modal-next { right: 8px; }
+      .video-modal-content { width: 92%; }
+
+      /* About Section: Stacked on Mobile & iPad Portrait */
+      .about-row { 
+        display: flex;
+        flex-direction: column; 
+        gap: 1.5rem; 
+        width: 100%; 
+      }
+      .about-photo-col { width: 100% !important; max-width: 220px; }
+      .about-content { width: 100% !important; }
+    }
+
+    /* About Section & Footer (No Top Gray Line) */
+    .about-wrapper { 
+      margin-top: 5rem; 
+      padding-top: 2.5rem; 
+      border-top: none !important; 
+      width: 100%; 
+    }
+    .about-portrait { width: 100%; max-width: 220px; height: auto; display: block; object-fit: cover; border-radius: 2px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); }
+    .about-name { font-family: 'Bodoni Moda', Georgia, serif; font-weight: 600; font-optical-sizing: none; font-variation-settings: 'opsz' 10; font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.01em; color: #111111; margin: 0 0 0.5rem 0; line-height: 1.1; }
+    .about-role { font-size: 1.2rem; font-weight: 500; color: var(--text-main); margin-bottom: 1.25rem; }
+    .about-heading { font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-top: 1.75rem; margin-bottom: 0.5rem; }
+    .about-body-text { font-size: 0.9375rem; line-height: 1.65; letter-spacing: 0.03em; margin-bottom: 1rem; }
+    .social-links { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; margin-top: 1.5rem; font-size: 0.875rem; }
+    .social-links a { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .site-footer { width: 100%; margin-top: 5rem; padding: 2.5rem 3rem; border-top: 1px solid var(--border-light); font-size: 0.75rem; color: #888888; line-height: 1.6; }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Frosted Dynamic Sticky Header Bar -->
+  <div class="sticky-header-container" id="header-container">
+    <header class="top-header-row">
+      <div class="brand-bar">
+        <a href="#top" class="js-scroll-link animated-brand" aria-label="Pavee Yat Fung LAI">
+          <span class="brand-first">Pavee&nbsp;</span><span class="typewriter-middle" id="typewriter"></span><span class="brand-last">LAI</span>
+        </a>
+      </div>
+      <div class="top-links-row">
+        <ul class="header-nav">
+          <li><a href="#projects-top" id="nav-dynamic-portfolio" class="js-scroll-link">Portfolio : Selected Projects</a></li>
+          <li><a href="#about" class="js-scroll-link">About</a></li>
+        </ul>
+      </div>
+    </header>
+  </div>
+
+  <main class="main-container" id="projects-top">
+
+    <!-- Project 1: Chevrolet Montana 2025 -->
+    <article id="proj-montana" class="project-block" data-category="automotive selected tvc website">
+      <div class="project-info">
+        <h2 class="project-title">Let's Go with Chevrolet Montana 2025</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Brazil, Mexico, Colombia &amp; South America)<br/>
+          <strong>Date:</strong> Aug 2023<br/>
+          <strong>Platform:</strong> Global Asset Package (GAP), Master TVCs, CGI Library, Regional Web Systems
+        </div>
+        <div class="project-details">
+          <h3>Objective</h3>
+          <p>Launch the all-new Chevrolet Montana trim across South American markets with a centralized Global Asset Package (GAP) adaptable for multi-market broadcast, print, OOH, and digital portals.</p>
+          <h3>Strategy</h3>
+          <p>Reframe utility into modern escapism through Rodrigo, an urban entrepreneur balancing trade and family. The visual tone curated a pan-regional look, avoiding country-specific tropes so imagery felt natural in every South American market.</p>
+          <h3>Execution</h3>
+          <p>Directed a seamless global virtual production effort. Realism was built through addition rather than subtraction: guiding the 3D pipeline to add road physics, tire compression on asphalt, road dust, and authentic light bounces alongside live talent.</p>
+          <h3>Skills &amp; Capabilities</h3>
+          <div class="pill-tags-container">
+            <span class="pill-tag">Art Direction</span>
+            <span class="pill-tag">Concept Ideation</span>
+            <span class="pill-tag">Visual Moodboards</span>
+            <span class="pill-tag">Storyboarding</span>
+            <span class="pill-tag">CGI Supervision</span>
+            <span class="pill-tag">Virtual Production</span>
+            <span class="pill-tag">Photo Retouching</span>
+            <span class="pill-tag">UI &amp; UX Design</span>
+            <span class="pill-tag">Design Systems</span>
+            <span class="pill-tag">South America Campaign</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="UGKPv-ERVbM">
+            <video autoplay loop muted playsinline class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <source src="video/montana_trim.mp4" type="video/mp4">
+            </video>
+            <div class="facade-play"></div>
+          </div>
+          <div class="media-caption">TV commercial (Brazil version) 15 sec</div>
+        </div>
+
+        <div class="media-grid-2">
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="Q7ZPyb1cS28" 
+                 data-gallery="montana-video"
+                 data-title="TV commercial (Master version) 60 sec">
+              <img src="video/Montana_Master_frame.jpg" alt="TV commercial (Master version)" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
+            <div class="media-caption">TV commercial (Master version) 60 sec</div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="uGsz04gzr8I" 
+                 data-gallery="montana-video"
+                 data-title="Product features video 24 sec">
+              <img src="video/Montana_Product_frame.jpg" alt="Product features video" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
+            <div class="media-caption">Product features video 24 sec</div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_00_big.jpg" data-caption="Photorealistic CGI product shoot with human models">
+                <img src="img/work/montana_00.jpg" loading="lazy" alt="Montana CGI 0">
+                <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_01_big.jpg" data-caption="CGI Product Shoot: Suburban Home Location">
+              <img src="img/work/montana_01.jpg" loading="lazy" alt="Montana CGI 1">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_02_big.jpg" data-caption="CGI Product Shoot: Bed &amp; Cargo Versatility">
+              <img src="img/work/montana_02.jpg" loading="lazy" alt="Montana CGI 2">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_03_big.jpg" data-caption="CGI Product Shoot: Interior Cockpit &amp; Infotainment">
+              <img src="img/work/montana_03.jpg" loading="lazy" alt="Montana CGI 3">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_05_big.jpg" data-caption="CGI Product Shoot: Coastal Lifestyle with Talent">
+              <img src="img/work/montana_05.jpg" loading="lazy" alt="Montana CGI 5">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="montana-cgi" data-img="img/work/montana_06_big.jpg" data-caption="CGI Product Shoot: Urban Work / Commercial Integration">
+              <img src="img/work/montana_06.jpg" loading="lazy" alt="Montana CGI 6">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="media-caption">Photorealistic CGI product suite combining CAD automotive models with live human talent (6-shot interactive gallery)</div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View Case Study</span>
+            <span class="text-open">Close Case Study</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div style="border-bottom: 1px solid var(--border-light); padding-bottom: 1.5rem;">
+              <h3 class="case-study-title" style="font-size: 1.05rem; font-weight: 600; color: #111; margin-bottom: 1.25rem;">Production Notes: The Virtual Pipeline &amp; 24-Hour Cycle</h3>
+              <div class="case-study-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; font-size: 0.8125rem; line-height: 1.6;">
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Pan-Regional Art Direction</h4>
+                  <p>To serve Brazil, Mexico, Colombia, and regional South American distributors from a single asset suite, location scouting had to be strategic. Workshop spaces, street architecture, and coastal plates were selected to reflect a shared modern South American aesthetic instead of identifiable landmarks tied to one country.</p>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Concept to Storyboard</h4>
+                  <p>Before opening 3D software, the entire film and stills suite was built on paper:</p>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Mapped vehicle engineering highlights to real-world tasks for small business owners.</li>
+                    <li>Built lighting and environment moodboards for client alignment.</li>
+                    <li>Created shot-by-shot broadcast storyboards detailing camera angles, talent blocking, and payload capacity features.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Realism by Addition</h4>
+                  <p>Standard automotive retouching is subtractive: removing rigs, reflections, and road grit. A virtual CGI shoot is the exact opposite. Pure renders look sterile, so realism had to be added back manually:</p>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Directed the CGI team to compress the tires against the asphalt so the vehicle sat with genuine road weight.</li>
+                    <li>Integrated subtle atmospheric haze, authentic light spill onto the body panels, and motion blur to lock the CAD model to live-action talent plates.</li>
+                  </ul>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">The 24-Hour "Follow-the-Sun" Workflow</h4>
+                  <p>Production ran continuously across opposite sides of the world. The 3D team in the Americas rendered and shipped files at the end of their day. Our art team reviewed passes, marked up frames, and adjusted color grading during our daytime hours. Notes arrived in the Americas at their morning call, ready to implement with zero lost time.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="media-grid-2">
+              <div class="media-item">
+                <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                     data-yt-id="mVSWGZzU930" 
+                     data-gallery="montana-web"
+                     data-title="Montana Brazil interactive portal walk-through">
+                  <img src="img/work/montana_web.jpg" alt="Montana Brazil interactive portal walk-through" class="facade-poster">
+                  <div class="facade-play"></div>
+                </div>
+                <div class="media-caption">Montana Brazil interactive portal walk-through</div>
+              </div>
+
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" data-gallery="montana-web" data-img="img/work/montana_web_overview_big.jpg" data-caption="Master website template system deployed across South American regional portals">
+                  <img src="img/work/montana_web_overview.jpg" loading="lazy" alt="Montana Master Website Template System">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Master website template system deployed across South American regional portals</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2: Chevrolet Spin 2025 -->
+    <article id="proj-spin" class="project-block" data-category="automotive website">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Spin 2025 : The Vehicle That Changes With You</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Argentina, Brazil, Colombia &amp; South America)<br/>
+          <strong>Date:</strong> Aug 2024<br/>
+          <strong>Platform:</strong> Global Asset Package (GAP), CGI Image Suite, Regional Web Systems
+        </div>
+        <div class="project-details">
+          <h3>Objective</h3>
+          <p>Position the 2025 Spin as the premier 7-seater crossover in South America, highlighting cabin versatility, comfort, and safety across regional launch channels.</p>
+          <h3>Strategy</h3>
+          <p>Showcase adaptable family life through a narrative of effortless transformation. The creative approach highlighted the vehicle shifting from daily school runs and grocery duties into a spacious weekend road-trip cruiser.</p>
+          <h3>Execution</h3>
+          <p>Directed an all-virtual CGI pipeline and master digital portal framework. Guided 3D artists to capture authentic cabin textures, configurable 7-seat layouts, and natural lighting, while designing modular responsive website templates for regional dealer networks.</p>
+          <h3>Skills &amp; Capabilities</h3>
+          <div class="pill-tags-container">
+            <span class="pill-tag">Art Direction</span>
+            <span class="pill-tag">CGI Supervision</span>
+            <span class="pill-tag">UI &amp; UX Design</span>
+            <span class="pill-tag">Design Systems</span>
+            <span class="pill-tag">Visual Storytelling</span>
+            <span class="pill-tag">Virtual Production</span>
+            <span class="pill-tag">Digital Architecture</span>
+            <span class="pill-tag">South America Campaign</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_00_big.jpg" data-caption="Chevrolet Spin 2025: Photorealistic CGI Master Hero">
+            <img src="img/work/spin_00.jpg" loading="lazy" alt="Chevrolet Spin Hero CGI">
+            <span class="gallery-zoom-badge">+</span>
+          </div>
+          <div class="media-caption">Photorealistic CGI product shoot</div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_01_big.jpg" data-caption="Chevrolet Spin 2025: Front Fascia &amp; Lighting Signature">
+              <img src="img/work/spin_01.jpg" loading="lazy" alt="Spin CGI 01">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_02_big.jpg" data-caption="Chevrolet Spin 2025: Digital Cockpit &amp; Infotainment Suite">
+              <img src="img/work/spin_02.jpg" loading="lazy" alt="Spin CGI 02">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_03_big.jpg" data-caption="Chevrolet Spin 2025: Urban Lifestyle &amp; Exterior Profile">
+              <img src="img/work/spin_03.jpg" loading="lazy" alt="Spin CGI 03">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_04_big.jpg" data-caption="Chevrolet Spin 2025: Dynamic Street Perspective">
+              <img src="img/work/spin_04.jpg" loading="lazy" alt="Spin CGI 04">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_05_big.jpg" data-caption="Chevrolet Spin 2025: Overhead Architecture &amp; Versatility">
+              <img src="img/work/spin_05.jpg" loading="lazy" alt="Spin CGI 05">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+          <div class="media-item">
+            <div class="gallery-thumb-item js-image-modal" data-gallery="spin-cgi" data-img="img/work/spin_06_big.jpg" data-caption="Chevrolet Spin 2025: Rear Tailgate &amp; Cargo Architecture">
+              <img src="img/work/spin_06.jpg" loading="lazy" alt="Spin CGI 06">
+              <span class="gallery-zoom-badge">+</span>
+            </div>
+          </div>
+        </div>
+        <div class="media-caption">Photorealistic CGI product suite (6-shot interactive gallery)</div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View Case Study</span>
+            <span class="text-open">Close Case Study</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div style="border-bottom: 1px solid var(--border-light); padding-bottom: 1.5rem;">
+              <h3 class="case-study-title" style="font-size: 1.05rem; font-weight: 600; color: #111; margin-bottom: 1.25rem;">Production Notes: Digital Launch &amp; 7-Seater Modular Pipeline</h3>
+              <div class="case-study-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; font-size: 0.8125rem; line-height: 1.6;">
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">The Family Crossover Challenge</h4>
+                  <p>Occupying a unique segment in South America as a versatile 7-seater, the Spin required a unified Global Asset Package that regional marketing teams in Brazil, Argentina, and Colombia could deploy across digital platforms without diluting core product messaging.</p>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Highlighting Cabin Modularity</h4>
+                  <p>Unlike exterior-focused truck campaigns, the Spin required deep attention to interior flexibility:</p>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Curated specific CGI camera angles detailing third-row seating transitions, cargo volume configurations, and updated digital cockpit screens.</li>
+                    <li>Balanced practical everyday family utility with a premium crossover look.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Virtual Asset Pipeline</h4>
+                  <p>Working from vehicle CAD data across our global creative and 3D pipeline:</p>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Directed lighting and realistic material shaders for fabrics, plastics, and infotainment displays.</li>
+                    <li>Ensured exterior hero renders maintained natural environmental reflections and grounded road physics.</li>
+                  </ul>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Responsive Web Design System</h4>
+                  <p>Architected a modular, component-based master website template featuring intuitive interactive feature hot-spots, seating configuration toggles, and localized spec comparison tools for regional dealer networks.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="media-grid-2">
+              <div class="media-item">
+                <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                     data-yt-id="ELfEkfptyt8" 
+                     data-gallery="spin-web"
+                     data-title="Spin Argentina product website walk-through">
+                  <img src="video/spin_trim.jpg" alt="Spin Argentina product website walk-through" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+                  <div class="facade-play"></div>
+                </div>
+                <div class="media-caption">Spin Argentina product website walk-through</div>
+              </div>
+
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" data-gallery="spin-web" data-img="img/work/spin_web_overview_big.jpg" data-caption="Master website template system deployed across South American regional portals">
+                  <img src="img/work/spin_web_overview.jpg" alt="Spin Master Website Template System">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Master website template system deployed across South American regional portals</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3: Know Your Chevrolet -->
+    <article id="proj-kyc" class="project-block" data-category="automotive selected social tvc">
+      <div class="project-info">
+        <h2 class="project-title">Know Your Chevrolet How Things Work</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet / General Motors<br/>
+          <strong>Date:</strong> Mar 2022 - Jan 2024<br/>
+          <strong>Platform:</strong> Official YouTube Series (46 Episodes)
+        </div>
+        <div class="project-details">
+          <h3>Objective</h3>
+          <p>Reclaim owner education from inconsistent third-party dealer clips. Build an official, branded video library explaining EV features, digital cockpit displays, and active safety systems.</p>
+          <h3>Strategy</h3>
+          <p>Replace expensive live shoots and dense manuals with a modular motion system. Instead of featuring a single car model, we designed an archetypal vehicle with Chevrolet DNA. This kept the content evergreen across model years and allowed GM to scale the framework to Buick, Cadillac, and GMC.</p>
+          <h3>Execution</h3>
+          <p>Directed 46 animated guides on Chevrolet's official channel. Recreated touchscreen menus and vehicle tech as clean vector graphics, turning complex engineering into fast, step-by-step visual answers.</p>
+          <h3>Skills &amp; Capabilities</h3>
+          <div class="pill-tags-container">
+            <span class="pill-tag">Art Direction</span>
+            <span class="pill-tag">Motion Graphics</span>
+            <span class="pill-tag">Storyboarding</span>
+            <span class="pill-tag">Information Architecture</span>
+            <span class="pill-tag">EV Onboarding</span>
+            <span class="pill-tag">UI &amp; UX Mapping</span>
+            <span class="pill-tag">Design Systems</span>
+            <span class="pill-tag">Content Strategy</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="CE_6yMilMIs">
+            <video autoplay loop muted playsinline class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <source src="video/htw_trim.mp4" type="video/mp4">
+            </video>
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="g5e7KSYrTsg" 
+                 data-gallery="kyc-videos"
+                 data-title="Regenerative Braking and One Pedal Driving | Chevrolet">
+              <img src="img/work/kyc01.jpg" loading="lazy" alt="Regenerative Braking" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="NZqqa9L_QpY" 
+                 data-gallery="kyc-videos"
+                 data-title="Super Cruise | Chevrolet">
+              <img src="img/work/kyc02.jpg" loading="lazy" alt="Super Cruise" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="iH8nufrzVXM" 
+                 data-gallery="kyc-videos"
+                 data-title="Navigating Your 17.7-inch Diagonal Color Touchscreen | Chevrolet">
+              <img src="img/work/kyc03.jpg" loading="lazy" alt="Navigating Touchscreen" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="M2PAEyWr6F0" 
+                 data-gallery="kyc-videos"
+                 data-title="EV Driver Information Center | Chevrolet">
+              <img src="img/work/kyc04.jpg" loading="lazy" alt="EV Driver Information Center" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="wvuz2dtN2bA" 
+                 data-gallery="kyc-videos"
+                 data-title="Your EV with the myChevrolet Mobile App | Chevrolet">
+              <img src="img/work/kyc05.jpg" loading="lazy" alt="myChevrolet Mobile App" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+
+          <div class="media-item">
+            <div class="video-wrapper lightbox-card js-lightbox-trigger" 
+                 data-yt-id="dH4WkcuwhKA" 
+                 data-gallery="kyc-videos"
+                 data-title="Charging on the Go DC Fast Charging | Chevrolet">
+              <img src="img/work/kyc06.jpg" loading="lazy" alt="Charging on the Go" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <div class="facade-play"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View Case Study</span>
+            <span class="text-open">Close Case Study</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div style="border-bottom: 1px solid var(--border-light); padding-bottom: 1.5rem;">
+              <h3 class="case-study-title" style="font-size: 1.05rem; font-weight: 600; color: #111; margin-bottom: 1.25rem;">Production Notes: A 46-Episode Scalable Motion System</h3>
+              <div class="case-study-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; font-size: 0.8125rem; line-height: 1.6;">
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">The Problem</h4>
+                  <p>Drivers struggled with new EV and driver-assist tech, but their only options were 400-page paper manuals or sales-heavy dealer clips on YouTube. Chevrolet needed fast, official answers that kept customers connected to the brand.</p>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Demystifying the EV Transition</h4>
+                  <p>A major focus was helping drivers shift to electric vehicles with confidence:</p>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Visualized charging workflows, Regenerative Braking, and One-Pedal Driving in clear steps.</li>
+                    <li>Mapped app-based battery management and route planning to ease range anxiety.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Model-Agnostic Design &amp; Longevity</h4>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>Illustrated an archetypal Chevrolet rather than a specific car nameplate.</li>
+                    <li>Videos stay fresh and relevant even after individual models receive exterior facelifts.</li>
+                    <li>The focus stays on how the technology works, not the sheet metal.</li>
+                  </ul>
+
+                  <h4 style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111;">Enterprise Scale across General Motors</h4>
+                  <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <li>The system was so cost-effective that GM adopted the template across Buick, Cadillac, and GMC.</li>
+                    <li>Cut live-action shoot costs across multiple divisions while maintaining consistent corporate quality.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p style="font-size: 0.8125rem;">
+                <strong>Deliverables:</strong> 46 official instructional videos published on YouTube and the myChevrolet app; scalable motion graphics library built for rapid UI and firmware updates.<br/>
+                <a href="https://www.youtube.com/playlist?list=PL7ufN7Cep1mHBBzRQV9rqgjtnZETxlQMC" target="_blank" rel="noopener" style="color: var(--text-highlight); font-weight: 500;">View Official YouTube Playlist &rarr;</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- Project 4: Dettol Antiseptic Liquid -->
+    <article id="proj-dettol-asl" class="project-block" data-category="cpg healthcare selected tvc">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Antiseptic Liquid : Protect Everything You Love</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand & Southeast Asia)<br/>
+          <strong>Date:</strong> May 2022<br/>
+          <strong>Platform:</strong> TVC 30 sec & Regional Print Key Visuals
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Reinforce Dettol Antiseptic Liquid as a trusted protector for Thai families, highlighting its role in safeguarding loved ones against 100 illness-causing germ strains.</p>
+          <h3>Strategy</h3>
+          <p>Appeal to parents by showing how protection and health empower children to pursue their ambitions without interruption.</p>
+          <h3>Solution</h3>
+          <p>Featured the inspiring journey of Panipak Wongpattanakit, Thailand’s two-time Olympic taekwondo champion, framing Dettol as the quiet guardian behind her resilience.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="_tDc2fGa3WA">
+            <video autoplay loop muted playsinline class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <source src="video/dasl_trim.mp4" type="video/mp4">
+            </video>
+            <div class="facade-play"></div>
+          </div>
+        </div>
+        
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/dasl01.jpg" loading="lazy" alt="Dettol Scene 1"></div>
+          <div class="media-item"><img src="img/work/dasl02.jpg" loading="lazy" alt="Dettol Scene 2"></div>
+          <div class="media-item"><img src="img/work/dasl03.jpg" loading="lazy" alt="Dettol Scene 3"></div>
+          <div class="media-item"><img src="img/work/dasl04.jpg" loading="lazy" alt="Dettol Scene 4"></div>
+          <div class="media-item"><img src="img/work/dasl05.jpg" loading="lazy" alt="Dettol Scene 5"></div>
+          <div class="media-item"><img src="img/work/dasl06.jpg" loading="lazy" alt="Dettol Scene 6"></div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+          
+          <div class="website-collapsible-content">
+            <div class="media-item">
+              <div style="display: flex; gap: 0.75rem; background: #f4f5f7; padding: 0.85rem; border-radius: 4px; align-items: flex-start;">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="dettol-print" 
+                     data-img="img/work/dasl_th_h_big.jpg" 
+                     data-caption="Print: Key Visual with Olympic taekwondo champion Panipak Wongpattanakit for Thai Market"
+                     style="flex: 3.2; background: transparent; cursor: pointer;">
+                  <img src="img/work/dasl_th_h_big.jpg" alt="Thai Market Horizontal" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="dettol-print" 
+                     data-img="img/work/dasl_th_v_big.jpg" 
+                     data-caption="Print: Key Visual with Olympic taekwondo champion Panipak Wongpattanakit for Thai Market"
+                     style="flex: 1; background: transparent; cursor: pointer;">
+                  <img src="img/work/dasl_th_v_big.jpg" alt="Thai Market Vertical" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+              </div>
+              <div class="media-caption">
+                Print: Key Visual with Olympic taekwondo champion Panipak Wongpattanakit for Thai Market
+              </div>
+            </div>
+
+            <div class="media-item">
+              <div style="display: flex; gap: 0.75rem; background: #f4f5f7; padding: 0.85rem; border-radius: 4px; align-items: flex-start;">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="dettol-print" 
+                     data-img="img/work/dasl_apac_h_big.jpg" 
+                     data-caption="Print: Key Visual for Southeast Asia Market"
+                     style="flex: 3.2; background: transparent; cursor: pointer;">
+                  <img src="img/work/dasl_apac_h_big.jpg" alt="Southeast Asia Market Horizontal" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="dettol-print" 
+                     data-img="img/work/dasl_apac_v_big.jpg" 
+                     data-caption="Print: Key Visual for Southeast Asia Market"
+                     style="flex: 1; background: transparent; cursor: pointer;">
+                  <img src="img/work/dasl_apac_v_big.jpg" alt="Southeast Asia Market Vertical" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+              </div>
+              <div class="media-caption">
+                Print: Key Visual for Southeast Asia Market
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 5: Dettol Soap -->
+    <article id="proj-dettol-soap" class="project-block" data-category="cpg healthcare tvc">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Soap : Never Stop Protecting</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand)<br/>
+          <strong>Date:</strong> Oct 2021<br/>
+          <strong>Platform:</strong> TVC 45 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position Dettol Soap as an accessible solution protecting families from hidden dirt and bacteria in everyday life.</p>
+          <h3>Strategy</h3>
+          <p>Emphasize continuous protection during daily outdoor adventures and social gatherings.</p>
+          <h3>Solution</h3>
+          <p>A narrative following a Thai family enjoying a temple fair. Dettol Soap is featured as their trusted companion, keeping family members safe while they immerse in the moment.</p>
+        </div>
+      </div>
+     <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="I2BMkjvv07s">
+            <img src="video/ds_trim.jpg" alt="Dettol Soap" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/ds01.jpg" loading="lazy" alt="Dettol Soap Scene 1"></div>
+          <div class="media-item"><img src="img/work/ds02.jpg" loading="lazy" alt="Dettol Soap Scene 2"></div>
+          <div class="media-item"><img src="img/work/ds03.jpg" loading="lazy" alt="Dettol Soap Scene 3"></div>
+          <div class="media-item"><img src="img/work/ds04.jpg" loading="lazy" alt="Dettol Soap Scene 4"></div>
+          <div class="media-item"><img src="img/work/ds05.jpg" loading="lazy" alt="Dettol Soap Scene 5"></div>
+          <div class="media-item"><img src="img/work/ds06.jpg" loading="lazy" alt="Dettol Soap Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 6: Enfagrow A+ IQ and EQ -->
+    <article id="proj-enfa-iq" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Advancing Your Child’s IQ and EQ</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Jul 2021<br/>
+          <strong>Platform:</strong> TVC 40 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position Enfagrow A+ as the superior formula enriched with MFGM, DHA, and 2'-FL to support cognitive and physical development.</p>
+          <h3>Strategy</h3>
+          <p>Highlight how balanced nutrition powers both intellectual inquiry (IQ) and empathy (EQ).</p>
+          <h3>Solution</h3>
+          <p>Followed children exploring, asking insightful questions, and solving problems together—demonstrating compassion and curiosity fueled by proper nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="yVN1w63m7GY">
+            <img src="video/ap_trim.jpg" alt="Enfagrow A+" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/a+01.jpg" loading="lazy" alt="Enfagrow A+ Scene 1"></div>
+          <div class="media-item"><img src="img/work/a+02.jpg" loading="lazy" alt="Enfagrow A+ Scene 2"></div>
+          <div class="media-item"><img src="img/work/a+03.jpg" loading="lazy" alt="Enfagrow A+ Scene 3"></div>
+          <div class="media-item"><img src="img/work/a+04.jpg" loading="lazy" alt="Enfagrow A+ Scene 4"></div>
+          <div class="media-item"><img src="img/work/a+05.jpg" loading="lazy" alt="Enfagrow A+ Scene 5"></div>
+          <div class="media-item"><img src="img/work/a+06.jpg" loading="lazy" alt="Enfagrow A+ Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 7: Enfagrow A2 -->
+    <article id="proj-enfa-a2" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A2 : Gentle on the Stomach, Easy to Digest</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Apr 2021<br/>
+          <strong>Platform:</strong> TVC 40 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Introduce Enfagrow A2 as a gentle formula designed to support easy digestion and steady learning.</p>
+          <h3>Strategy</h3>
+          <p>Focus on smooth digestion as the foundation for uninterrupted brain development and stronger immunity.</p>
+          <h3>Solution</h3>
+          <p>Partnered with spokesperson Chompoo Araya and her sons to showcase natural A2 beta-casein protein cows in an engaging, visually lighthearted countryside story.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="lMgAgump97Q">
+            <img src="video/a2_trim.jpg" alt="Enfagrow A2" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/a201.jpg" loading="lazy" alt="Enfagrow A2 Scene 1"></div>
+          <div class="media-item"><img src="img/work/a202.jpg" loading="lazy" alt="Enfagrow A2 Scene 2"></div>
+          <div class="media-item"><img src="img/work/a203.jpg" loading="lazy" alt="Enfagrow A2 Scene 3"></div>
+          <div class="media-item"><img src="img/work/a204.jpg" loading="lazy" alt="Enfagrow A2 Scene 4"></div>
+          <div class="media-item"><img src="img/work/a205.jpg" loading="lazy" alt="Enfagrow A2 Scene 5"></div>
+          <div class="media-item"><img src="img/work/a206.jpg" loading="lazy" alt="Enfagrow A2 Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 8: Dettol Range -->
+    <article id="proj-dettol-range" class="project-block" data-category="cpg healthcare selected tvc">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Range : The Loving List</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand, Indonesia & Southeast Asia)<br/>
+          <strong>Date:</strong> Oct 2020<br/>
+          <strong>Platform:</strong> TVC 120 sec (Brand Anthem)
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Educate 60 million Thai citizens on comprehensive hygiene while humanizing Dettol’s personal and surface care lines.</p>
+          <h3>Strategy</h3>
+          <p>Reflect on how pandemic restrictions distanced us from human connection, reframing hygiene as the enabler of safe touch.</p>
+          <h3>Solution</h3>
+          <p>Crafted "The Loving List," celebrating touch as an essential language of affection. Positioned Dettol as the trusted barrier that lets families embrace safely again.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="uTTx1q5WYVE">
+            <video autoplay loop muted playsinline class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <source src="video/Dettol_Range_trim.mp4" type="video/mp4">
+            </video>
+            <div class="facade-play"></div>
+          </div>
+        </div>
+        
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/LovingList01.jpg" loading="lazy" alt="The Loving List Scene 1"></div>
+          <div class="media-item"><img src="img/work/LovingList02.jpg" loading="lazy" alt="The Loving List Scene 2"></div>
+          <div class="media-item"><img src="img/work/LovingList03.jpg" loading="lazy" alt="The Loving List Scene 3"></div>
+          <div class="media-item"><img src="img/work/LovingList04.jpg" loading="lazy" alt="The Loving List Scene 4"></div>
+          <div class="media-item"><img src="img/work/LovingList05.jpg" loading="lazy" alt="The Loving List Scene 5"></div>
+          <div class="media-item"><img src="img/work/LovingList06.jpg" loading="lazy" alt="The Loving List Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 9: Dettol Hand Hygiene -->
+    <article id="proj-dettol-hh" class="project-block" data-category="cpg healthcare tvc">
+      <div class="project-info">
+        <h2 class="project-title">Dettol Hand Hygiene : Do You Wanna Eat Germs?</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Dettol (Thailand, Indonesia & Southeast Asia)<br/>
+          <strong>Date:</strong> Sep 2020<br/>
+          <strong>Platform:</strong> TVC 45 sec & Print Campaign
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Build daily handwashing habits across Southeast Asia through high-energy, memorable public messaging.</p>
+          <h3>Strategy</h3>
+          <p>Modernize Dettol's heritage jingle into an upbeat dance track to cut through clinical hygiene fatigue.</p>
+          <h3>Solution</h3>
+          <p>Paired playful choreography with bright urban visuals, making hand hygiene feel lively, social, and second nature.</p>
+        </div>
+      </div>
+     <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="cMmHv2jUgJ4">
+            <img src="video/Dettol_Handwash_trim.jpg" alt="Dettol Hand Hygiene" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+        
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/hw01.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 1"></div>
+          <div class="media-item"><img src="img/work/hw02.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 2"></div>
+          <div class="media-item"><img src="img/work/hw03.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 3"></div>
+          <div class="media-item"><img src="img/work/hw04.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 4"></div>
+          <div class="media-item"><img src="img/work/hw05.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 5"></div>
+          <div class="media-item"><img src="img/work/hw06.jpg" loading="lazy" alt="Dettol Hand Hygiene Scene 6"></div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div class="media-grid-2">
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="dettol-hh-print" 
+                     data-img="img/work/dhw_p.jpg" 
+                     data-caption="Print: Key Visual for Thai Market">
+                  <img src="img/work/dhw_p.jpg" alt="Dettol Print Key Visual" style="width: 100%; height: auto; object-fit: contain;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Print: Key Visual for Thai Market</div>
+              </div>
+              <div class="media-item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 10: Enfagrow Train Track -->
+    <article id="proj-enfa-train" class="project-block" data-category="cpg selected tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Train Track</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand & Southeast Asia)<br/>
+          <strong>Date:</strong> Sep 2020<br/>
+          <strong>Platform:</strong> TVC 30 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Reinforce Enfagrow A+ as the gold standard supporting children’s cognitive development and collaborative play.</p>
+          <h3>Strategy</h3>
+          <p>Highlight teamwork and shared ingenuity as natural reflections of strong mental and emotional growth.</p>
+          <h3>Solution</h3>
+          <p>Brought hundreds of children together with interconnected train track segments, visualizing collaborative problem-solving powered by proper nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="0yagjiWpGb4">
+            <video autoplay loop muted playsinline class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+              <source src="video/Enfa_TrainTrack_trim.mp4" type="video/mp4">
+            </video>
+            <div class="facade-play"></div>
+          </div>
+        </div>
+        
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/traintrack01.jpg" loading="lazy" alt="Train Track Scene 1"></div>
+          <div class="media-item"><img src="img/work/traintrack02.jpg" loading="lazy" alt="Train Track Scene 2"></div>
+          <div class="media-item"><img src="img/work/traintrack03.jpg" loading="lazy" alt="Train Track Scene 3"></div>
+          <div class="media-item"><img src="img/work/traintrack04.jpg" loading="lazy" alt="Train Track Scene 4"></div>
+          <div class="media-item"><img src="img/work/traintrack05.jpg" loading="lazy" alt="Train Track Scene 5"></div>
+          <div class="media-item"><img src="img/work/traintrack06.jpg" loading="lazy" alt="Train Track Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 11: Enfagrow iWonder -->
+    <article id="proj-enfa-iwonder" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : iWonder</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Aug 2020<br/>
+          <strong>Platform:</strong> TVC 30 sec (Millennial Parents)
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Connect with millennial mothers on a deeper emotional plane regarding future preparation.</p>
+          <h3>Strategy</h3>
+          <p>Acknowledge that while parents cannot predict the future world their children will inherit, they can build their inner foundation today.</p>
+          <h3>Solution</h3>
+          <p>Positioned Enfagrow A+ as emotional and cognitive groundwork, giving parents confidence that their children will navigate tomorrow with heart and mind.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="SfqY4p7d6Wc">
+            <img src="video/Enfa_iWonder_trim.jpg" alt="Enfagrow A+ iWonder" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/iw01.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 1"></div>
+          <div class="media-item"><img src="img/work/iw02.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 2"></div>
+          <div class="media-item"><img src="img/work/iw03.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 3"></div>
+          <div class="media-item"><img src="img/work/iw04.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 4"></div>
+          <div class="media-item"><img src="img/work/iw05.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 5"></div>
+          <div class="media-item"><img src="img/work/iw06.jpg" loading="lazy" alt="Enfagrow A+ iWonder Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 12: Enfagrow Rally Cry -->
+    <article id="proj-enfa-rally" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Rally Cry</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> May 2020<br/>
+          <strong>Platform:</strong> TVC 45 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Provide authentic support to mothers navigating stay-at-home isolation during early COVID-19 lockdowns.</p>
+          <h3>Strategy</h3>
+          <p>Reframe extended time at home from a stressful obstacle into an opportunity to nurture children's milestones.</p>
+          <h3>Solution</h3>
+          <p>Spokesperson Chompoo shared candid parental encouragement, offering an uplifting rally cry for mothers supporting their children's daily learning.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="YFHlie6RXP4">
+            <img src="video/Enfa_RallyCry_trim.jpg" alt="Enfagrow A+ Rally Cry" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/rc01.jpg" loading="lazy" alt="Enfagrow A+ Rally Cry Scene 1"></div>
+          <div class="media-item"><img src="img/work/rc02.jpg" loading="lazy" alt="Enfagrow A+ Rally Cry Scene 2"></div>
+          <div class="media-item"><img src="img/work/rc03.jpg" loading="lazy" alt="Enfagrow A+ Rally Cry Scene 3"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 13: Enfagrow Polar Bear -->
+    <article id="proj-enfa-pb" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ UHT: Polar Bear</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Nov 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec & Key Visual Print Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Highlight Enfagrow A+ UHT as portable brain nutrition for active on-the-go children.</p>
+          <h3>Strategy</h3>
+          <p>Use visual metaphor to illustrate resilience and adaptability in dynamic outdoor environments.</p>
+          <h3>Solution</h3>
+          <p>A curious boy encounters an illustrated polar bear spirit in nature, representing adaptability and strength nurtured by wholesome nutrition.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="32cJILRZZgE">
+            <img src="video/enfartd_trim.jpg" alt="Enfagrow A+ Polar Bear" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/pb01.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 1"></div>
+          <div class="media-item"><img src="img/work/pb02.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 2"></div>
+          <div class="media-item"><img src="img/work/pb03.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 3"></div>
+          <div class="media-item"><img src="img/work/pb04.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 4"></div>
+          <div class="media-item"><img src="img/work/pb05.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 5"></div>
+          <div class="media-item"><img src="img/work/pb06.jpg" loading="lazy" alt="Enfagrow A+ Polar Bear Scene 6"></div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div class="media-item">
+              <div style="display: flex; gap: 0.75rem; background: #f4f5f7; padding: 0.85rem; border-radius: 4px; align-items: flex-start;">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="polarbear-print" 
+                     data-img="img/work/pb_print_h.jpg" 
+                     data-caption="Print: Key Visual for Thai Market">
+                  <img src="img/work/pb_print_h.jpg" alt="Enfagrow Polar Bear Horizontal" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="polarbear-print" 
+                     data-img="img/work/pb_print_v.jpg" 
+                     data-caption="Print: Key Visual for Thai Market"
+                     style="flex: 1; background: transparent; cursor: pointer;">
+                  <img src="img/work/pb_print_v.jpg" alt="Enfagrow Polar Bear Vertical" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+              </div>
+              <div class="media-caption">Print: Key Visual for Thai Market</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 14: Enfagrow Salmon -->
+    <article id="proj-enfa-salmon" class="project-block" data-category="cpg tvc">
+      <div class="project-info">
+        <h2 class="project-title">Enfagrow A+ : Salmon</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Enfagrow (Thailand)<br/>
+          <strong>Date:</strong> Nov 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Clarify the nutritional value of dietary DHA for growing brains in everyday terms.</p>
+          <h3>Strategy</h3>
+          <p>Contrast complex meal planning with convenient, reliable daily nutrition.</p>
+          <h3>Solution</h3>
+          <p>A warm kitchen story demonstrating how Enfagrow effortlessly supplements critical developmental nutrients like DHA for active children.</p>
+        </div>
+      </div>
+     <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="lKojC4BDNpE">
+            <img src="video/enfasalmon_trim.jpg" alt="Enfagrow A+ Salmon" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/sa01.jpg" loading="lazy" alt="Enfagrow A+ Salmon Scene 1"></div>
+          <div class="media-item"><img src="img/work/sa02.jpg" loading="lazy" alt="Enfagrow A+ Salmon Scene 2"></div>
+          <div class="media-item"><img src="img/work/sa03.jpg" loading="lazy" alt="Enfagrow A+ Salmon Scene 3"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 15: Chevrolet Trailblazer -->
+    <article id="proj-tbz" class="project-block" data-category="automotive tvc">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trailblazer : The Makings of a Leader</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia, Vietnam & Southeast Asia)<br/>
+          <strong>Date:</strong> May 2019<br/>
+          <strong>Platform:</strong> TVC 30 sec & Regional Print Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Elevate Trailblazer consideration among executives and leaders seeking performance paired with advanced tech safety.</p>
+          <h3>Strategy</h3>
+          <p>Correlate Chevrolet’s engineering with decisive, forward-thinking executive qualities.</p>
+          <h3>Solution</h3>
+          <p>High-contrast industrial aesthetics and bold driving sequences showing command over both city boardrooms and mountain highways.</p>
+        </div>
+      </div>
+     <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="gW5pJ_IsD70">
+            <img src="video/tbz2019_trim.jpg" alt="Chevrolet Trailblazer" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/tb1901.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 1"></div>
+          <div class="media-item"><img src="img/work/tb1902.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 2"></div>
+          <div class="media-item"><img src="img/work/tb1903.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 3"></div>
+          <div class="media-item"><img src="img/work/tb1904.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 4"></div>
+          <div class="media-item"><img src="img/work/tb1905.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 5"></div>
+          <div class="media-item"><img src="img/work/tb1906.jpg" loading="lazy" alt="Chevrolet Trailblazer Scene 6"></div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div class="media-grid-2">
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="trailblazer-print" 
+                     data-img="img/work/tbz.jpg" 
+                     data-caption="Print: Key Visual for Vietnam Market">
+                  <img src="img/work/tbz.jpg" alt="Trailblazer Print Key Visual" style="width: 100%; height: auto; object-fit: contain;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Print: Key Visual for Vietnam Market</div>
+              </div>
+              <div class="media-item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 16: Chevrolet Trax Choose Everything -->
+    <article id="proj-trax-ce" class="project-block" data-category="automotive tvc social">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax : Choose Everything</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> Apr 2019<br/>
+          <strong>Platform:</strong> TVC & Social Campaign
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Trax as the crossover that refuses compromise between career needs and weekend adventures.</p>
+          <h3>Strategy</h3>
+          <p>Challenge young couples to expect versatility from their urban SUV.</p>
+          <h3>Solution</h3>
+          <p>A split-perspective concept revealing two contrasting lifestyles coexisting effortlessly inside the same Trax cabin.</p>
+        </div>
+      </div>
+     <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="-lKhjrkcu5g">
+            <img src="video/trax2019_trim.jpg" alt="Chevrolet Trax 2019" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/Trax1901.jpg" loading="lazy" alt="Chevrolet Trax Scene 1"></div>
+          <div class="media-item"><img src="img/work/Trax1902.jpg" loading="lazy" alt="Chevrolet Trax Scene 2"></div>
+          <div class="media-item"><img src="img/work/Trax1903.jpg" loading="lazy" alt="Chevrolet Trax Scene 3"></div>
+          <div class="media-item"><img src="img/work/Trax1904.jpg" loading="lazy" alt="Chevrolet Trax Scene 4"></div>
+          <div class="media-item"><img src="img/work/Trax1905.jpg" loading="lazy" alt="Chevrolet Trax Scene 5"></div>
+          <div class="media-item"><img src="img/work/Trax1906.jpg" loading="lazy" alt="Chevrolet Trax Scene 6"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 17: Chevrolet Trax 2018 -->
+    <article id="proj-trax-2018" class="project-block" data-category="automotive tvc social">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax 2018 : Designed to Impress</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> Feb 2018<br/>
+          <strong>Platform:</strong> TVC 60 sec & Social Media Suite
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Introduce the Trax copper edition as a design statement for style-conscious urban drivers.</p>
+          <h3>Strategy</h3>
+          <p>Anchor the vehicle colorway within golden hour coastal light and premium design cues.</p>
+          <h3>Solution</h3>
+          <p>Captured the Trax cruising along sunset coastlines, highlighting interior infotainment and exterior craftsmanship through a coordinated social campaign.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="yWpIbdDbex8">
+            <img src="video/trax2018_trim.jpg" alt="Chevrolet Trax 2018" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/Trax1801.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 1"></div>
+          <div class="media-item"><img src="img/work/Trax1802.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 2"></div>
+          <div class="media-item"><img src="img/work/Trax1803.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 3"></div>
+          <div class="media-item"><img src="img/work/Trax1804.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 4"></div>
+          <div class="media-item"><img src="img/work/Trax1805.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 5"></div>
+          <div class="media-item"><img src="img/work/Trax1806.jpg" loading="lazy" alt="Chevrolet Trax 2018 Scene 6"></div>
+        </div>
+    
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer" style="padding-top: 0.75rem;">
+            <div class="media-caption" style="margin-top: 0; margin-bottom: 0.0rem; font-weight: 500; color: var(--text-main);">Social media post on Instagram</div>
+            <div class="media-grid-3">
+              <div class="media-item">
+                <img src="img/work/trax2018_1.gif" alt="Trax GIF 1" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                <div class="media-caption" style="margin-top: 0.35rem;">Design</div>
+              </div>
+              <div class="media-item">
+                <img src="img/work/trax2018_2.gif" alt="Trax GIF 2" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                <div class="media-caption" style="margin-top: 0.35rem;">MyLink</div>
+              </div>
+              <div class="media-item">
+                <img src="img/work/trax2018_3.gif" alt="Trax GIF 3" style="width: 100%; height: auto; display: block; border-radius: 2px;">
+                <div class="media-caption" style="margin-top: 0.35rem;">Passive Entry Passive Start</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 18: Chevrolet Trax 2016 -->
+    <article id="proj-trax-2016" class="project-block" data-category="automotive website social">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Trax 2016 : Unlock The City</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Indonesia)<br/>
+          <strong>Date:</strong> 2016<br/>
+          <strong>Innovation:</strong> World's First Ever Virtual Test Drive
+        </div>
+        <div class="project-details">
+          <h3>Communication Objective</h3>
+          <p>Position the Trax as the agile compact SUV for discovering hidden Jakarta culture and dining.</p>
+          <h3>Strategy</h3>
+          <p>Combine digital livestreaming, mobile game mechanics, and live broadcast entertainment.</p>
+          <h3>Solution</h3>
+          <p>Conceived and directed a live interactive celebrity game show where online viewers voted in real time to steer drivers through Jakarta, unlocking city secrets and proving vehicle handling.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item">
+          <div class="video-wrapper custom-facade" data-yt-id="jyJGLm6eQaA">
+            <img src="video/trax2016_trim.jpg" alt="Chevrolet Trax 2016" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+        </div>
+
+        <div class="media-grid-3">
+          <div class="media-item"><img src="img/work/Trax1601.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 1"></div>
+          <div class="media-item"><img src="img/work/Trax1602.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 2"></div>
+          <div class="media-item"><img src="img/work/Trax1603.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 3"></div>
+          <div class="media-item"><img src="img/work/Trax1604.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 4"></div>
+          <div class="media-item"><img src="img/work/Trax1605.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 5"></div>
+          <div class="media-item"><img src="img/work/Trax1606.jpg" loading="lazy" alt="Chevrolet Trax 2016 Scene 6"></div>
+        </div>
+
+        <div class="website-accordion-wrapper js-accordion-wrapper">
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false">
+            <span class="toggle-icon">+</span>
+            <span class="text-closed">View full campaign</span>
+            <span class="text-open">Close</span>
+          </button>
+
+          <div class="website-collapsible-content js-website-drawer">
+            <div class="media-grid-2">
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="trax2016-campaign" 
+                     data-img="img/work/trax2016web_big.jpg" 
+                     data-caption="Digital livestreaming">
+                  <img src="img/work/trax2016web.jpg" alt="Trax 2016 Digital Livestreaming" style="width: 100%; height: auto; object-fit: contain;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Digital livestreaming</div>
+              </div>
+
+              <div class="media-item">
+                <div class="gallery-thumb-item js-image-modal" 
+                     data-gallery="trax2016-campaign" 
+                     data-img="img/work/trax2016web_post.jpg" 
+                     data-caption="Mobile game mechanics">
+                  <img src="img/work/trax2016web_post.jpg" alt="Trax 2016 Mobile Game Mechanics" style="width: 100%; height: auto; object-fit: contain;">
+                  <span class="gallery-zoom-badge">+</span>
+                </div>
+                <div class="media-caption">Mobile game mechanics</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 19: Chevrolet Spark 2018 -->
+    <article id="proj-spark" class="project-block" data-category="automotive social">
+      <div class="project-info">
+        <h2 class="project-title">Chevrolet Spark 2018</h2>
+        <div class="project-meta">
+          <strong>Client:</strong> Chevrolet (Vietnam)<br/>
+          <strong>Date:</strong> Mar 2018<br/>
+          <strong>Platform:</strong> Facebook Instant Experience / Canvas
+        </div>
+        <div class="project-details">
+          <h3>Solution</h3>
+          <p>Crafted interactive mobile-first social units optimized for rapid thumb-stopping engagement and immediate showroom bookings.</p>
+        </div>
+      </div>
+      <div class="project-media">
+        <div class="media-item" style="max-width: 404px;">
+          <div class="video-wrapper mobile-vertical lightbox-card js-lightbox-trigger" 
+               data-yt-id="8QHzUT3Je7U"
+               data-gallery="spark-video"
+               data-title="Chevrolet Spark 2018 Mobile Experience"
+               data-orientation="vertical">
+            <img src="video/spark_trim.jpg" alt="Chevrolet Spark 2018" class="facade-poster" style="width: 100%; height: 100%; object-fit: cover; background: #111111;">
+            <div class="facade-play"></div>
+          </div>
+          <div class="media-caption">Facebook Instant Experience / Canvas walkthrough</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT GALLERY SECTION: 6 Thumbnails Per Row -->
+    <section id="project-gallery" class="gallery-section-wrapper">
+      <div class="gallery-filter-bar">
+        <!-- Left: Dynamic Portfolio Indicator -->
+        <div class="gallery-nav-left">
+          <a href="#projects-top" id="gallery-dynamic-left" class="gallery-filter-btn">Portfolio : Selected Projects</a>
+        </div>
+
+        <!-- Middle: Dynamic Categories Filter Container -->
+        <div class="gallery-nav-middle" id="galleryCategoryContainer">
+          <!-- Dynamically populated via JS without redundant tags -->
+        </div>
+
+        <!-- Right: Master Toggle Link -->
+        <div class="gallery-nav-right">
+          <button type="button" class="gallery-filter-btn" id="gallery-dynamic-right-btn">All Projects</button>
+        </div>
+      </div>
+
+      <!-- 6-Column Visual Thumbnail Grid -->
+      <div class="archive-grid" id="archiveGrid">
+        
+        <!-- 1. Montana: Deep Wine Red -->
+        <a href="#proj-montana" class="archive-card is-color" data-category="automotive selected tvc website" style="--overlay-color: rgba(138, 22, 35, 0.82);">
+          <img src="video/Montana_Master_frame.jpg" loading="lazy" alt="Chevrolet Montana 2025">
+          <div class="archive-card-overlay"><span class="archive-card-title">Let's Go with Chevrolet Montana 2025</span></div>
+        </a>
+
+        <!-- 2. Spin: Electric Metallic Blue -->
+        <a href="#proj-spin" class="archive-card is-dimmed" data-category="automotive website" style="--overlay-color: rgba(16, 76, 153, 0.84);">
+          <img src="img/work/spin_00.jpg" loading="lazy" alt="Chevrolet Spin 2025">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Spin 2025 : The Vehicle That Changes With You</span></div>
+        </a>
+
+        <!-- 3. Know Your Chevrolet: Warm Slate Gray -->
+        <a href="#proj-kyc" class="archive-card is-color" data-category="automotive selected social tvc" style="--overlay-color: rgba(45, 52, 60, 0.84);">
+          <img src="img/work/kyc01.jpg" loading="lazy" alt="Know Your Chevrolet">
+          <div class="archive-card-overlay"><span class="archive-card-title">Know Your Chevrolet How Things Work</span></div>
+        </a>
+
+        <!-- 4. Dettol Antiseptic Liquid -->
+        <a href="#proj-dettol-asl" class="archive-card is-color" data-category="cpg healthcare selected tvc" style="--overlay-color: rgba(0, 115, 60, 0.82);">
+          <img src="img/work/dasl01.jpg" loading="lazy" alt="Dettol Antiseptic Liquid">
+          <div class="archive-card-overlay"><span class="archive-card-title">Dettol Antiseptic Liquid : Protect Everything You Love</span></div>
+        </a>
+
+        <!-- 5. Dettol Soap -->
+        <a href="#proj-dettol-soap" class="archive-card is-dimmed" data-category="cpg healthcare tvc" style="--overlay-color: rgba(0, 95, 48, 0.82);">
+          <img src="video/ds_trim.jpg" loading="lazy" alt="Dettol Soap">
+          <div class="archive-card-overlay"><span class="archive-card-title">Dettol Soap : Never Stop Protecting</span></div>
+        </a>
+
+        <!-- 6. Enfagrow A+ IQ and EQ -->
+        <a href="#proj-enfa-iq" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(8, 75, 142, 0.84);">
+          <img src="video/ap_trim.jpg" loading="lazy" alt="Enfagrow A+ IQ and EQ">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ : Advancing Your Child’s IQ and EQ</span></div>
+        </a>
+
+        <!-- 7. Enfagrow A2 -->
+        <a href="#proj-enfa-a2" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(184, 134, 11, 0.82);">
+          <img src="video/a2_trim.jpg" loading="lazy" alt="Enfagrow A2">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A2 : Gentle on the Stomach, Easy to Digest</span></div>
+        </a>
+
+        <!-- 8. Dettol Range -->
+        <a href="#proj-dettol-range" class="archive-card is-color" data-category="cpg healthcare selected tvc" style="--overlay-color: rgba(0, 105, 52, 0.82);">
+          <img src="img/work/LovingList01.jpg" loading="lazy" alt="Dettol Range">
+          <div class="archive-card-overlay"><span class="archive-card-title">Dettol Range : The Loving List</span></div>
+        </a>
+
+        <!-- 9. Dettol Hand Hygiene -->
+        <a href="#proj-dettol-hh" class="archive-card is-dimmed" data-category="cpg healthcare tvc" style="--overlay-color: rgba(14, 138, 88, 0.82);">
+          <img src="video/Dettol_Handwash_trim.jpg" loading="lazy" alt="Dettol Hand Hygiene">
+          <div class="archive-card-overlay"><span class="archive-card-title">Dettol Hand Hygiene : Do You Wanna Eat Germs?</span></div>
+        </a>
+
+        <!-- 10. Enfagrow Train Track -->
+        <a href="#proj-enfa-train" class="archive-card is-color" data-category="cpg selected tvc" style="--overlay-color: rgba(15, 88, 172, 0.84);">
+          <img src="img/work/traintrack01.jpg" loading="lazy" alt="Enfagrow Train Track">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ : Train Track</span></div>
+        </a>
+
+        <!-- 11. Enfagrow iWonder -->
+        <a href="#proj-enfa-iwonder" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(18, 52, 112, 0.84);">
+          <img src="video/Enfa_iWonder_trim.jpg" loading="lazy" alt="Enfagrow A+ iWonder">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ : iWonder</span></div>
+        </a>
+
+        <!-- 12. Enfagrow Rally Cry -->
+        <a href="#proj-enfa-rally" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(175, 118, 18, 0.82);">
+          <img src="video/Enfa_RallyCry_trim.jpg" alt="Enfagrow Rally Cry">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ : Rally Cry</span></div>
+        </a>
+
+        <!-- 13. Enfagrow Polar Bear -->
+        <a href="#proj-enfa-pb" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(4, 98, 136, 0.82);">
+          <img src="video/enfartd_trim.jpg" loading="lazy" alt="Enfagrow Polar Bear">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ UHT: Polar Bear</span></div>
+        </a>
+
+        <!-- 14. Enfagrow Salmon -->
+        <a href="#proj-enfa-salmon" class="archive-card is-dimmed" data-category="cpg tvc" style="--overlay-color: rgba(194, 76, 52, 0.82);">
+          <img src="video/enfasalmon_trim.jpg" loading="lazy" alt="Enfagrow Salmon">
+          <div class="archive-card-overlay"><span class="archive-card-title">Enfagrow A+ : Salmon</span></div>
+        </a>
+
+        <!-- 15. Trailblazer -->
+        <a href="#proj-tbz" class="archive-card is-dimmed" data-category="automotive tvc" style="--overlay-color: rgba(50, 50, 56, 0.84);">
+          <img src="video/tbz2019_trim.jpg" loading="lazy" alt="Chevrolet Trailblazer">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Trailblazer : The Makings of a Leader</span></div>
+        </a>
+
+        <!-- 16. Trax 2019 -->
+        <a href="#proj-trax-ce" class="archive-card is-dimmed" data-category="automotive tvc social" style="--overlay-color: rgba(204, 85, 0, 0.82);">
+          <img src="video/trax2019_trim.jpg" loading="lazy" alt="Chevrolet Trax Choose Everything">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Trax : Choose Everything</span></div>
+        </a>
+
+        <!-- 17. Trax 2018 -->
+        <a href="#proj-trax-2018" class="archive-card is-dimmed" data-category="automotive tvc social" style="--overlay-color: rgba(178, 92, 45, 0.82);">
+          <img src="video/trax2018_trim.jpg" loading="lazy" alt="Chevrolet Trax 2018">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Trax 2018 : Designed to Impress</span></div>
+        </a>
+
+        <!-- 18. Trax 2016 -->
+        <a href="#proj-trax-2016" class="archive-card is-dimmed" data-category="automotive website social" style="--overlay-color: rgba(214, 73, 14, 0.84);">
+          <img src="video/trax2016_trim.jpg" loading="lazy" alt="Chevrolet Trax 2016">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Trax 2016 : Unlock The City</span></div>
+        </a>
+
+        <!-- 19. Spark 2018 -->
+        <a href="#proj-spark" class="archive-card is-dimmed" data-category="automotive social" style="--overlay-color: rgba(188, 22, 34, 0.84);">
+          <img src="video/spark_trim.jpg" loading="lazy" alt="Chevrolet Spark 2018">
+          <div class="archive-card-overlay"><span class="archive-card-title">Chevrolet Spark 2018</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-wrapper">
+      <div class="about-row">
+        <div class="about-photo-col">
+          <img src="img/pavee_img.jpg" alt="Pavee Yat Fung LAI" class="about-portrait">
+        </div>
+
+        <div class="about-content">
+          <h2 class="about-name">Pavee &bull; Yat Fung LAI</h2>
+          <p class="about-role">Creative/Art Director</p>
+
+          <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Profile</p>
+          <p class="about-body-text">
+            A Creative/Art Director with over 20 years of experience in integrated advertising, developing impactful brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, develop impactful campaigns, and drive brand growth.
+          </p>
+
+          <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Key Competencies</p>
+          <p class="about-body-text">
+            <strong>Digital Innovation:</strong> AI-Driven Concepting, Creative Automation, Virtual Production, Social Media Strategy<br/>
+            <strong>Creative Skills:</strong> Art Direction, Concept Development, Branding &amp; Identity, UX Design<br/>
+            <strong>Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development
+          </p>
+
+          <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Let's Connect</p>
+          <p class="about-body-text" style="margin-bottom: 1.2rem;">
+            Great work starts with good conversations. If you're looking to partner on a creative initiative, explore innovative workflows, or just say hello—I’d be happy to hear from you.
+          </p>
+
+          <div class="social-links">
+            <a href="mailto:yatfung.lai@gmail.com" target="_blank">
+              <img src="img/icon_gmail.png" alt="Email" width="16" height="16">
+              <span>yatfung.lai@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/paveelai" target="_blank">
+              <img src="img/icon_linkedin.png" alt="LinkedIn" width="16" height="16">
+              <span>linkedin.com/in/paveelai</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Pavee Yat Fung LAI. All rights reserved. All trademarks, registered marks, and logos featured are property of their respective owners (General Motors, Reckitt, and client partners). Work produced during tenure at agency partners including McCann Worldgroup for portfolio archive and reference purposes.</p>
+  </footer>
+
+  <!-- Lightbox Modal Container -->
+  <div id="videoModal" class="video-modal" aria-hidden="true" role="dialog">
+    <div class="video-modal-content">
+      <button class="modal-close" aria-label="Close modal">&#x2715;</button>
+      <button class="modal-prev" aria-label="Previous item">&#10094;</button>
+      <button class="modal-next" aria-label="Next item">&#10095;</button>
+
+      <div class="modal-video-frame" id="modalFrame"></div>
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Typewriter Logo Animation
+      const typewriterElem = document.getElementById('typewriter');
+      if (typewriterElem) {
+        const fullText = "• Yat Fung ";
+        let index = fullText.length;
+        typewriterElem.textContent = fullText;
+
+        function backspace() {
+          if (index > 0) {
+            index--;
+            typewriterElem.textContent = fullText.substring(0, index);
+            setTimeout(backspace, 70);
+          } else {
+            typewriterElem.textContent = "";
+            setTimeout(typeForward, 4000);
+          }
+        }
+
+        function typeForward() {
+          if (index < fullText.length) {
+            index++;
+            typewriterElem.textContent = fullText.substring(0, index);
+            setTimeout(typeForward, 90);
+          } else {
+            setTimeout(backspace, 3500);
+          }
+        }
+
+        setTimeout(backspace, 2200);
+      }
+
+      // 2. Lightbox Modal Logic
+      const modal = document.getElementById('videoModal');
+      const modalFrame = document.getElementById('modalFrame');
+      const modalCaption = document.getElementById('modalCaption');
+      const closeBtn = document.querySelector('.modal-close');
+      const prevBtn = document.querySelector('.modal-prev');
+      const nextBtn = document.querySelector('.modal-next');
+      
+      let galleryItems = [];
+      let currentIndex = 0;
+      let activeGalleryType = 'video';
+
+      function openModal(index) {
+        currentIndex = index;
+        const item = galleryItems[currentIndex];
+        
+        if (activeGalleryType === 'video') {
+          modal.classList.remove('is-image-mode');
+          
+          if (item.getAttribute('data-orientation') === 'vertical') {
+            modal.classList.add('is-vertical-mode');
+            modalFrame.className = 'modal-video-frame is-vertical-video';
+          } else {
+            modal.classList.remove('is-vertical-mode');
+            modalFrame.className = 'modal-video-frame is-video';
+          }
+          
+          const ytId = item.getAttribute('data-yt-id');
+          const title = item.getAttribute('data-title') || '';
+          modalFrame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          modalCaption.textContent = title;
+        } else {
+          modal.classList.remove('is-vertical-mode');
+          modal.classList.add('is-image-mode');
+          modalFrame.className = 'modal-video-frame is-image';
+          const src = item.getAttribute('data-img');
+          const caption = item.getAttribute('data-caption') || '';
+          modalFrame.innerHTML = `<img src="${src}" alt="${caption}">`;
+          modalCaption.textContent = caption;
+        }
+        
+        modal.classList.add('is-active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-active');
+        modal.setAttribute('aria-hidden', 'true');
+        modalFrame.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.js-lightbox-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          activeGalleryType = 'video';
+          const galleryName = this.getAttribute('data-gallery');
+          galleryItems = Array.from(document.querySelectorAll(`.js-lightbox-trigger[data-gallery="${galleryName}"]`));
+          const index = galleryItems.indexOf(this);
+          openModal(index);
+        });
+      });
+
+      document.querySelectorAll('.js-image-modal').forEach((thumb) => {
+        thumb.addEventListener('click', function(e) {
+          e.preventDefault();
+          activeGalleryType = 'image';
+          const galleryName = this.getAttribute('data-gallery');
+          galleryItems = Array.from(document.querySelectorAll(`.js-image-modal[data-gallery="${galleryName}"]`));
+          const index = galleryItems.indexOf(this);
+          openModal(index);
+        });
+      });
+
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        openModal(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        openModal(currentIndex);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('is-active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+      });
+
+      // Facade Video click-to-load logic
+      document.querySelectorAll('.video-wrapper.custom-facade').forEach((facade) => {
+        facade.addEventListener('click', function() {
+          const videoId = this.getAttribute('data-yt-id');
+          this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=0&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          this.classList.remove('custom-facade');
+        });
+      });
+
+      // 3. Collapsible Accordion Drawers
+      const toggleBtns = document.querySelectorAll('.js-toggle-website');
+      toggleBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const wrapper = btn.closest('.js-accordion-wrapper');
+          if (wrapper) {
+            const isOpen = wrapper.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen);
+          }
+        });
+      });
+
+      // 4. Dynamic Sub-Menu Bar & Gallery Filter Engine
+      const topDynamicNav = document.getElementById('nav-dynamic-portfolio');
+      const galleryDynamicLeft = document.getElementById('gallery-dynamic-left');
+      const galleryDynamicRightBtn = document.getElementById('gallery-dynamic-right-btn');
+      const galleryCategoryContainer = document.getElementById('galleryCategoryContainer');
+      const projectBlocks = document.querySelectorAll('.project-block');
+      const archiveCards = document.querySelectorAll('.archive-card');
+
+      const allCategoryTags = [
+        { key: 'automotive', label: 'Automotive' },
+        { key: 'cpg', label: 'CPG' },
+        { key: 'healthcare', label: 'Healthcare' },
+        { key: 'tvc', label: 'TVC' },
+        { key: 'website', label: 'Website' },
+        { key: 'social', label: 'Social Media' }
+      ];
+
+      const labelMap = {
+        'selected': 'Portfolio : Selected Projects',
+        'all': 'Portfolio : All Projects',
+        'automotive': 'Portfolio : Automotive',
+        'cpg': 'Portfolio : Consumer Packaged Goods',
+        'healthcare': 'Portfolio : Healthcare',
+        'tvc': 'Portfolio : TVC',
+        'website': 'Portfolio : Website',
+        'social': 'Portfolio : Social Media'
+      };
+
+      let currentActiveFilter = 'selected';
+
+      function updateArchiveThumbnailVisuals(filter) {
+        archiveCards.forEach((card) => {
+          const cardCat = card.getAttribute('data-category') || '';
+          if (filter === 'all' || cardCat.includes(filter)) {
+            card.classList.remove('is-dimmed');
+            card.classList.add('is-color');
+          } else {
+            card.classList.remove('is-color');
+            card.classList.add('is-dimmed');
+          }
+        });
+      }
+
+      function renderGallerySubMenu(activeFilter) {
+        const isMobileOrTabletPortrait = window.matchMedia("(orientation: portrait)").matches || window.innerWidth < 992;
+
+        const activeLabel = labelMap[activeFilter] || 'Portfolio : Selected Projects';
+        if (galleryDynamicLeft) galleryDynamicLeft.textContent = activeLabel;
+        if (topDynamicNav) topDynamicNav.textContent = activeLabel;
+
+        galleryCategoryContainer.innerHTML = '';
+        
+        let middleList = [];
+        if (isMobileOrTabletPortrait) {
+          middleList = [...allCategoryTags];
+          middleList.push({ key: 'all', label: 'All Projects' });
+        } else {
+          if (activeFilter === 'selected' || activeFilter === 'all') {
+            middleList = [...allCategoryTags];
+          } else {
+            middleList = allCategoryTags.filter(item => item.key !== activeFilter);
+            middleList.push({ key: 'selected', label: 'Selected Projects' });
+          }
+        }
+
+        middleList.forEach(item => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'gallery-filter-btn' + (item.key === activeFilter ? ' active' : '');
+          btn.setAttribute('data-filter', item.key);
+          btn.textContent = item.label;
+
+          btn.addEventListener('mouseenter', () => updateArchiveThumbnailVisuals(item.key));
+          btn.addEventListener('mouseleave', () => updateArchiveThumbnailVisuals(currentActiveFilter));
+
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            applyFilter(item.key);
+          });
+
+          galleryCategoryContainer.appendChild(btn);
+        });
+
+        if (isMobileOrTabletPortrait) {
+          galleryDynamicRightBtn.style.display = 'none';
+        } else {
+          galleryDynamicRightBtn.style.display = 'inline-flex';
+          if (activeFilter === 'all') {
+            galleryDynamicRightBtn.textContent = 'Selected Projects';
+            galleryDynamicRightBtn.setAttribute('data-filter', 'selected');
+          } else {
+            galleryDynamicRightBtn.textContent = 'All Projects';
+            galleryDynamicRightBtn.setAttribute('data-filter', 'all');
+          }
+        }
+      }
+
+      function applyFilter(filterVal) {
+        currentActiveFilter = filterVal;
+
+        projectBlocks.forEach((block) => {
+          const cat = block.getAttribute('data-category') || '';
+          if (filterVal === 'all' || cat.includes(filterVal)) {
+            block.style.display = 'flex';
+          } else {
+            block.style.display = 'none';
+          }
+        });
+
+        updateArchiveThumbnailVisuals(filterVal);
+        renderGallerySubMenu(filterVal);
+
+        const topTarget = document.getElementById('projects-top');
+        if (topTarget) {
+          topTarget.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      projectBlocks.forEach((block) => {
+        const cat = block.getAttribute('data-category') || '';
+        block.style.display = cat.includes('selected') ? 'flex' : 'none';
+      });
+      updateArchiveThumbnailVisuals('selected');
+      renderGallerySubMenu('selected');
+
+      window.addEventListener('resize', () => {
+        renderGallerySubMenu(currentActiveFilter);
+      });
+
+      galleryDynamicRightBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetFilter = galleryDynamicRightBtn.getAttribute('data-filter');
+        applyFilter(targetFilter);
+      });
+
+      galleryDynamicLeft.addEventListener('click', (e) => {
+        e.preventDefault();
+        const topTarget = document.getElementById('projects-top');
+        if (topTarget) {
+          topTarget.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      archiveCards.forEach((card) => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = card.getAttribute('href');
+          const targetBlock = document.querySelector(targetId);
+
+          if (!targetBlock) return;
+
+          const isCurrentlyHidden = window.getComputedStyle(targetBlock).display === 'none';
+
+          if (isCurrentlyHidden) {
+            currentActiveFilter = 'all';
+
+            projectBlocks.forEach((block) => {
+              block.style.display = 'flex';
+            });
+
+            updateArchiveThumbnailVisuals('all');
+            renderGallerySubMenu('all');
+          }
+
+          targetBlock.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
