@@ -40,6 +40,171 @@
     a { color: var(--text-main); text-decoration: none; transition: color 0.2s ease; }
     a:hover { color: var(--text-highlight); }
 
+    /* Full-Screen Hero Showreel */
+    .hero-showreel-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.32);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-center-brand {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.85rem;
+      pointer-events: none;
+    }
+
+    .hero-brand-svg {
+      width: min(520px, 82vw);
+      height: auto;
+      filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.55));
+      animation: heroFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-brand-title {
+      font-family: var(--font-stack, "Roboto", sans-serif);
+      font-size: clamp(0.78rem, 1.15vw, 1.05rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      color: #ffffff;
+      opacity: 0.9;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      animation: heroFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      color: #ffffff;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .hero-scroll-cue:hover {
+      opacity: 1;
+      color: #ffffff;
+    }
+
+    .hero-scroll-text {
+      font-size: clamp(0.72rem, 0.95vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-scroll-chevron {
+      animation: cueBounce 2s infinite ease-in-out;
+    }
+
+    .hero-presentation-btn {
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      z-index: 20;
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.05rem;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .hero-presentation-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 991px) {
+      .hero-presentation-btn {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        padding: 0.45rem 0.85rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-presentation-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.68rem;
+      }
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cueBounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(5px);
+      }
+      60% {
+        transform: translateY(2px);
+      }
+    }
+
     .sticky-header-container { 
       position: sticky; top: 0; z-index: 1000; width: 100%; 
       background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -58,9 +223,42 @@
     
     .top-links-row { display: flex; align-items: center; justify-content: flex-start; gap: 1.25rem; font-size: 0.825rem; letter-spacing: 0.02em; white-space: nowrap; }
     .header-nav { display: flex; align-items: center; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
-    .header-nav a { color: var(--text-main); font-weight: 400; text-decoration: none; transition: color 0.2s ease; }
+    .header-nav a { color: var(--text-main); font-weight: 400; text-decoration: none !important; transition: color 0.2s ease; }
     .header-nav a:hover { color: var(--text-highlight); }
-    #nav-dynamic-portfolio { color: #111111; font-weight: 400; text-decoration: underline; text-underline-offset: 4px; }
+    #nav-dynamic-portfolio { color: #111111; font-weight: 400; text-decoration: none !important; }
+    
+    .header-pres-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(18, 18, 18, 0.05);
+      color: var(--text-main);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 999px;
+      font-family: var(--font-stack);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 0.3rem 0.75rem;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      line-height: 1.2;
+    }
+
+    .header-pres-btn.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .header-pres-btn:hover {
+      background: #111111;
+      border-color: #111111;
+      color: #ffffff;
+    }
 
     .main-container { width: 100%; max-width: 100%; margin: 0; }
     .project-block { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 4.5rem; width: 100%; }
@@ -159,11 +357,11 @@
     .gallery-nav-left, .gallery-nav-right { flex-shrink: 0; display: flex; align-items: center; }
     .gallery-nav-middle { display: flex; align-items: center; justify-content: center; gap: 1.25rem; overflow-x: auto; scrollbar-width: none; flex-grow: 1; }
     .gallery-nav-middle::-webkit-scrollbar { display: none; }
-    .gallery-filter-btn { background: transparent; border: none; outline: none; color: #888888; font-family: var(--font-stack); font-size: 0.8125rem; cursor: pointer; white-space: nowrap; transition: color 0.2s ease; }
-    .gallery-filter-btn:hover, .gallery-filter-btn.active { color: var(--text-highlight); }
-    .gallery-filter-btn.active { text-decoration: underline; text-underline-offset: 4px; }
-    #gallery-dynamic-left { color: #111111; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
-    #gallery-dynamic-right-btn { color: #888888; cursor: pointer; }
+    .gallery-filter-btn { background: transparent; border: none; outline: none; color: #888888; font-family: var(--font-stack); font-size: 0.8125rem; cursor: pointer; white-space: nowrap; transition: color 0.2s ease; text-decoration: none !important; }
+    .gallery-filter-btn:hover, .gallery-filter-btn.active { color: var(--text-highlight); text-decoration: none !important; }
+    .gallery-filter-btn.active { text-decoration: none !important; font-weight: 500; }
+    #gallery-dynamic-left { color: #111111; text-decoration: none !important; cursor: pointer; }
+    #gallery-dynamic-right-btn { color: #888888; cursor: pointer; text-decoration: none !important; }
     .archive-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; width: 100%; background: #f4f5f7; border: 1px solid #e5e7eb; overflow: hidden; }
     .archive-card { display: block; width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; cursor: pointer; background: #f4f5f7; transition: opacity 0.3s ease; }
     .archive-card img { width: 100%; height: auto; object-fit: cover; display: block; transition: transform 0.35s ease, filter 0.3s ease; }
@@ -225,38 +423,128 @@
     .social-links a { display: inline-flex; align-items: center; gap: 0.5rem; }
     .site-footer { width: 100%; margin-top: 5rem; padding: 2.5rem 3rem; border-top: 1px solid var(--border-light); font-size: 0.75rem; color: #888888; line-height: 1.6; }
 
-    /* Presentation Mode Floating Trigger Button */
-    .pres-trigger-btn {
+    /* Presentation Mode Mini HUD Navigation Bar */
+    .deck-hud-controls {
       position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
+      bottom: 2rem;
+      right: 2.5rem;
+      top: auto;
       z-index: 9999;
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(18, 18, 18, 0.76);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      padding: 0.35rem 0.65rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    body.is-presenting .deck-hud-controls {
+      display: inline-flex !important;
+    }
+
+    .deck-hud-counter {
+      font-family: var(--font-stack, "Roboto", sans-serif);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0 0.5rem 0 0.25rem;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .deck-hud-btn, .deck-hud-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 0.35rem;
+      border-radius: 50%;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+
+    .deck-hud-icon {
+      cursor: default;
+      opacity: 0.5;
+      padding-left: 0.3rem;
+      padding-right: 0.1rem;
+    }
+
+    .deck-hud-btn:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Slide 1 Cover Navigation Hint - Vertically aligned with Mini HUD Bar */
+    .deck-nav-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
-      background: rgba(18, 18, 18, 0.75);
-      color: #f0f0f0;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 999px;
-      font-family: var(--font-stack);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 0.45rem 0.9rem;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      height: 38px;
+      line-height: 1;
+      color: #ffffff;
+      opacity: 0.88;
+      pointer-events: auto;
       cursor: pointer;
       user-select: none;
-      outline: none;
-      transition: all 0.2s ease;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
-    .pres-trigger-btn:hover {
-      background: rgba(0, 0, 0, 0.95);
-      border-color: rgba(255, 255, 255, 0.4);
+    .deck-nav-hint:hover {
+      opacity: 1;
+    }
+
+    .deck-nav-hint-text {
+      font-family: var(--font-stack, "Roboto", sans-serif);
+      font-size: clamp(0.72rem, 0.95vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+    }
+
+    .deck-nav-chevron {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       color: #ffffff;
+      line-height: 1;
+    }
+
+    .deck-nav-chevron svg {
+      display: block;
+      width: 14px;
+      height: 14px;
+    }
+
+    .deck-nav-chevron-right {
+      animation: cueNudgeRight 1.5s ease-in-out infinite;
+    }
+
+    @keyframes cueNudgeRight {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(4.5px);
+      }
     }
 
     body.is-presenting {
@@ -264,6 +552,7 @@
       overflow: hidden !important;
     }
 
+    body.is-presenting .hero-showreel-container,
     body.is-presenting .sticky-header-container,
     body.is-presenting footer,
     body.is-presenting .site-footer,
@@ -325,9 +614,12 @@
       gap: 1.5rem;
       padding-bottom: 0.85rem;
       margin-bottom: 1.25rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: none !important;
+      box-shadow: none !important;
       flex-shrink: 0;
       width: 100%;
+      position: relative;
+      z-index: 100;
     }
 
     .pres-header-left {
@@ -336,6 +628,7 @@
       gap: 1rem;
       min-width: 0;
       overflow: hidden;
+      text-align: left;
     }
 
     .pres-slide-tag {
@@ -369,6 +662,49 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .pres-slide-logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .pres-slide-logo img {
+      width: min(260px, 40vw);
+      max-width: 260px;
+      height: auto;
+      display: block;
+      filter: brightness(0);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .pres-subsection-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #f8f9fa;
+      border: 1px solid #dcdfe4;
+      border-radius: 999px;
+      color: #444444;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    .pres-assets-body .pres-subsection-pill {
+      align-self: flex-start;
+      margin-bottom: 0;
     }
 
     .pres-slide-counter {
@@ -386,7 +722,9 @@
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 3rem;
-      align-items: center;
+      align-items: flex-start;
+      align-content: center;
+      margin: auto 0;
       flex-grow: 1;
       min-height: 0;
       max-height: calc(100vh - 130px);
@@ -408,6 +746,8 @@
       border-radius: 4px;
       min-width: 0;
       box-sizing: border-box;
+      align-self: flex-start;
+      margin-top: 0;
     }
 
     .pres-hero-info::-webkit-scrollbar,
@@ -431,6 +771,7 @@
       font-weight: 500;
       line-height: 1.25;
       color: #111111;
+      margin-top: 0;
       margin-bottom: 0.85rem;
       letter-spacing: 0;
     }
@@ -487,8 +828,8 @@
     .pres-hero-media {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       width: 100%;
       max-height: calc(100vh - 130px);
       min-width: 0;
@@ -624,9 +965,10 @@
       text-align: left;
     }
 
-    /* SLIDE 2.5: Fullscreen Video Slide */
+    /* SLIDE 2.5: Fullscreen Video Slide - Pure Video + Mini HUD Only */
     .pres-slide--video {
-      padding: 0;
+      padding: 0 !important;
+      margin: 0 !important;
       position: relative;
       overflow: hidden;
       background: #000000;
@@ -634,24 +976,16 @@
       height: 100vh;
     }
 
-    .pres-slide--video .pres-slide-header {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      right: 1.5rem;
-      z-index: 10;
-      background: rgba(18, 18, 18, 0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 0.65rem 1.25rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      margin-bottom: 0;
-      width: auto;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .pres-slide--video .pres-slide-header,
+    .pres-slide--video .hero-overlay,
+    .pres-slide--video .hero-center-brand,
+    .pres-slide--video .pres-showreel-brand,
+    .pres-slide--video .pres-video-badge,
+    .pres-slide--video .pres-video-bottom-bar,
+    .pres-slide--video .pres-header-left,
+    .pres-slide--video .pres-slide-counter,
+    .pres-slide--video .deck-header-runner {
+      display: none !important;
     }
 
     .pres-slide--video .pres-slide-title-bar {
@@ -660,6 +994,31 @@
 
     .pres-slide--video .pres-slide-counter {
       color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* Discreet Breadcrumb Runner */
+    .deck-header-author {
+      font-weight: 500;
+      color: inherit;
+    }
+
+    .deck-header-sep {
+      opacity: 0.35;
+      margin: 0 0.35rem;
+      font-weight: 300;
+    }
+
+    .deck-header-title {
+      font-weight: 400;
+      opacity: 0.8;
+      color: inherit;
+    }
+
+    .presentation-slide[data-slide="thank-you"] .deck-header-runner,
+    .presentation-slide:last-child .deck-header-runner,
+    .presentation-slide-thankyou .deck-header-runner,
+    .pres-slide--thankyou .deck-header-runner {
+      display: none !important;
     }
 
     .pres-slide--video .pres-video-bg-container {
@@ -682,6 +1041,133 @@
       object-fit: contain;
       background: #000000;
       display: block;
+    }
+
+    /* Slide 1: Showreel Fullscreen Cover */
+    .pres-slide--showreel,
+    .pres-slide[data-slide="showreel"],
+    .presentation-slide[data-slide="showreel"] {
+      position: relative !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #000000 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    .pres-slide--showreel video,
+    .pres-slide--showreel .pres-fullscreen-bg-video,
+    .pres-slide[data-slide="showreel"] video,
+    .pres-slide[data-slide="showreel"] .pres-fullscreen-bg-video,
+    .presentation-slide[data-slide="showreel"] video,
+    .presentation-slide[data-slide="showreel"] .pres-fullscreen-bg-video,
+    .pres-showreel-video {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transform: translate(-50%, -50%) !important;
+      z-index: 1 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #000000 !important;
+    }
+
+    .pres-slide--showreel .hero-overlay,
+    .pres-slide[data-slide="showreel"] .hero-overlay,
+    .presentation-slide[data-slide="showreel"] .hero-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba(0, 0, 0, 0.32) !important;
+      z-index: 2 !important;
+      pointer-events: none !important;
+    }
+
+    .pres-slide--showreel .hero-center-brand,
+    .pres-slide[data-slide="showreel"] .hero-center-brand,
+    .presentation-slide[data-slide="showreel"] .hero-center-brand,
+    .pres-showreel-brand {
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      z-index: 3 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: min(520px, 82vw) !important;
+      max-width: 90vw !important;
+      pointer-events: none !important;
+      margin: 0 !important;
+      gap: 0.85rem !important;
+    }
+
+    .pres-slide--showreel .hero-brand-svg,
+    .pres-slide[data-slide="showreel"] .hero-brand-svg,
+    .presentation-slide[data-slide="showreel"] .hero-brand-svg {
+      width: min(520px, 82vw) !important;
+      height: auto !important;
+      filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.55)) !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
+
+    .pres-slide--showreel .hero-brand-title,
+    .pres-slide[data-slide="showreel"] .hero-brand-title,
+    .presentation-slide[data-slide="showreel"] .hero-brand-title {
+      font-family: var(--font-stack, "Roboto", sans-serif) !important;
+      font-size: clamp(0.78rem, 1.15vw, 1.05rem) !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: none !important;
+      color: #ffffff !important;
+      opacity: 0.9 !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+      white-space: nowrap !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Cover Slide Check: Keep top runner subtle & visible on Slide 1 */
+    .pres-slide--showreel .pres-slide-header,
+    .presentation-slide[data-slide="showreel"] .pres-slide-header {
+      opacity: 0.9 !important;
+      pointer-events: auto !important;
+      position: absolute !important;
+      top: 1.5rem !important;
+      left: 1.5rem !important;
+      right: 1.5rem !important;
+      z-index: 100 !important;
+      transition: opacity 0.25s ease;
+    }
+
+    .pres-slide--showreel .pres-slide-header:hover,
+    .presentation-slide[data-slide="showreel"] .pres-slide-header:hover {
+      opacity: 1 !important;
+    }
+
+    .pres-slide--showreel .pres-video-badge,
+    .presentation-slide[data-slide="showreel"] .pres-video-badge {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease;
+    }
+
+    .pres-slide--showreel:hover .pres-video-badge,
+    .presentation-slide[data-slide="showreel"]:hover .pres-video-badge {
+      opacity: 0.9 !important;
+      pointer-events: auto !important;
     }
 
     .pres-slide--video .pres-fullscreen-bg-iframe {
@@ -729,7 +1215,9 @@
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 3rem;
-      align-items: center;
+      align-items: flex-start;
+      align-content: center;
+      margin: auto 0;
       flex-grow: 1;
       min-height: 0;
       max-height: calc(100vh - 130px);
@@ -745,6 +1233,12 @@
       min-width: 0;
       width: 100%;
       box-sizing: border-box;
+      align-self: flex-start;
+      margin-top: 0;
+    }
+
+    .pres-casestudy-text-col .pres-subsection-pill {
+      margin-top: 0;
     }
 
     .pres-casestudy-text-col .case-study-title {
@@ -752,6 +1246,7 @@
       font-size: clamp(1.15rem, 1.6vw, 1.45rem);
       font-weight: 600;
       color: #111111;
+      margin-top: 0;
       margin-bottom: 0.85rem;
       line-height: 1.35;
     }
@@ -875,12 +1370,22 @@
       line-height: 1.4;
     }
 
+    .pres-casestudy-media-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
     /* Ambient Media Column for case study slides (matches pres-hero-media 16:9 geometry) */
     .pres-casestudy-media-col--ambient {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       width: 100%;
       max-height: calc(100vh - 130px);
       min-width: 0;
@@ -1058,6 +1563,10 @@
     }
 
     /* SLIDE THANK YOU: Concluding End Slide Layout */
+    .thankyou-top-logo {
+      display: none !important;
+    }
+
     .pres-thankyou-body {
       display: flex;
       flex-direction: column;
@@ -1065,57 +1574,68 @@
       justify-content: center;
       flex-grow: 1;
       min-height: 0;
-      max-height: calc(100vh - 130px);
       width: 100%;
       margin: auto 0;
-      padding: 2rem 1.5rem;
+      padding: 3.5rem 1.5rem 5.5rem 1.5rem;
       box-sizing: border-box;
+      text-align: center;
     }
 
     .pres-thankyou-content {
       width: 100%;
-      max-width: 620px;
+      max-width: 680px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
     }
 
     .pres-thankyou-title {
       font-family: 'Bodoni Moda', Georgia, serif;
       font-optical-sizing: none;
       font-variation-settings: 'opsz' 10;
-      font-size: clamp(4.5rem, 8.8vw, 6.2rem);
+      font-size: clamp(3.8rem, 7.5vw, 5.8rem);
       font-weight: 600;
       color: #111111;
       line-height: 1;
       letter-spacing: -0.02em;
-      margin: 0 0 2rem 0;
-      text-align: left;
-      white-space: nowrap;
+      margin: 0;
+      text-align: center;
     }
 
+    .thankyou-contact-block {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 620px;
+      width: 100%;
+      margin: 2rem auto 0 auto; /* stays centered on the canvas, but content inside is left-aligned */
+    }
+
+    .thankyou-contact-block h3,
     .pres-thankyou-heading {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 500;
       color: #111111;
       margin-top: 0;
-      margin-bottom: 0.5rem;
-      text-transform: none;
-      letter-spacing: normal;
+      margin-bottom: 0.65rem;
       text-align: left;
     }
 
+    .thankyou-contact-block p,
     .pres-thankyou-text {
       font-size: 0.9375rem;
       line-height: 1.65;
       letter-spacing: 0.03em;
-      color: #111111;
+      color: #333333;
       max-width: 620px;
       margin: 0 0 1.5rem 0;
       text-align: left;
     }
 
+    .thankyou-contact-block .contact-links,
     .pres-thankyou-links {
       display: flex;
       flex-wrap: wrap;
@@ -1123,21 +1643,194 @@
       gap: 1.5rem;
       align-items: center;
       margin-top: 0.25rem;
+      text-align: left;
     }
 
+    .thankyou-contact-block a,
+    .contact-link,
+    .lets-connect a,
     .pres-thankyou-links a {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       font-size: 0.875rem;
-      color: #111111;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease;
+      text-decoration: none !important;
+      color: #1a1a1a;
+      transition: opacity 0.2s ease;
     }
 
+    .thankyou-contact-block a:hover,
+    .contact-link:hover,
+    .lets-connect a:hover,
     .pres-thankyou-links a:hover {
-      color: var(--text-highlight, #0084b4);
+      text-decoration: none !important;
+      opacity: 0.65;
+      color: #1a1a1a;
+    }
+
+    /* FINAL SLIDE: Thank You / Disclaimer Footer */
+    .presentation-slide[data-slide="thank-you"] ~ .deck-header,
+    .presentation-deck-header {
+      border-bottom: none !important;
+      box-shadow: none !important;
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .presentation-slide-thankyou,
+    .pres-slide--thankyou {
+      position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
+      box-sizing: border-box !important;
+      padding: 2.25rem 3.5rem 2.75rem 3.5rem !important;
+      overflow-y: auto !important;
+    }
+
+    .presentation-slide-footer,
+    .presentation-legal-text {
+      position: absolute;
+      bottom: 2rem;
+      left: 4rem;
+      right: 4rem;
+      width: auto !important;
+      max-width: calc(100vw - 8rem) !important;
+      text-align: left;
+      font-size: clamp(0.68rem, 0.8vw, 0.78rem);
+      line-height: 1.5;
+      color: #8c8c8c;
+      white-space: normal;
+    }
+
+    .presentation-slide-footer {
+      box-sizing: border-box;
+    }
+
+    .presentation-slide-footer .presentation-legal-text {
+      position: static !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0;
+    }
+
+    .presentation-divider {
+      border: none;
+      border-top: 1px solid #eaeaea;
+      margin: 0 0 0.85rem 0;
+      width: 100%;
+    }
+
+    /* PORTFOLIO GALLERY SLIDE IN PRESENTATION MODE */
+    .presentation-slide[data-slide="portfolio-archive"] {
+      padding: 4rem 4vw 2rem 4vw !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      background: #ffffff;
+      overflow: hidden;
+      position: relative !important;
+    }
+
+    .presentation-slide[data-slide="portfolio-archive"] .pres-gallery-top-logo {
+      position: absolute;
+      top: 2.25rem;
+      right: 3.5rem;
+      z-index: 100;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 991px) {
+      .presentation-slide[data-slide="portfolio-archive"] .pres-gallery-top-logo {
+        top: 1.25rem !important;
+        right: 1.25rem !important;
+      }
+    }
+
+    .presentation-slide[data-slide="portfolio-archive"] .deck-webgallery-wrapper {
+      max-width: 92vw !important;
+      width: 100% !important;
+    }
+
+    /* Executive Project Counter: Hide on Thank You slide */
+    .presentation-slide[data-slide="thank-you"] .pres-slide-counter,
+    .presentation-slide[data-slide="thank-you"] [data-counter],
+    .pres-slide--thankyou .pres-slide-counter,
+    .pres-slide--thankyou [data-counter] {
+      display: none !important;
+    }
+
+    /* Distinct Hover Badges for Presentation Gallery Thumbnails */
+    .deck-grid-thumb {
+      position: relative;
+    }
+
+    /* Base pill styling */
+    .deck-grid-thumb::after {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.6rem;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.35rem 0.65rem;
+      border-radius: 9999px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 5;
+    }
+
+    /* Reveal badge on hover */
+    .deck-grid-thumb:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Badge for Curated Slides */
+    .deck-grid-thumb[data-destination="slide"]::after {
+      content: "Slide";
+    }
+
+    /* Badge for Archive Web Case Studies */
+    .deck-grid-thumb[data-destination="web"]::after {
+      content: "Web Case Study";
+      background: rgba(18, 18, 18, 0.85);
+    }
+
+    /* Clean Navigation & Category Typography: No Underlines */
+    .deck-webgallery-heading,
+    .portfolio-heading,
+    .gallery-filter-btn,
+    .gallery-nav-left,
+    .gallery-nav-left a,
+    .gallery-nav-right,
+    .gallery-nav-right button,
+    .gallery-nav-middle,
+    .gallery-nav-middle button,
+    #gallery-dynamic-left,
+    #gallery-dynamic-right-btn,
+    #pres-gallery-dynamic-left,
+    #pres-gallery-dynamic-right-btn,
+    #nav-dynamic-portfolio,
+    .header-nav a {
+      text-decoration: none !important;
     }
 
     .pres-gallery-filter-bar {
@@ -1228,7 +1921,49 @@
         padding: 1.25rem 1.25rem 4.5rem 1.25rem !important;
       }
       .pres-slide--video {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .pres-slide--showreel,
+      .pres-slide[data-slide="showreel"],
+      .presentation-slide[data-slide="showreel"] {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .presentation-slide-thankyou,
+      .pres-slide--thankyou {
         padding: 1.25rem 1.25rem 4.5rem 1.25rem !important;
+      }
+      .presentation-slide-footer,
+      .presentation-legal-text {
+        left: 1.5rem !important;
+        right: 1.5rem !important;
+        bottom: 1.25rem !important;
+        max-width: calc(100vw - 3rem) !important;
+      }
+      .thankyou-top-logo {
+        top: 2rem !important;
+      }
+      .thankyou-top-logo img {
+        width: min(75vw, 360px) !important;
+        height: auto !important;
+        max-width: 360px !important;
+      }
+      .deck-hud-controls {
+        bottom: 1.25rem !important;
+        right: 1.25rem !important;
+      }
+      .deck-nav-hint {
+        bottom: 1.25rem !important;
+        height: 34px !important;
+      }
+      .presentation-slide[data-slide="portfolio-archive"] {
+        padding: 2rem 1.25rem !important;
+        overflow-y: auto;
+      }
+      .presentation-slide[data-slide="portfolio-archive"] .deck-webgallery-wrapper {
+        max-width: 100% !important;
+        width: 100% !important;
       }
       .pres-slide--video .pres-slide-header {
         margin: 0;
@@ -1238,9 +1973,12 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      .pres-hero-body {
+      .pres-hero-body,
+      .pres-casestudy-body {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        margin: 0;
+        align-content: start;
       }
       .pres-intro-body {
         grid-template-columns: 1fr;
@@ -1290,6 +2028,38 @@
   </style>
 </head>
 <body id="top">
+
+  <!-- Full-Screen Hero Showreel -->
+  <section class="hero-showreel-container" id="hero-showreel">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="video/showreel.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <!-- Dead Center: Brand Lockup -->
+    <div class="hero-center-brand">
+      <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI" class="hero-brand-svg">
+      <div class="hero-brand-title">Creative / Art Director</div>
+    </div>
+
+    <!-- Bottom Center: Primary Scroll Cue -->
+    <a href="#projects-top" class="hero-scroll-cue" aria-label="Scroll down to Selected Projects">
+      <span class="hero-scroll-text">Scroll for Portfolio : Selected Projects</span>
+      <svg class="hero-scroll-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </a>
+
+    <!-- Bottom Right: Presentation Mode Trigger -->
+    <button type="button" id="presModeBtn" class="hero-presentation-btn js-launch-presentation" aria-label="Enter Presentation Mode">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+      <span>Presentation Mode</span>
+    </button>
+  </section>
 
   <!-- Frosted Dynamic Sticky Header Bar -->
   <div class="sticky-header-container" id="header-container">
@@ -2680,14 +3450,14 @@
           </p>
           <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Let's Connect</p>
           <p class="about-body-text" style="margin-bottom: 1.2rem;">
-            Great work starts with good conversations. If you're looking to partner on a creative initiative, explore innovative workflows, or just say hello—I’d be happy to hear from you.
+            Great work starts with good conversations. If you'd like to partner on a creative initiative, explore innovative workflows, or simply say hello, I'd love to hear from you.
           </p>
-          <div class="social-links">
-            <a href="mailto:yatfung.lai@gmail.com" target="_blank">
+          <div class="social-links lets-connect">
+            <a href="mailto:yatfung.lai@gmail.com" target="_blank" class="contact-link">
               <img src="img/icon_gmail.png" alt="Email" width="16" height="16">
               <span>yatfung.lai@gmail.com</span>
             </a>
-            <a href="https://linkedin.com/in/paveelai" target="_blank">
+            <a href="https://linkedin.com/in/paveelai" target="_blank" class="contact-link">
               <img src="img/icon_linkedin.png" alt="LinkedIn" width="16" height="16">
               <span>linkedin.com/in/paveelai</span>
             </a>
@@ -2714,6 +3484,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        heroVideo.play().catch(() => {});
+      }
+
       const typewriterElem = document.getElementById('typewriter');
       if (typewriterElem) {
         const fullText = "• Yat Fung ";
@@ -2968,7 +3743,7 @@
         }
       }
 
-      function applyFilter(filterVal) {
+      function applyFilter(filterVal, shouldScrollTop = true) {
         currentActiveFilter = filterVal;
         projectBlocks.forEach((block) => {
           const cat = block.getAttribute('data-category') || '';
@@ -2980,9 +3755,12 @@
         });
         updateArchiveThumbnailVisuals(filterVal);
         renderGallerySubMenu(filterVal);
-        const topTarget = document.getElementById('projects-top');
-        if (topTarget) topTarget.scrollIntoView({ behavior: 'smooth' });
+        if (shouldScrollTop) {
+          const topTarget = document.getElementById('projects-top');
+          if (topTarget) topTarget.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+      window.applyWebsiteFilter = applyFilter;
 
       projectBlocks.forEach((block) => {
         const cat = block.getAttribute('data-category') || '';
@@ -3016,22 +3794,31 @@
   <!-- Presentation Deck Container -->
   <div id="presDeck" class="pres-deck" role="region" aria-label="Presentation Deck"></div>
 
-  <!-- Presentation Mode Floating Trigger -->
-  <button id="presModeBtn" class="pres-trigger-btn" aria-label="Toggle Presentation Mode">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.85;">
-      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-      <line x1="8" y1="21" x2="16" y2="21"></line>
-      <line x1="12" y1="17" x2="12" y2="21"></line>
-    </svg>
-    <span>Presentation Mode</span>
-  </button>
+  <!-- Presentation Deck In-Mode Mini HUD Navigation Bar -->
+  <div class="deck-hud-controls">
+    <span class="deck-hud-icon" title="Presentation Deck">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+    </span>
+    <span class="deck-hud-counter" id="deckHudCounter"></span>
+    <button type="button" class="deck-hud-btn deck-hud-prev" id="deckHudPrev" title="Previous Slide (←)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="deck-hud-btn deck-hud-next" id="deckHudNext" title="Next Slide (→)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <button type="button" class="deck-hud-btn deck-hud-close" id="deckHudClose" title="Exit Presentation (Esc)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
 
   <!-- Presentation Mode Controller -->
   <script>
     (function() {
-      const presBtn = document.getElementById('presModeBtn');
+      const presBtn = document.getElementById('presModeBtn') || document.querySelector('.hero-presentation-btn');
       const presDeck = document.getElementById('presDeck');
-      if (!presBtn || !presDeck) return;
+      if (!presDeck) return;
+
+      const curatedProjectIds = ['proj-montana', 'proj-kyc', 'proj-dettol-asl', 'proj-dettol-range', 'proj-enfa-train'];
 
       let presentationSlides = [];
       let currentSlideIndex = 0;
@@ -3041,6 +3828,7 @@
       }
 
       function updateButtonUI(active) {
+        if (!presBtn) return;
         const span = presBtn.querySelector('span');
         if (span) {
           span.textContent = active ? 'Exit Deck (Esc)' : 'Presentation Mode';
@@ -3063,7 +3851,27 @@
         presDeck.innerHTML = '';
         presentationSlides = [];
 
-        // SLIDE 1: Introduction & Profile (Image 1)
+        // SLIDE 1: Showreel Video Cover
+        const showreelSlide = document.createElement('section');
+        showreelSlide.className = 'pres-slide pres-slide--video pres-slide--showreel presentation-slide';
+        showreelSlide.setAttribute('data-slide', 'showreel');
+        showreelSlide.setAttribute('data-proj-id', 'hero-showreel');
+        showreelSlide.innerHTML = `
+          <video class="pres-fullscreen-bg-video pres-showreel-video" autoplay muted loop playsinline preload="auto">
+            <source src="video/showreel.mp4" type="video/mp4">
+          </video>
+          <div class="hero-overlay"></div>
+          <div class="hero-center-brand">
+            <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI" class="hero-brand-svg">
+            <div class="hero-brand-title">Creative / Art Director</div>
+          </div>
+          <div class="deck-nav-hint" id="deckNavHint">
+            <span class="deck-nav-hint-text">Press <span class="deck-nav-chevron deck-nav-chevron-left" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></span> / <span class="deck-nav-chevron deck-nav-chevron-right" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span> arrows to navigate</span>
+          </div>
+        `;
+        presentationSlides.push(showreelSlide);
+
+        // SLIDE 2: Introduction & Profile (Image 1)
         const aboutSection = document.getElementById('about');
         if (aboutSection) {
           const introSlide = document.createElement('section');
@@ -3072,10 +3880,11 @@
           introSlide.innerHTML = `
             <div class="pres-slide-header">
               <div class="pres-header-left">
-                <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Portfolio</div>
-                <div class="pres-slide-title-bar">Pavee • Yat Fung LAI | Creative/Art Director</div>
+                <div class="pres-slide-title-bar">About</div>
               </div>
-              <div class="pres-slide-counter" data-counter></div>
+              <div class="pres-slide-logo">
+                <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+              </div>
             </div>
             <div class="pres-intro-body">
               <div class="pres-intro-photo-col">
@@ -3102,15 +3911,14 @@
           presentationSlides.push(introSlide);
         }
 
-        // Find visible project blocks (respecting active category filter)
-        const visibleBlocks = Array.from(document.querySelectorAll('.project-block')).filter((block) => {
-          return window.getComputedStyle(block).display !== 'none';
-        });
+        // STRICT CURATED DECK: Exactly Slide 1 (Showreel) + the 5 Curated Case Studies + Gallery Slide + Thank You Slide
+        const curatedBlocks = curatedProjectIds
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
 
-        const categoryLabelElem = document.getElementById('gallery-dynamic-left');
-        const categoryLabel = categoryLabelElem ? categoryLabelElem.textContent.trim() : 'Portfolio : Selected Projects';
+        const categoryLabel = 'Portfolio : Selected Projects';
 
-        visibleBlocks.forEach((block, projIndex) => {
+        curatedBlocks.forEach((block, projIndex) => {
           const projId = block.getAttribute('id') || '';
           const titleElem = block.querySelector('.project-title');
           const projectTitle = titleElem ? titleElem.textContent.trim() : 'Project';
@@ -3119,7 +3927,7 @@
           const mediaContainer = block.querySelector('.project-media');
           if (!mediaContainer) return;
 
-          const projectCounterTag = `${categoryLabel} (${projIndex + 1} of ${visibleBlocks.length})`;
+          const projectCounterTag = `${categoryLabel} (${projIndex + 1} of ${curatedBlocks.length})`;
 
           // 1. Hero media item (first direct child)
           const heroMedia = mediaContainer.querySelector(':scope > .media-item');
@@ -3142,10 +3950,11 @@
           slide1.innerHTML = `
             <div class="pres-slide-header">
               <div class="pres-header-left">
-                <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Project Summary</div>
                 <div class="pres-slide-title-bar">${projectTitle}</div>
               </div>
-              <div class="pres-slide-counter" data-counter></div>
+              <div class="pres-slide-logo">
+                <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+              </div>
             </div>
             <div class="pres-hero-body">
               <div class="pres-hero-info">
@@ -3213,20 +4022,7 @@
               `;
             }
 
-            slideVideo.innerHTML = `
-              <div class="pres-slide-header">
-                <div class="pres-header-left">
-                  <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Featured Commercial</div>
-                  <div class="pres-slide-title-bar">${projectTitle} &bull; ${heroCaption}</div>
-                </div>
-                <div class="pres-slide-counter" data-counter></div>
-              </div>
-              ${bgVideoHtml}
-              <div class="pres-video-badge">
-                <span class="pres-sound-dot"></span>
-                <span>Sound On</span>
-              </div>
-            `;
+            slideVideo.innerHTML = bgVideoHtml;
             presentationSlides.push(slideVideo);
           }
 
@@ -3240,12 +4036,14 @@
             slideVideos.innerHTML = `
               <div class="pres-slide-header">
                 <div class="pres-header-left">
-                  <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Campaign Broadcast & Video Assets</div>
                   <div class="pres-slide-title-bar">${projectTitle}</div>
                 </div>
-                <div class="pres-slide-counter" data-counter></div>
+                <div class="pres-slide-logo">
+                  <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                </div>
               </div>
               <div class="pres-assets-body">
+                <div class="pres-subsection-pill">Campaign Broadcast & Video Assets</div>
                 <div class="media-grid-2">${grid2.innerHTML}</div>
               </div>
             `;
@@ -3267,12 +4065,14 @@
             slideStills.innerHTML = `
               <div class="pres-slide-header">
                 <div class="pres-header-left">
-                  <div class="pres-slide-tag"><span class="pres-tag-dot"></span> ${grid3Title}</div>
                   <div class="pres-slide-title-bar">${projectTitle}</div>
                 </div>
-                <div class="pres-slide-counter" data-counter></div>
+                <div class="pres-slide-logo">
+                  <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                </div>
               </div>
               <div class="pres-assets-body">
+                <div class="pres-subsection-pill">${grid3Title}</div>
                 <div class="media-grid-3">${grid3.innerHTML}</div>
               </div>
             `;
@@ -3290,12 +4090,14 @@
             slideExtra.innerHTML = `
               <div class="pres-slide-header">
                 <div class="pres-header-left">
-                  <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Campaign Assets & Media</div>
                   <div class="pres-slide-title-bar">${projectTitle}</div>
                 </div>
-                <div class="pres-slide-counter" data-counter></div>
+                <div class="pres-slide-logo">
+                  <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                </div>
               </div>
               <div class="pres-assets-body">
+                <div class="pres-subsection-pill">Campaign Assets & Media</div>
                 ${extraHtml}
               </div>
             `;
@@ -3321,12 +4123,14 @@
               slideWeb.innerHTML = `
                 <div class="pres-slide-header">
                   <div class="pres-header-left">
-                    <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Regional Web Systems</div>
                     <div class="pres-slide-title-bar">${projectTitle}</div>
                   </div>
-                  <div class="pres-slide-counter" data-counter></div>
+                  <div class="pres-slide-logo">
+                    <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                  </div>
                 </div>
                 <div class="pres-assets-body">
+                  <div class="pres-subsection-pill">Regional Web Systems</div>
                   <div class="pres-web-group-card">
                     <div class="media-grid-2">${webGrid2.innerHTML}</div>
                   </div>
@@ -3345,13 +4149,15 @@
               slideCaseStudy.innerHTML = `
                 <div class="pres-slide-header">
                   <div class="pres-header-left">
-                    <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Case Study</div>
                     <div class="pres-slide-title-bar">${projectTitle}</div>
                   </div>
-                  <div class="pres-slide-counter" data-counter></div>
+                  <div class="pres-slide-logo">
+                    <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                  </div>
                 </div>
                 <div class="pres-casestudy-body">
                   <div class="pres-casestudy-text-col">
+                    <div class="pres-subsection-pill">Case Study</div>
                     ${textNode ? textNode.innerHTML : ''}
                   </div>
                   <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
@@ -3377,13 +4183,15 @@
                 slideCaseStudy.innerHTML = `
                   <div class="pres-slide-header">
                     <div class="pres-header-left">
-                      <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Case Study</div>
                       <div class="pres-slide-title-bar">${projectTitle}</div>
                     </div>
-                    <div class="pres-slide-counter" data-counter></div>
+                    <div class="pres-slide-logo">
+                      <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                    </div>
                   </div>
                   <div class="pres-casestudy-body">
                     <div class="pres-casestudy-text-col">
+                      <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
                     </div>
                     <div class="pres-casestudy-media-col">
@@ -3400,13 +4208,15 @@
                 slideCaseStudy.innerHTML = `
                   <div class="pres-slide-header">
                     <div class="pres-header-left">
-                      <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Case Study</div>
                       <div class="pres-slide-title-bar">${projectTitle}</div>
                     </div>
-                    <div class="pres-slide-counter" data-counter></div>
+                    <div class="pres-slide-logo">
+                      <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+                    </div>
                   </div>
                   <div class="pres-casestudy-body">
                     <div class="pres-casestudy-text-col">
+                      <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
                     </div>
                     <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
@@ -3423,80 +4233,100 @@
           }
         });
 
-        // SECOND-TO-LAST SLIDE: Portfolio Gallery & Full Archive (Image 5)
+        // SLIDE IMMEDIATELY BEFORE THANK YOU: Reproduce Website Portfolio Gallery Exactly
         const archiveGrid = document.getElementById('archiveGrid');
         if (archiveGrid) {
-          const gallerySlide = document.createElement('section');
-          gallerySlide.className = 'pres-slide pres-slide--gallery';
-          gallerySlide.setAttribute('data-proj-id', 'archiveGrid');
-          gallerySlide.innerHTML = `
-            <div class="pres-slide-header">
-              <div class="pres-header-left">
-                <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Portfolio Gallery & Archive</div>
-              </div>
-              <div class="pres-slide-counter" data-counter></div>
+          const archiveSlide = document.createElement('section');
+          archiveSlide.className = 'pres-slide presentation-slide';
+          archiveSlide.setAttribute('data-slide', 'portfolio-archive');
+          archiveSlide.setAttribute('data-proj-id', 'portfolio-archive');
+          archiveSlide.innerHTML = `
+            <div class="pres-slide-logo pres-gallery-top-logo">
+              <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
             </div>
-            <div class="pres-gallery-body">
-              <div class="pres-gallery-container">
-                <div class="gallery-filter-bar pres-gallery-filter-bar">
-                  <div class="gallery-nav-left">
-                    <span id="presGalleryDynamicLeft" style="color: #111111; font-weight: 500; font-size: 0.8125rem;">Portfolio : Selected Projects</span>
-                  </div>
-                  <div class="gallery-nav-middle" id="presGallerySubmenuContainer"></div>
-                  <div class="gallery-nav-right">
-                    <button type="button" class="gallery-filter-btn" id="presGalleryRightToggle" style="color: #888888; cursor: pointer;">All Projects</button>
-                  </div>
+            <div class="gallery-section-wrapper deck-webgallery-wrapper" style="margin: 0; padding: 0; width: 100%;">
+              <div class="gallery-filter-bar">
+                <div class="gallery-nav-left">
+                  <a href="#projects-top" id="pres-gallery-dynamic-left" class="gallery-filter-btn" style="color: #111111; text-decoration: none; cursor: pointer;">Portfolio : Selected Projects</a>
                 </div>
-                <div class="archive-grid" id="presArchiveGrid">
-                  ${archiveGrid.innerHTML}
+                <div class="gallery-nav-middle" id="presGalleryCategoryContainer"></div>
+                <div class="gallery-nav-right">
+                  <button type="button" class="gallery-filter-btn" id="pres-gallery-dynamic-right-btn" style="color: #888888; cursor: pointer;">All Projects</button>
                 </div>
+              </div>
+
+              <div class="archive-grid" id="presArchiveGrid">
+                ${archiveGrid.innerHTML}
               </div>
             </div>
           `;
-          initPresentationGallery(gallerySlide);
-          presentationSlides.push(gallerySlide);
+          initPresentationPortfolioArchive(archiveSlide);
+          presentationSlides.push(archiveSlide);
         }
 
         // FINAL SLIDE: Thank You / The End Slide (Image 2)
         const thankYouSlide = document.createElement('section');
-        thankYouSlide.className = 'pres-slide pres-slide--thankyou';
+        thankYouSlide.className = 'pres-slide pres-slide--thankyou presentation-slide presentation-slide-thankyou';
+        thankYouSlide.setAttribute('data-slide', 'thank-you');
         thankYouSlide.setAttribute('data-proj-id', 'thankyou');
         thankYouSlide.innerHTML = `
           <div class="pres-slide-header">
-            <div class="pres-header-left">
-              <div class="pres-slide-tag"><span class="pres-tag-dot"></span> Thank You</div>
-              <div class="pres-slide-title-bar">Pavee • Yat Fung LAI</div>
+            <div class="pres-header-left"></div>
+            <div class="pres-slide-logo">
+              <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
             </div>
-            <div class="pres-slide-counter" data-counter></div>
           </div>
           <div class="pres-thankyou-body">
             <div class="pres-thankyou-content">
-              <h1 class="pres-thankyou-title">Thank You</h1>
-              <div class="pres-thankyou-heading">Let's Connect</div>
-              <p class="pres-thankyou-text">
-                Great work starts with good conversations. If you're looking to partner on a creative initiative, explore innovative workflows, or just say hello—I’d be happy to hear from you.
-              </p>
-              <div class="pres-thankyou-links">
-                <a href="mailto:yatfung.lai@gmail.com" target="_blank">
-                  <img src="img/icon_gmail.png" alt="Email" width="16" height="16">
-                  <span>yatfung.lai@gmail.com</span>
-                </a>
-                <a href="https://linkedin.com/in/paveelai" target="_blank">
-                  <img src="img/icon_linkedin.png" alt="LinkedIn" width="16" height="16">
-                  <span>linkedin.com/in/paveelai</span>
-                </a>
+              <h1 class="pres-thankyou-title">Thank You!</h1>
+              <div class="thankyou-contact-block">
+                <h3 class="pres-thankyou-heading">Let's Connect</h3>
+                <p class="pres-thankyou-text">
+                  Great work starts with good conversations. If you'd like to partner on a creative initiative, explore innovative workflows, or simply say hello, I'd love to hear from you.
+                </p>
+                <div class="pres-thankyou-links contact-links">
+                  <a href="mailto:yatfung.lai@gmail.com" target="_blank" class="contact-link">
+                    <img src="img/icon_gmail.png" alt="Email" width="16" height="16">
+                    <span>yatfung.lai@gmail.com</span>
+                  </a>
+                  <a href="https://linkedin.com/in/paveelai" target="_blank" class="contact-link">
+                    <img src="img/icon_linkedin.png" alt="LinkedIn" width="16" height="16">
+                    <span>linkedin.com/in/paveelai</span>
+                  </a>
+                </div>
               </div>
             </div>
+          </div>
+          <div class="presentation-slide-footer">
+            <hr class="presentation-divider">
+            <p class="presentation-legal-text">
+              © 2026 Pavee Yat Fung LAI. All rights reserved. All trademarks, registered marks, and logos featured are property of their respective owners (General Motors, Reckitt, and client partners). Work produced during tenure at agency partners including McCann Worldgroup for portfolio archive and reference purposes.
+            </p>
           </div>
         `;
         presentationSlides.push(thankYouSlide);
 
-        // Set slide counters & append to presentation deck
-        const total = presentationSlides.length;
-        presentationSlides.forEach((slide, idx) => {
+        // Set executive project counters & append to presentation deck
+        presentationSlides.forEach((slide) => {
           const counter = slide.querySelector('[data-counter]');
           if (counter) {
-            counter.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+            const slideType = slide.getAttribute('data-slide');
+            const projId = slide.getAttribute('data-proj-id');
+            const curatedIndex = curatedProjectIds.indexOf(projId);
+
+            if (curatedIndex !== -1) {
+              counter.textContent = `Project ${curatedIndex + 1} of 5`;
+              counter.style.display = '';
+            } else if (slideType === 'portfolio-archive' || projId === 'portfolio-archive') {
+              counter.textContent = 'Project Directory';
+              counter.style.display = '';
+            } else if (slideType === 'thank-you' || projId === 'thankyou' || slideType === 'showreel') {
+              counter.textContent = '';
+              counter.style.display = 'none';
+            } else if (projId === 'about') {
+              counter.textContent = '';
+              counter.style.display = 'none';
+            }
           }
           presDeck.appendChild(slide);
         });
@@ -3504,13 +4334,13 @@
         return presentationSlides;
       }
 
-      function initPresentationGallery(gallerySlide) {
-        const presGrid = gallerySlide.querySelector('#presArchiveGrid');
+      function initPresentationPortfolioArchive(archiveSlide) {
+        const presGrid = archiveSlide.querySelector('.archive-grid');
         if (!presGrid) return;
         const presCards = presGrid.querySelectorAll('.archive-card');
-        const dynamicLeft = gallerySlide.querySelector('#presGalleryDynamicLeft');
-        const submenuContainer = gallerySlide.querySelector('#presGallerySubmenuContainer');
-        const rightToggle = gallerySlide.querySelector('#presGalleryRightToggle');
+        const dynamicLeft = archiveSlide.querySelector('#pres-gallery-dynamic-left');
+        const submenuContainer = archiveSlide.querySelector('#presGalleryCategoryContainer');
+        const rightToggle = archiveSlide.querySelector('#pres-gallery-dynamic-right-btn');
 
         const presCategories = [
           { key: 'automotive', label: 'Automotive' },
@@ -3546,19 +4376,6 @@
             }
           });
         }
-
-        presCards.forEach((card) => {
-          card.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = card.getAttribute('href');
-            if (!targetId) return;
-            const cleanId = targetId.replace('#', '');
-            const targetIndex = presentationSlides.findIndex((slide) => slide.getAttribute('data-proj-id') === cleanId);
-            if (targetIndex !== -1) {
-              goToSlide(targetIndex);
-            }
-          });
-        });
 
         function renderPresSubmenu(activeFilter) {
           if (dynamicLeft) dynamicLeft.textContent = presLabelMap[activeFilter] || 'Portfolio : Selected Projects';
@@ -3606,12 +4423,90 @@
           renderPresSubmenu(filterKey);
         }
 
+        if (dynamicLeft) {
+          dynamicLeft.addEventListener('click', (e) => {
+            e.preventDefault();
+            applyPresFilter('selected');
+          });
+        }
+
         if (rightToggle) {
           rightToggle.addEventListener('click', (e) => {
             e.preventDefault();
             applyPresFilter(rightToggle.getAttribute('data-filter'));
           });
         }
+
+        // Setup thumbnails: badges, data attributes, and navigation click handlers
+        presCards.forEach((card) => {
+          card.classList.add('deck-grid-thumb');
+
+          const rawHref = card.getAttribute('href') || card.getAttribute('data-target-anchor') || '';
+          const targetAnchor = rawHref.startsWith('#') ? rawHref : ('#' + rawHref);
+          const rawId = targetAnchor.slice(1);
+
+          const isCurated = curatedProjectIds.includes(rawId);
+          const slideIdx = isCurated ? presentationSlides.findIndex(s => s.getAttribute('data-proj-id') === rawId) : -1;
+
+          if (isCurated && slideIdx !== -1) {
+            card.setAttribute('data-destination', 'slide');
+            card.setAttribute('data-slide-index', String(slideIdx));
+          } else {
+            card.setAttribute('data-destination', 'web');
+            card.setAttribute('data-target', targetAnchor);
+          }
+
+          card.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const dest = card.getAttribute('data-destination');
+            if (dest === 'slide') {
+              const targetIndex = parseInt(card.getAttribute('data-slide-index'), 10);
+              if (!isNaN(targetIndex) && typeof goToSlide === 'function') {
+                goToSlide(targetIndex);
+              }
+            } else {
+              const target = card.getAttribute('data-target') || targetAnchor;
+
+              // Step 1: Exit Presentation Mode
+              if (typeof window.exitPresentationMode === 'function') {
+                window.exitPresentationMode();
+              } else if (typeof exitPresentation === 'function') {
+                exitPresentation();
+              }
+
+              // Step 2: Switch the Webpage Category / Filter to "All Projects"
+              if (typeof window.applyWebsiteFilter === 'function') {
+                window.applyWebsiteFilter('all', false);
+              } else {
+                const rightBtn = document.getElementById('gallery-dynamic-right-btn');
+                if (rightBtn && rightBtn.getAttribute('data-filter') === 'all') {
+                  rightBtn.click();
+                } else {
+                  const allBtn = document.querySelector('.gallery-filter-btn[data-filter="all"]');
+                  if (allBtn) {
+                    allBtn.click();
+                  }
+                }
+              }
+
+              // Step 3: Scroll smoothly to the target project
+              setTimeout(() => {
+                let targetEl = target ? document.querySelector(target) : null;
+                if (!targetEl && target && target.startsWith('#')) {
+                  const idOnly = target.slice(1);
+                  targetEl = document.getElementById(idOnly) ||
+                             document.getElementById('proj-' + idOnly.replace('chevrolet-', '')) ||
+                             document.getElementById(idOnly.replace('proj-', 'chevrolet-'));
+                }
+                if (targetEl) {
+                  targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 150);
+            }
+          });
+        });
 
         updatePresVisuals('selected');
         renderPresSubmenu('selected');
@@ -3622,17 +4517,32 @@
           const isCurrent = idx === activeIndex;
 
           // 1. Local HTML5 video
-          const vid = slide.querySelector('video.pres-fullscreen-bg-video');
+          const vid = slide.querySelector('video.pres-fullscreen-bg-video, video');
           if (vid) {
             if (isCurrent) {
               try {
                 vid.currentTime = 0;
-                vid.muted = false;
-                vid.volume = 1.0;
-                vid.play().catch(() => {
+                const isShowreel = slide.classList.contains('pres-slide--showreel') || slide.getAttribute('data-slide') === 'showreel' || idx === 0;
+                if (isShowreel) {
                   vid.muted = true;
-                  vid.play().catch(() => {});
-                });
+                  const playPromise = vid.play();
+                  if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                      vid.muted = true;
+                      vid.play().catch(() => {});
+                    });
+                  }
+                } else {
+                  vid.muted = false;
+                  vid.volume = 1.0;
+                  const playPromise = vid.play();
+                  if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                      vid.muted = true;
+                      vid.play().catch(() => {});
+                    });
+                  }
+                }
               } catch (_) {}
             } else {
               vid.pause();
@@ -3669,6 +4579,40 @@
         });
       }
 
+      function updateDeckCounter(slideIndex) {
+        const slide = presentationSlides[slideIndex];
+        const hudCounter = document.getElementById('deckHudCounter');
+        if (!slide) {
+          if (hudCounter) { hudCounter.textContent = ''; hudCounter.style.display = 'none'; }
+          return;
+        }
+
+        const slideType = slide.getAttribute('data-slide');
+        const projId = slide.getAttribute('data-proj-id');
+        const curatedIndex = curatedProjectIds.indexOf(projId);
+
+        let markerText = '';
+        if (curatedIndex !== -1) {
+          markerText = `Project ${curatedIndex + 1} of 5`;
+        } else if (slideType === 'portfolio-archive' || projId === 'portfolio-archive') {
+          markerText = 'Project Directory';
+        } else if (slideType === 'thank-you' || projId === 'thankyou' || slideType === 'showreel') {
+          markerText = '';
+        } else if (projId === 'about') {
+          markerText = '';
+        }
+
+        if (hudCounter) {
+          if (markerText) {
+            hudCounter.textContent = markerText;
+            hudCounter.style.display = 'inline-block';
+          } else {
+            hudCounter.textContent = '';
+            hudCounter.style.display = 'none';
+          }
+        }
+      }
+
       function goToSlide(index, smooth = true) {
         if (window.closeLightboxModal) {
           window.closeLightboxModal();
@@ -3679,10 +4623,19 @@
         if (target) {
           target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
         }
+        presentationSlides.forEach((s, i) => {
+          if (i === currentSlideIndex) s.classList.add('active');
+          else s.classList.remove('active');
+        });
         updateSlideVideoPlayback(currentSlideIndex);
+        updateDeckCounter(currentSlideIndex);
+
       }
 
       function enterPresentation() {
+        presDeck.innerHTML = '';
+        presentationSlides = [];
+        currentSlideIndex = 0;
         const slides = buildPresentationDeck();
         if (!slides.length) return;
 
@@ -3690,18 +4643,34 @@
         document.documentElement.classList.add('is-presenting');
         updateButtonUI(true);
 
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen().catch(() => {});
-        } else if (elem.webkitRequestFullscreen) {
-          elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-          elem.msRequestFullscreen();
-        }
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo) heroVideo.pause();
+
+        try {
+          const elem = document.documentElement;
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(() => {});
+          } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+          }
+        } catch (_) {}
 
         currentSlideIndex = 0;
         presDeck.scrollTop = 0;
-        setTimeout(() => goToSlide(0, false), 50);
+        setTimeout(() => {
+          goToSlide(0, false);
+          const firstSlide = presentationSlides[0];
+          if (firstSlide) {
+            const vid = firstSlide.querySelector('video');
+            if (vid) {
+              vid.currentTime = 0;
+              vid.muted = true;
+              vid.play().catch(() => {});
+            }
+          }
+        }, 50);
       }
 
       function exitPresentation() {
@@ -3711,6 +4680,9 @@
         document.body.classList.remove('is-presenting');
         document.documentElement.classList.remove('is-presenting');
         updateButtonUI(false);
+
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo) heroVideo.play().catch(() => {});
 
         // Pause and unload all videos in presentation deck
         presentationSlides.forEach((slide) => {
@@ -3724,7 +4696,7 @@
         const curSlide = presentationSlides[currentSlideIndex];
         if (curSlide) {
           const projId = curSlide.getAttribute('data-proj-id');
-          if (projId) {
+          if (projId && projId !== 'portfolio-archive' && projId !== 'project-grid') {
             const origBlock = document.getElementById(projId) || (projId === 'thankyou' ? document.getElementById('about') : null);
             if (origBlock) origBlock.scrollIntoView({ behavior: 'smooth' });
           }
@@ -3745,6 +4717,12 @@
         }
       }
 
+      window.exitPresentationMode = exitPresentation;
+      const exitPresentationMode = exitPresentation;
+      window.openPresentationMode = enterPresentation;
+      window.enterPresentationMode = enterPresentation;
+      window.togglePresentationMode = togglePresentation;
+
       function togglePresentation() {
         if (isPresenting()) {
           exitPresentation();
@@ -3753,10 +4731,78 @@
         }
       }
 
-      presBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        togglePresentation();
+      // Unified presentation launcher: both header and hero buttons invoke enterPresentation()
+      document.querySelectorAll('.js-launch-presentation, #presModeBtn, .hero-presentation-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          enterPresentation();
+        });
       });
+
+      // Delegated document-level click listener to guarantee launcher responds to clicks
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.js-launch-presentation, #presModeBtn, .hero-presentation-btn');
+        if (btn) {
+          e.preventDefault();
+          enterPresentation();
+        }
+      });
+
+      // Global keyboard shortcut: Press 'p' / 'P' to toggle presentation mode
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+        if ((e.key === 'p' || e.key === 'P') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          if (!isPresenting()) {
+            enterPresentation();
+          }
+        }
+      });
+
+      function prevSlide() {
+        if (!presentationSlides.length) return;
+        goToSlide(Math.max(0, currentSlideIndex - 1));
+      }
+
+      function nextSlide() {
+        if (!presentationSlides.length) return;
+        goToSlide(Math.min(presentationSlides.length - 1, currentSlideIndex + 1));
+      }
+
+      const hudPrev = document.getElementById('deckHudPrev');
+      if (hudPrev) {
+        hudPrev.addEventListener('click', (e) => {
+          e.preventDefault();
+          prevSlide();
+        });
+      }
+
+      const hudNext = document.getElementById('deckHudNext');
+      if (hudNext) {
+        hudNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          nextSlide();
+        });
+      }
+
+      const hudClose = document.getElementById('deckHudClose');
+      if (hudClose) {
+        hudClose.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (typeof window.exitPresentationMode === 'function') {
+            window.exitPresentationMode();
+          } else if (typeof exitPresentation === 'function') {
+            exitPresentation();
+          }
+        });
+      }
+
+      const deckExitBtn = document.getElementById('presDeckExitBtn');
+      if (deckExitBtn) {
+        deckExitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          exitPresentation();
+        });
+      }
 
       let isVideoFullscreen = false;
 
@@ -3797,7 +4843,12 @@
           });
           if (currentSlideIndex !== closestIdx) {
             currentSlideIndex = closestIdx;
+            presentationSlides.forEach((s, i) => {
+              if (i === currentSlideIndex) s.classList.add('active');
+              else s.classList.remove('active');
+            });
             updateSlideVideoPlayback(currentSlideIndex);
+            updateDeckCounter(currentSlideIndex);
           }
         }, 80);
       }, { passive: true });
@@ -3826,6 +4877,13 @@
 
       // Event delegation inside presentation deck for video facades & lightbox triggers
       presDeck.addEventListener('click', (e) => {
+        const navHintCue = e.target.closest('#deckNavHint');
+        if (navHintCue) {
+          e.preventDefault();
+          nextSlide();
+          return;
+        }
+
         // Video slide popup trigger button or background click
         const slideModalBtn = e.target.closest('.js-open-slide-modal');
         if (slideModalBtn) {
@@ -3849,18 +4907,56 @@
           }
         }
 
-        // 0. Click on gallery card in final slide -> jump directly to that project's slide
-        const galleryCard = e.target.closest('.pres-slide--gallery .archive-card');
+        // 0. Click on project thumbnail in Portfolio Archive slide -> navigate to slide or exit to web
+        const galleryCard = e.target.closest('.presentation-slide[data-slide="portfolio-archive"] .archive-card, .presentation-slide[data-slide="portfolio-archive"] .deck-grid-thumb, .deck-card-item');
         if (galleryCard) {
           e.preventDefault();
-          const targetHref = galleryCard.getAttribute('href') || '';
-          const targetId = targetHref.replace('#', '');
-          if (targetId) {
-            const slideIdx = presentationSlides.findIndex(s => s.getAttribute('data-proj-id') === targetId);
-            if (slideIdx !== -1) {
-              goToSlide(slideIdx);
+          const dest = galleryCard.getAttribute('data-destination');
+          if (dest === 'slide') {
+            const targetIndex = parseInt(galleryCard.getAttribute('data-slide-index'), 10);
+            if (!isNaN(targetIndex) && typeof goToSlide === 'function') {
+              goToSlide(targetIndex);
+            }
+            return;
+          }
+
+          const targetAnchor = galleryCard.getAttribute('data-target') || galleryCard.getAttribute('href') || galleryCard.getAttribute('data-target-anchor');
+
+          // Step 1: Exit Presentation Mode
+          if (typeof window.exitPresentationMode === 'function') {
+            window.exitPresentationMode();
+          } else if (typeof exitPresentation === 'function') {
+            exitPresentation();
+          }
+
+          // Step 2: Switch the Webpage Category / Filter to "All Projects"
+          if (typeof window.applyWebsiteFilter === 'function') {
+            window.applyWebsiteFilter('all', false);
+          } else {
+            const rightBtn = document.getElementById('gallery-dynamic-right-btn');
+            if (rightBtn && rightBtn.getAttribute('data-filter') === 'all') {
+              rightBtn.click();
+            } else {
+              const allBtn = document.querySelector('.gallery-filter-btn[data-filter="all"]');
+              if (allBtn) {
+                allBtn.click();
+              }
             }
           }
+
+          // Step 3: Scroll smoothly to the target project
+          setTimeout(() => {
+            let targetEl = targetAnchor ? document.querySelector(targetAnchor) : null;
+            if (!targetEl && targetAnchor && targetAnchor.startsWith('#')) {
+              const rawId = targetAnchor.slice(1);
+              targetEl = document.getElementById(rawId) ||
+                         document.getElementById('proj-' + rawId.replace('chevrolet-', '')) ||
+                         document.getElementById(rawId.replace('proj-', 'chevrolet-'));
+            }
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 150);
           return;
         }
 
