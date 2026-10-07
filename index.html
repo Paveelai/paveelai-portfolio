@@ -266,7 +266,7 @@
     }
 
     .main-container { width: 100%; max-width: 100%; margin: 0; }
-    .project-block { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 4.5rem; width: 100%; }
+    .project-block { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 4.5rem; width: 100%; scroll-margin-top: calc(75px + env(safe-area-inset-top, 0px)); }
     .project-info { width: 100%; background-color: #ffffff; background-image: linear-gradient(135deg, #e3e3e3 0%, #ffffff 140px); background-repeat: no-repeat; padding: 1.125rem 1rem 1.25rem 1rem; align-self: flex-start; }
     .project-title { font-size: 1.2rem; font-weight: 500; margin-bottom: 0.85rem; line-height: 1.25; }
     .project-meta { font-size: 0.8125rem; margin-bottom: 1.125rem; letter-spacing: 0.04em; line-height: 1.55; }
@@ -1960,7 +1960,6 @@
       height: 100% !important;
       width: 100% !important;
       object-fit: contain !important;
-      pointer-events: none !important;
     }
 
     @media (max-width: 1024px), (max-height: 850px) {
@@ -4077,26 +4076,25 @@
             slideVideo.setAttribute('data-proj-id', projId);
 
             let bgVideoHtml = '';
-            // Always prioritize high-performance local MP4 video for seamless autoplay on iPad and preventing keyboard hijacking
-            if (heroVideoSrc) {
-              bgVideoHtml = `
-                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="${heroYtId || ''}" data-title="${heroCaption}">
-                  <video class="pres-fullscreen-bg-video" loop muted playsinline autoplay preload="auto" tabindex="-1">
-                    <source src="${heroVideoSrc}" type="video/mp4">
-                  </video>
-                </div>
-              `;
-            } else if (heroYtId) {
+            // Prioritize YouTube embed over local teaser trim
+            if (heroYtId) {
               bgVideoHtml = `
                 <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="${heroYtId}" data-title="${heroCaption}">
                   <iframe
                     class="pres-fullscreen-bg-iframe"
-                    data-src="https://www.youtube-nocookie.com/embed/${heroYtId}?autoplay=1&mute=1&loop=1&playlist=${heroYtId}&controls=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1"
+                    data-src="https://www.youtube-nocookie.com/embed/${heroYtId}?autoplay=1&loop=1&playlist=${heroYtId}&controls=1&rel=0&modestbranding=1&enablejsapi=1"
                     src=""
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowfullscreen
-                    tabindex="-1"
                   ></iframe>
+                </div>
+              `;
+            } else if (heroVideoSrc) {
+              bgVideoHtml = `
+                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="" data-title="${heroCaption}">
+                  <video class="pres-fullscreen-bg-video" loop playsinline preload="metadata">
+                    <source src="${heroVideoSrc}" type="video/mp4">
+                  </video>
                 </div>
               `;
             }
@@ -4548,14 +4546,7 @@
             } else {
               const target = card.getAttribute('data-target') || targetAnchor;
 
-              // Step 1: Exit Presentation Mode
-              if (typeof window.exitPresentationMode === 'function') {
-                window.exitPresentationMode();
-              } else if (typeof exitPresentation === 'function') {
-                exitPresentation();
-              }
-
-              // Step 2: Switch the Webpage Category / Filter to "All Projects"
+              // Step 1: Switch the Webpage Category / Filter to "All Projects"
               if (typeof window.applyWebsiteFilter === 'function') {
                 window.applyWebsiteFilter('all', false);
               } else {
@@ -4570,19 +4561,13 @@
                 }
               }
 
-              // Step 3: Scroll smoothly to the target project
-              setTimeout(() => {
-                let targetEl = target ? document.querySelector(target) : null;
-                if (!targetEl && target && target.startsWith('#')) {
-                  const idOnly = target.slice(1);
-                  targetEl = document.getElementById(idOnly) ||
-                             document.getElementById('proj-' + idOnly.replace('chevrolet-', '')) ||
-                             document.getElementById(idOnly.replace('proj-', 'chevrolet-'));
-                }
-                if (targetEl) {
-                  targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }, 150);
+              // Step 2: Exit Presentation Mode and scroll accurately to target project
+              const targetId = target ? target.replace('#', '') : '';
+              if (typeof window.exitPresentationMode === 'function') {
+                window.exitPresentationMode(targetId);
+              } else if (typeof exitPresentation === 'function') {
+                exitPresentation(targetId);
+              }
             }
           });
         });
@@ -4601,14 +4586,26 @@
             if (isCurrent) {
               try {
                 vid.currentTime = 0;
-                vid.muted = true;
-                vid.playsInline = true;
-                const playPromise = vid.play();
-                if (playPromise !== undefined) {
-                  playPromise.catch(() => {
-                    vid.muted = true;
-                    vid.play().catch(() => {});
-                  });
+                const isShowreel = slide.classList.contains('pres-slide--showreel') || slide.getAttribute('data-slide') === 'showreel' || idx === 0;
+                if (isShowreel) {
+                  vid.muted = true;
+                  const playPromise = vid.play();
+                  if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                      vid.muted = true;
+                      vid.play().catch(() => {});
+                    });
+                  }
+                } else {
+                  vid.muted = false;
+                  vid.volume = 1.0;
+                  const playPromise = vid.play();
+                  if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                      vid.muted = true;
+                      vid.play().catch(() => {});
+                    });
+                  }
                 }
               } catch (_) {}
             } else {
@@ -4765,7 +4762,58 @@
         }, 50);
       }
 
-      function exitPresentation() {
+      function findTargetProjectElement(target) {
+        if (!target) return null;
+        const rawId = target.startsWith('#') ? target.slice(1) : target;
+        return document.getElementById(rawId) ||
+               document.getElementById('proj-' + rawId.replace('chevrolet-', '').replace('proj-', '')) ||
+               document.getElementById('proj-' + rawId) ||
+               document.getElementById(rawId.replace('proj-', 'chevrolet-')) ||
+               (rawId === 'thankyou' ? document.getElementById('about') : null) ||
+               document.querySelector(target.startsWith('#') ? target : '#' + target);
+      }
+
+      function scrollToProject(targetIdOrSelector) {
+        if (!targetIdOrSelector) return;
+        const targetEl = findTargetProjectElement(targetIdOrSelector);
+        if (!targetEl) return;
+
+        // Ensure target is display: flex so geometry is accurately computed
+        targetEl.style.display = 'flex';
+
+        const performScroll = () => {
+          const header = document.querySelector('.sticky-header-container');
+          const headerHeight = header ? header.offsetHeight : 70;
+          const rect = targetEl.getBoundingClientRect();
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          const targetY = Math.max(0, rect.top + currentScroll - headerHeight - 16);
+
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+        };
+
+        // Multi-stage scroll execution to withstand iPadOS fullscreen exit animation and layout reflow
+        requestAnimationFrame(() => {
+          performScroll();
+          setTimeout(performScroll, 120);
+          setTimeout(performScroll, 350);
+          setTimeout(performScroll, 700);
+        });
+
+        // Also hook fullscreen change events to catch when iPadOS finishes collapsing fullscreen viewport
+        const onFsChange = () => {
+          document.removeEventListener('fullscreenchange', onFsChange);
+          document.removeEventListener('webkitfullscreenchange', onFsChange);
+          setTimeout(performScroll, 100);
+          setTimeout(performScroll, 400);
+        };
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+      }
+
+      function exitPresentation(targetProjId) {
         if (window.closeLightboxModal) {
           window.closeLightboxModal();
         }
@@ -4787,15 +4835,8 @@
           if (iframe) iframe.src = '';
         });
 
-        // Scroll main page to current project
         const curSlide = presentationSlides[currentSlideIndex];
-        if (curSlide) {
-          const projId = curSlide.getAttribute('data-proj-id');
-          if (projId && projId !== 'portfolio-archive' && projId !== 'project-grid') {
-            const origBlock = document.getElementById(projId) || (projId === 'thankyou' ? document.getElementById('about') : null);
-            if (origBlock) origBlock.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
+        const effectiveProjId = targetProjId || (curSlide ? curSlide.getAttribute('data-proj-id') : null);
 
         // Clean up deck DOM to pause any playing iframes
         presDeck.innerHTML = '';
@@ -4809,6 +4850,11 @@
           } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
           }
+        }
+
+        // Scroll main page to project if specified
+        if (effectiveProjId && effectiveProjId !== 'portfolio-archive' && effectiveProjId !== 'project-grid') {
+          scrollToProject(effectiveProjId);
         }
       }
 
@@ -5044,14 +5090,7 @@
 
           const targetAnchor = galleryCard.getAttribute('data-target') || galleryCard.getAttribute('href') || galleryCard.getAttribute('data-target-anchor');
 
-          // Step 1: Exit Presentation Mode
-          if (typeof window.exitPresentationMode === 'function') {
-            window.exitPresentationMode();
-          } else if (typeof exitPresentation === 'function') {
-            exitPresentation();
-          }
-
-          // Step 2: Switch the Webpage Category / Filter to "All Projects"
+          // Step 1: Switch the Webpage Category / Filter to "All Projects"
           if (typeof window.applyWebsiteFilter === 'function') {
             window.applyWebsiteFilter('all', false);
           } else {
@@ -5066,19 +5105,13 @@
             }
           }
 
-          // Step 3: Scroll smoothly to the target project
-          setTimeout(() => {
-            let targetEl = targetAnchor ? document.querySelector(targetAnchor) : null;
-            if (!targetEl && targetAnchor && targetAnchor.startsWith('#')) {
-              const rawId = targetAnchor.slice(1);
-              targetEl = document.getElementById(rawId) ||
-                         document.getElementById('proj-' + rawId.replace('chevrolet-', '')) ||
-                         document.getElementById(rawId.replace('proj-', 'chevrolet-'));
-            }
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 150);
+          // Step 2: Exit Presentation Mode and scroll accurately to target project
+          const targetId = targetAnchor ? targetAnchor.replace('#', '') : '';
+          if (typeof window.exitPresentationMode === 'function') {
+            window.exitPresentationMode(targetId);
+          } else if (typeof exitPresentation === 'function') {
+            exitPresentation(targetId);
+          }
           return;
         }
 
