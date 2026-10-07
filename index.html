@@ -169,21 +169,21 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
-    @media (max-width: 991px) {
-      .hero-presentation-btn {
-        bottom: 1.25rem;
-        right: 1.25rem;
-        padding: 0.45rem 0.85rem;
-        font-size: 0.7rem;
+    /* Hide Presentation Mode completely on mobile / smartphones, but keep on iPad (>=768px) and desktop */
+    @media (max-width: 767px), (max-height: 500px) and (max-width: 932px) and (pointer: coarse) {
+      .hero-presentation-btn,
+      #presModeBtn,
+      .js-launch-presentation {
+        display: none !important;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (min-width: 768px) and (max-width: 1024px) {
       .hero-presentation-btn {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.4rem 0.75rem;
-        font-size: 0.68rem;
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        right: calc(1.5rem + env(safe-area-inset-right, 0px));
+        padding: 0.48rem 0.95rem;
+        font-size: 0.72rem;
       }
     }
 
@@ -1960,6 +1960,7 @@
       height: 100% !important;
       width: 100% !important;
       object-fit: contain !important;
+      pointer-events: none !important;
     }
 
     @media (max-width: 1024px), (max-height: 850px) {
@@ -4076,25 +4077,26 @@
             slideVideo.setAttribute('data-proj-id', projId);
 
             let bgVideoHtml = '';
-            // Always prioritize YouTube embed of popup layer over local teaser trim
-            if (heroYtId) {
+            // Always prioritize high-performance local MP4 video for seamless autoplay on iPad and preventing keyboard hijacking
+            if (heroVideoSrc) {
+              bgVideoHtml = `
+                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="${heroYtId || ''}" data-title="${heroCaption}">
+                  <video class="pres-fullscreen-bg-video" loop muted playsinline autoplay preload="auto" tabindex="-1">
+                    <source src="${heroVideoSrc}" type="video/mp4">
+                  </video>
+                </div>
+              `;
+            } else if (heroYtId) {
               bgVideoHtml = `
                 <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="${heroYtId}" data-title="${heroCaption}">
                   <iframe
                     class="pres-fullscreen-bg-iframe"
-                    data-src="https://www.youtube-nocookie.com/embed/${heroYtId}?autoplay=1&loop=1&playlist=${heroYtId}&controls=1&rel=0&modestbranding=1&enablejsapi=1"
+                    data-src="https://www.youtube-nocookie.com/embed/${heroYtId}?autoplay=1&mute=1&loop=1&playlist=${heroYtId}&controls=0&rel=0&modestbranding=1&enablejsapi=1&playsinline=1"
                     src=""
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowfullscreen
+                    tabindex="-1"
                   ></iframe>
-                </div>
-              `;
-            } else if (heroVideoSrc) {
-              bgVideoHtml = `
-                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="" data-title="${heroCaption}">
-                  <video class="pres-fullscreen-bg-video" loop playsinline preload="metadata">
-                    <source src="${heroVideoSrc}" type="video/mp4">
-                  </video>
                 </div>
               `;
             }
@@ -4599,26 +4601,14 @@
             if (isCurrent) {
               try {
                 vid.currentTime = 0;
-                const isShowreel = slide.classList.contains('pres-slide--showreel') || slide.getAttribute('data-slide') === 'showreel' || idx === 0;
-                if (isShowreel) {
-                  vid.muted = true;
-                  const playPromise = vid.play();
-                  if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                      vid.muted = true;
-                      vid.play().catch(() => {});
-                    });
-                  }
-                } else {
-                  vid.muted = false;
-                  vid.volume = 1.0;
-                  const playPromise = vid.play();
-                  if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                      vid.muted = true;
-                      vid.play().catch(() => {});
-                    });
-                  }
+                vid.muted = true;
+                vid.playsInline = true;
+                const playPromise = vid.play();
+                if (playPromise !== undefined) {
+                  playPromise.catch(() => {
+                    vid.muted = true;
+                    vid.play().catch(() => {});
+                  });
                 }
               } catch (_) {}
             } else {
@@ -4727,7 +4717,13 @@
         syncDeckTheme(currentSlideIndex);
       }
 
+      function isMobileSmartphone() {
+        return (window.innerWidth < 768 && window.innerHeight < 768) ||
+               (window.innerHeight <= 500 && window.innerWidth <= 932 && ('ontouchstart' in window));
+      }
+
       function enterPresentation() {
+        if (isMobileSmartphone()) return;
         presDeck.innerHTML = '';
         presentationSlides = [];
         currentSlideIndex = 0;
@@ -4973,6 +4969,32 @@
         } else if (e.key === 'Escape') {
           exitPresentation();
         }
+      });
+
+      // Touch swipe navigation for iPad and touch devices
+      let touchStartX = 0;
+      let touchStartY = 0;
+      presDeck.addEventListener('touchstart', (e) => {
+        if (!e.touches || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      presDeck.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        const diffX = e.changedTouches[0].clientX - touchStartX;
+        const diffY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
+          if (diffX < 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }, { passive: true });
+
+      presDeck.addEventListener('click', () => {
+        window.focus();
       });
 
       // Event delegation inside presentation deck for video facades & lightbox triggers
