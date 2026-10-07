@@ -607,7 +607,10 @@
       box-sizing: border-box;
       scroll-snap-align: start;
       scroll-snap-stop: always;
-      padding: 2.25rem 3.5rem 2.75rem 3.5rem;
+      --pres-slide-pad-top: 2.25rem;
+      --pres-slide-pad-x: 3.5rem;
+      --pres-slide-pad-bottom: 2.75rem;
+      padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -623,20 +626,31 @@
       background-repeat: no-repeat;
     }
 
-    /* Slide Header */
-    .pres-slide-header {
+    /* Slide Header / Breadcrumb Runner */
+    .deck-header,
+    .presentation-slide-header,
+    .pres-slide-header,
+    .deck-runner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
+      margin-top: calc(-1 * var(--pres-slide-pad-top, 2.25rem));
+      margin-left: calc(-1 * var(--pres-slide-pad-x, 3.5rem));
+      margin-right: calc(-1 * var(--pres-slide-pad-x, 3.5rem));
+      width: calc(100% + 2 * var(--pres-slide-pad-x, 3.5rem)) !important;
+      /* Provide ample clearance past the native iPad overlay pill */
+      padding-left: max(4.5rem, calc(env(safe-area-inset-left, 0px) + 3rem)) !important;
+      padding-right: max(4.5rem, calc(env(safe-area-inset-right, 0px) + 3rem)) !important;
+      padding-top: max(1.5rem, env(safe-area-inset-top, 0px)) !important;
       padding-bottom: 0.85rem;
       margin-bottom: 1.25rem;
       border-bottom: none !important;
       box-shadow: none !important;
       flex-shrink: 0;
-      width: 100%;
       position: relative;
       z-index: 100;
+      box-sizing: border-box !important;
     }
 
     .pres-header-left {
@@ -1178,9 +1192,15 @@
       opacity: 0.9 !important;
       pointer-events: auto !important;
       position: absolute !important;
-      top: 1.5rem !important;
-      left: 1.5rem !important;
-      right: 1.5rem !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding-left: max(4.5rem, calc(env(safe-area-inset-left, 0px) + 3rem)) !important;
+      padding-right: max(4.5rem, calc(env(safe-area-inset-right, 0px) + 3rem)) !important;
+      padding-top: max(1.5rem, env(safe-area-inset-top, 0px)) !important;
+      box-sizing: border-box !important;
       z-index: 100 !important;
       transition: opacity 0.25s ease;
     }
@@ -1971,7 +1991,10 @@
         right: calc(1.5rem + env(safe-area-inset-right, 0px)) !important;
       }
       .pres-slide {
-        padding: 1.75rem 2.5rem 2rem 2.5rem;
+        --pres-slide-pad-top: 1.75rem;
+        --pres-slide-pad-x: 2.5rem;
+        --pres-slide-pad-bottom: 2rem;
+        padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x);
       }
       .presentation-slide-thankyou,
       .pres-slide--thankyou {
@@ -1984,7 +2007,10 @@
 
     @media (max-width: 991px) {
       .pres-slide {
-        padding: 1.25rem 1.25rem 4rem 1.25rem !important;
+        --pres-slide-pad-top: 1.25rem;
+        --pres-slide-pad-x: 1.25rem;
+        --pres-slide-pad-bottom: 4rem;
+        padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x) !important;
       }
       .pres-slide--video {
         padding: 0 !important;
@@ -3950,7 +3976,7 @@
           introSlide.className = 'pres-slide pres-slide--intro';
           introSlide.setAttribute('data-proj-id', 'about');
           introSlide.innerHTML = `
-            <div class="pres-slide-header">
+            <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
               <div class="pres-header-left">
                 <div class="pres-slide-title-bar">About</div>
               </div>
@@ -4021,7 +4047,7 @@
           slide1.className = 'pres-slide pres-slide--hero';
           slide1.setAttribute('data-proj-id', projId);
           slide1.innerHTML = `
-            <div class="pres-slide-header">
+            <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
               <div class="pres-header-left">
                 <div class="pres-slide-title-bar">${topBarTitle}</div>
               </div>
@@ -4107,7 +4133,7 @@
             slideVideos.setAttribute('data-proj-id', projId);
 
             slideVideos.innerHTML = `
-              <div class="pres-slide-header">
+              <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                 <div class="pres-header-left">
                   <div class="pres-slide-title-bar">${topBarTitle}</div>
                 </div>
@@ -4136,7 +4162,7 @@
             }
 
             slideStills.innerHTML = `
-              <div class="pres-slide-header">
+              <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                 <div class="pres-header-left">
                   <div class="pres-slide-title-bar">${topBarTitle}</div>
                 </div>
@@ -4161,7 +4187,7 @@
             extraMedia.forEach(em => { extraHtml += em.outerHTML; });
 
             slideExtra.innerHTML = `
-              <div class="pres-slide-header">
+              <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                 <div class="pres-header-left">
                   <div class="pres-slide-title-bar">${topBarTitle}</div>
                 </div>
@@ -4194,7 +4220,7 @@
               slideWeb.className = 'pres-slide pres-slide--assets';
               slideWeb.setAttribute('data-proj-id', projId);
               slideWeb.innerHTML = `
-                <div class="pres-slide-header">
+                <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                   <div class="pres-header-left">
                     <div class="pres-slide-title-bar">${topBarTitle}</div>
                   </div>
@@ -4220,7 +4246,7 @@
               slideCaseStudy.className = 'pres-slide pres-slide--casestudy';
               slideCaseStudy.setAttribute('data-proj-id', projId);
               slideCaseStudy.innerHTML = `
-                <div class="pres-slide-header">
+                <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                   <div class="pres-header-left">
                     <div class="pres-slide-title-bar">${topBarTitle}</div>
                   </div>
@@ -4254,7 +4280,7 @@
                   mediaHtml += m.outerHTML;
                 });
                 slideCaseStudy.innerHTML = `
-                  <div class="pres-slide-header">
+                  <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                     <div class="pres-header-left">
                       <div class="pres-slide-title-bar">${topBarTitle}</div>
                     </div>
@@ -4279,7 +4305,7 @@
                 const thumbSrc = thumbImg ? thumbImg.getAttribute('src') : null;
 
                 slideCaseStudy.innerHTML = `
-                  <div class="pres-slide-header">
+                  <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
                     <div class="pres-header-left">
                       <div class="pres-slide-title-bar">${topBarTitle}</div>
                     </div>
@@ -4343,7 +4369,7 @@
         thankYouSlide.setAttribute('data-slide', 'thank-you');
         thankYouSlide.setAttribute('data-proj-id', 'thankyou');
         thankYouSlide.innerHTML = `
-          <div class="pres-slide-header">
+          <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
             <div class="pres-header-left"></div>
             <div class="pres-slide-logo">
               <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
