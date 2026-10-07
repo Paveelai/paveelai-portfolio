@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>PAVEE LAI | Creative & Art Director</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,12 +45,17 @@
       position: relative;
       width: 100%;
       height: 100vh;
+      height: 100dvh;
       min-height: 100vh;
+      min-height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       background-color: #000;
+      box-sizing: border-box;
     }
 
     .hero-video {
@@ -105,7 +110,7 @@
 
     .hero-scroll-cue {
       position: absolute;
-      bottom: 2.2rem;
+      bottom: calc(2.2rem + env(safe-area-inset-bottom, 0px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
@@ -138,8 +143,8 @@
 
     .hero-presentation-btn {
       position: absolute;
-      bottom: 2rem;
-      right: 2.5rem;
+      bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+      right: calc(2.5rem + env(safe-area-inset-right, 0px));
       z-index: 20;
       pointer-events: auto;
       display: inline-flex;
@@ -426,8 +431,8 @@
     /* Presentation Mode Mini HUD Navigation Bar */
     .deck-hud-controls {
       position: fixed;
-      bottom: 2rem;
-      right: 2.5rem;
+      bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+      right: calc(2.5rem + env(safe-area-inset-right, 0px));
       top: auto;
       z-index: 9999;
       display: none;
@@ -486,7 +491,7 @@
     /* Slide 1 Cover Navigation Hint - Vertically aligned with Mini HUD Bar */
     .deck-nav-hint {
       position: absolute;
-      bottom: 2rem;
+      bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 20;
@@ -563,10 +568,15 @@
     .pres-deck {
       display: none;
       position: fixed;
+      inset: 0;
       top: 0;
       left: 0;
+      right: 0;
+      bottom: 0;
       width: 100vw;
+      width: 100%;
       height: 100vh;
+      height: 100dvh;
       background: #ffffff;
       color: #111111;
       font-family: var(--font-stack);
@@ -575,6 +585,15 @@
       scroll-snap-type: y mandatory;
       scroll-behavior: smooth;
       z-index: 9990;
+      transition: background-color 0.2s ease;
+    }
+
+    /* Seamless dark background state for full-screen video slides & showreel */
+    .pres-deck.pres-deck--dark,
+    body.is-presenting.is-dark-slide,
+    html.is-presenting.is-dark-slide {
+      background: #000000 !important;
+      background-color: #000000 !important;
     }
 
     body.is-presenting .pres-deck {
@@ -584,9 +603,13 @@
     /* Individual Slide Structure */
     .pres-slide {
       width: 100vw;
+      width: 100%;
       height: 100vh;
+      height: 100dvh;
       min-height: 100vh;
+      min-height: 100dvh;
       max-height: 100vh;
+      max-height: 100dvh;
       box-sizing: border-box;
       scroll-snap-align: start;
       scroll-snap-stop: always;
@@ -971,9 +994,17 @@
       margin: 0 !important;
       position: relative;
       overflow: hidden;
-      background: #000000;
-      width: 100vw;
-      height: 100vh;
+      background: #000000 !important;
+      background-color: #000000 !important;
+      width: 100vw !important;
+      width: 100% !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      min-height: 100vh !important;
+      min-height: 100dvh !important;
+      max-height: 100vh !important;
+      max-height: 100dvh !important;
+      box-sizing: border-box !important;
     }
 
     .pres-slide--video .pres-slide-header,
@@ -1023,12 +1054,14 @@
 
     .pres-slide--video .pres-video-bg-container {
       position: absolute;
+      inset: 0;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
-      background: #000000;
+      background: #000000 !important;
+      background-color: #000000 !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1039,7 +1072,8 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background: #000000;
+      background: #000000 !important;
+      background-color: #000000 !important;
       display: block;
     }
 
@@ -1049,14 +1083,19 @@
     .presentation-slide[data-slide="showreel"] {
       position: relative !important;
       width: 100vw !important;
+      width: 100% !important;
       height: 100vh !important;
+      height: 100dvh !important;
       min-height: 100vh !important;
+      min-height: 100dvh !important;
       max-height: 100vh !important;
+      max-height: 100dvh !important;
       overflow: hidden !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       background: #000000 !important;
+      background-color: #000000 !important;
       padding: 0 !important;
       margin: 0 !important;
       box-sizing: border-box !important;
@@ -1576,7 +1615,7 @@
       min-height: 0;
       width: 100%;
       margin: auto 0;
-      padding: 3.5rem 1.5rem 5.5rem 1.5rem;
+      padding: 1.5rem 1rem 1.5rem 1rem;
       box-sizing: border-box;
       text-align: center;
     }
@@ -1684,40 +1723,41 @@
       flex-direction: column !important;
       justify-content: space-between !important;
       height: 100vh !important;
+      height: 100dvh !important;
       min-height: 100vh !important;
+      min-height: 100dvh !important;
       max-height: 100vh !important;
+      max-height: 100dvh !important;
       box-sizing: border-box !important;
-      padding: 2.25rem 3.5rem 2.75rem 3.5rem !important;
+      padding: 2.25rem 3.5rem 2rem 3.5rem !important;
       overflow-y: auto !important;
     }
 
-    .presentation-slide-footer,
-    .presentation-legal-text {
-      position: absolute;
-      bottom: 2rem;
-      left: 4rem;
-      right: 4rem;
-      width: auto !important;
-      max-width: calc(100vw - 8rem) !important;
-      text-align: left;
-      font-size: clamp(0.68rem, 0.8vw, 0.78rem);
-      line-height: 1.5;
-      color: #8c8c8c;
-      white-space: normal;
-    }
-
     .presentation-slide-footer {
-      box-sizing: border-box;
+      position: relative !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-top: auto !important;
+      padding-top: 1rem !important;
+      padding-bottom: 0.25rem !important;
+      padding-right: 140px !important; /* Prevents text from being overlapped by bottom-right Mini HUD pill */
+      flex-shrink: 0 !important;
+      z-index: 10 !important;
     }
 
-    .presentation-slide-footer .presentation-legal-text {
+    .presentation-legal-text {
       position: static !important;
       left: auto !important;
       right: auto !important;
       bottom: auto !important;
-      max-width: 100% !important;
       width: 100% !important;
-      margin: 0;
+      max-width: 100% !important;
+      margin: 0 !important;
+      text-align: left !important;
+      font-size: clamp(0.68rem, 0.8vw, 0.76rem) !important;
+      line-height: 1.55 !important;
+      color: #8c8c8c !important;
+      white-space: normal !important;
     }
 
     .presentation-divider {
@@ -1731,7 +1771,13 @@
     .presentation-slide[data-slide="portfolio-archive"] {
       padding: 4rem 4vw 2rem 4vw !important;
       width: 100vw !important;
+      width: 100% !important;
       height: 100vh !important;
+      height: 100dvh !important;
+      min-height: 100vh !important;
+      min-height: 100dvh !important;
+      max-height: 100vh !important;
+      max-height: 100dvh !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1916,9 +1962,36 @@
       object-fit: contain !important;
     }
 
+    @media (max-width: 1024px), (max-height: 850px) {
+      .hero-scroll-cue {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+      }
+      .hero-presentation-btn {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+        right: calc(1.5rem + env(safe-area-inset-right, 0px)) !important;
+      }
+      .deck-hud-controls {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+        right: calc(1.5rem + env(safe-area-inset-right, 0px)) !important;
+      }
+      .deck-nav-hint {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+      }
+      .pres-slide {
+        padding: 1.75rem 2.5rem 2rem 2.5rem;
+      }
+      .presentation-slide-thankyou,
+      .pres-slide--thankyou {
+        padding: 1.75rem 2.5rem 1.75rem 2.5rem !important;
+      }
+      .presentation-slide-footer {
+        padding-right: 130px !important;
+      }
+    }
+
     @media (max-width: 991px) {
       .pres-slide {
-        padding: 1.25rem 1.25rem 4.5rem 1.25rem !important;
+        padding: 1.25rem 1.25rem 4rem 1.25rem !important;
       }
       .pres-slide--video {
         padding: 0 !important;
@@ -1932,14 +2005,18 @@
       }
       .presentation-slide-thankyou,
       .pres-slide--thankyou {
-        padding: 1.25rem 1.25rem 4.5rem 1.25rem !important;
+        padding: 1.25rem 1.25rem 4rem 1.25rem !important;
       }
-      .presentation-slide-footer,
+      .presentation-slide-footer {
+        position: relative !important;
+        width: 100% !important;
+        padding-right: 120px !important;
+        padding-bottom: 0.5rem !important;
+        margin-top: auto !important;
+      }
       .presentation-legal-text {
-        left: 1.5rem !important;
-        right: 1.5rem !important;
-        bottom: 1.25rem !important;
-        max-width: calc(100vw - 3rem) !important;
+        font-size: 0.68rem !important;
+        max-width: 100% !important;
       }
       .thankyou-top-logo {
         top: 2rem !important;
@@ -1950,11 +2027,11 @@
         max-width: 360px !important;
       }
       .deck-hud-controls {
-        bottom: 1.25rem !important;
-        right: 1.25rem !important;
+        bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
+        right: calc(1.25rem + env(safe-area-inset-right, 0px)) !important;
       }
       .deck-nav-hint {
-        bottom: 1.25rem !important;
+        bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
         height: 34px !important;
       }
       .presentation-slide[data-slide="portfolio-archive"] {
@@ -4613,6 +4690,24 @@
         }
       }
 
+      function syncDeckTheme(slideIndex) {
+        if (!presentationSlides.length) return;
+        const curSlide = presentationSlides[slideIndex];
+        if (!curSlide) return;
+        const isDark = curSlide.classList.contains('pres-slide--video') ||
+                       curSlide.classList.contains('pres-slide--showreel') ||
+                       curSlide.getAttribute('data-slide') === 'showreel';
+        if (isDark) {
+          presDeck.classList.add('pres-deck--dark');
+          document.body.classList.add('is-dark-slide');
+          document.documentElement.classList.add('is-dark-slide');
+        } else {
+          presDeck.classList.remove('pres-deck--dark');
+          document.body.classList.remove('is-dark-slide');
+          document.documentElement.classList.remove('is-dark-slide');
+        }
+      }
+
       function goToSlide(index, smooth = true) {
         if (window.closeLightboxModal) {
           window.closeLightboxModal();
@@ -4621,7 +4716,7 @@
         currentSlideIndex = Math.max(0, Math.min(presentationSlides.length - 1, index));
         const target = presentationSlides[currentSlideIndex];
         if (target) {
-          target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+          presDeck.scrollTo({ top: target.offsetTop, behavior: smooth ? 'smooth' : 'auto' });
         }
         presentationSlides.forEach((s, i) => {
           if (i === currentSlideIndex) s.classList.add('active');
@@ -4629,7 +4724,7 @@
         });
         updateSlideVideoPlayback(currentSlideIndex);
         updateDeckCounter(currentSlideIndex);
-
+        syncDeckTheme(currentSlideIndex);
       }
 
       function enterPresentation() {
@@ -4642,6 +4737,7 @@
         document.body.classList.add('is-presenting');
         document.documentElement.classList.add('is-presenting');
         updateButtonUI(true);
+        syncDeckTheme(0);
 
         const heroVideo = document.querySelector('.hero-video');
         if (heroVideo) heroVideo.pause();
@@ -4679,6 +4775,9 @@
         }
         document.body.classList.remove('is-presenting');
         document.documentElement.classList.remove('is-presenting');
+        document.body.classList.remove('is-dark-slide');
+        document.documentElement.classList.remove('is-dark-slide');
+        presDeck.classList.remove('pres-deck--dark');
         updateButtonUI(false);
 
         const heroVideo = document.querySelector('.hero-video');
@@ -4849,6 +4948,7 @@
             });
             updateSlideVideoPlayback(currentSlideIndex);
             updateDeckCounter(currentSlideIndex);
+            syncDeckTheme(currentSlideIndex);
           }
         }, 80);
       }, { passive: true });
