@@ -859,6 +859,7 @@
     }
 
     .pres-hero-info::-webkit-scrollbar,
+    .pres-hero-media::-webkit-scrollbar,
     .pres-assets-body::-webkit-scrollbar,
     .pres-casestudy-body::-webkit-scrollbar,
     .pres-slide::-webkit-scrollbar {
@@ -866,6 +867,7 @@
     }
 
     .pres-hero-info::-webkit-scrollbar-thumb,
+    .pres-hero-media::-webkit-scrollbar-thumb,
     .pres-assets-body::-webkit-scrollbar-thumb,
     .pres-casestudy-body::-webkit-scrollbar-thumb,
     .pres-slide::-webkit-scrollbar-thumb {
@@ -925,11 +927,13 @@
       color: #444444;
     }
 
-    .pres-hero-info .project-skills {
-      margin-top: 0.85rem;
+    .pres-hero-info .project-skills,
+    .pres-hero-media .project-skills {
+      margin-top: 1.15rem;
       width: 100%;
     }
-    .pres-hero-info .project-skills h3 {
+    .pres-hero-info .project-skills h3,
+    .pres-hero-media .project-skills h3 {
       font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -939,14 +943,16 @@
       margin-bottom: 0.25rem;
     }
 
-    .pres-hero-info .pill-tags-container {
+    .pres-hero-info .pill-tags-container,
+    .pres-hero-media .pill-tags-container {
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem;
-      margin-top: 0.75rem;
+      margin-top: 0.65rem;
     }
 
-    .pres-hero-info .pill-tag {
+    .pres-hero-info .pill-tag,
+    .pres-hero-media .pill-tag {
       background: #f8f9fa;
       border: 1px solid #dcdfe4;
       border-radius: 999px;
@@ -966,6 +972,7 @@
       justify-content: flex-start;
       width: 100%;
       max-height: calc(100vh - 130px);
+      overflow-y: auto;
       min-width: 0;
       box-sizing: border-box;
     }
@@ -980,6 +987,20 @@
       max-height: 68vh;
       border: none;
       border-radius: 2px;
+      cursor: default !important;
+      pointer-events: auto;
+    }
+
+    .pres-hero-media .facade-play {
+      display: none !important;
+    }
+
+    .pres-hero-media .facade-poster {
+      opacity: 1 !important;
+    }
+
+    .pres-hero-media .video-wrapper:hover .facade-poster {
+      opacity: 1 !important;
     }
 
     .pres-hero-media .media-item img {
@@ -988,9 +1009,14 @@
     }
 
     .pres-hero-media .media-caption {
-      color: #666666;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
+      display: none !important;
+    }
+
+    /* Project 2 (Know Your Chevrolet): subtle light gray border for white-background video on slide 1 */
+    .pres-slide--hero[data-proj-id="proj-kyc"] .pres-hero-media .video-wrapper,
+    .pres-slide[data-proj-id="proj-kyc"].pres-slide--hero .video-wrapper {
+      border: 1px solid #e0e0e0 !important;
+      box-sizing: border-box;
     }
 
         .pres-assets-header {
@@ -1669,6 +1695,13 @@
       filter: contrast(102%);
       display: block;
       border-radius: 2px;
+    }
+
+    /* Project 2 (Know Your Chevrolet): subtle light gray border for white-background ambient image on final slide */
+    .pres-slide--casestudy[data-proj-id="proj-kyc"] .pres-casestudy-ambient-wrapper,
+    .pres-slide[data-proj-id="proj-kyc"].pres-slide--casestudy .pres-casestudy-ambient-wrapper {
+      border: 1px solid #e0e0e0 !important;
+      box-sizing: border-box;
     }
 
     /* SLIDE INTRO: About & Introduction Layout */
@@ -2429,11 +2462,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Launch the new Chevrolet Montana 2025 trim across South America using a master Global Asset Package built for TV, print, billboards, and web portals.</p>
+          <p>Launch the new Chevrolet Montana 2025 across South America using a centralized Global Asset Package built for broadcast, OOH, and digital portals.</p>
           <h3>Strategy</h3>
-          <p>We focused on everyday escape through Rodrigo, a local business owner balancing work and family. We kept the visual style clean and regional so it felt natural in every South American market without relying on clichés.</p>
+          <p>Reframe utility into modern escapism through Rodrigo, an entrepreneur balancing small-business hustle with weekend getaways, framed in a clean pan-regional aesthetic without local clichés.</p>
           <h3>Execution</h3>
-          <p>Directed the global virtual production step-by-step. We built realism back in by hand, guiding the 3D team to show tire compression on asphalt, subtle road dust, and real lighting reflections alongside live actors.</p>
+          <p>Directed the multi-market rollout spanning master TV commercials, photorealistic CGI imagery suites, and responsive website rollouts across Latin American dealer networks.</p>
           <h3>Achievements</h3>
           <ul>
             <li>Over 24.3 million views on the official Chevrolet Brasil YouTube channel for the 16-second master commercial cutdown.</li>
@@ -2444,13 +2477,12 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="UGKPv-ERVbM">
+          <div class="video-wrapper custom-facade" data-yt-id="UGKPv-ERVbM" data-title="TV commercial (Brazil version) 15 sec">
             <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
               <source src="video/montana_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
           </div>
-          <div class="media-caption">TV commercial (Brazil version) 15 sec</div>
         </div>
 
         <div class="media-grid-2">
@@ -2487,23 +2519,13 @@
               <div class="case-study-grid">
                 <div>
                   <h4>Pan-Regional Art Direction</h4>
-                  <p>To support teams in Brazil, Mexico, Colombia, and regional distributors from one core asset package, we scouted workshops, streets, and coastal spots that felt authentically South American without pointing to any single country.</p>
-                  <h4>Concept to Storyboard</h4>
-                  <ul>
-                    <li>Mapped vehicle engineering highlights to real-world tasks for small business owners.</li>
-                    <li>Built lighting and environment moodboards for client alignment.</li>
-                    <li>Created shot-by-shot broadcast storyboards detailing camera angles, talent blocking, and payload capacity features.</li>
-                  </ul>
+                  <p>To support launch teams across Brazil, Mexico, Colombia, and regional distributors from a single asset package, we scouted workshops, urban architecture, and coastal routes that felt authentically modern South American without pointing to a single country.</p>
+                  <h4>Realism by Addition</h4>
+                  <p>Standard automotive retouching is subtractive, focusing on removing camera rigs and road grit. Virtual CGI production is the opposite. Because raw 3D renders look sterile, we built believable imperfections back in by hand: guiding artists to compress tires against the asphalt for genuine road weight, while integrating atmospheric haze and authentic light bounces.</p>
                 </div>
                 <div>
-                  <h4>Realism by Addition</h4>
-                  <p>Standard retouching removes camera rigs and road grit, but virtual CGI shoots work the opposite way. Clean renders look sterile, so we built believable details back in by hand:</p>
-                  <ul>
-                    <li>Directed the 3D team to compress tires against the road so the vehicle felt weighted and grounded.</li>
-                    <li>Integrated subtle atmospheric haze, authentic light spill onto the body panels, and motion blur.</li>
-                  </ul>
                   <h4>The 24-Hour "Follow-the-Sun" Workflow</h4>
-                  <p>Production ran around the clock across time zones. The 3D team in the Americas handed off renders at the end of their workday. Our art team reviewed the frames, marked up feedback, and adjusted color during ours, leaving clear notes ready for their morning call.</p>
+                  <p>Production ran continuously across opposite time zones. The 3D team in the Americas rendered passes at the end of their day. Our art team reviewed frames, marked up feedback, and adjusted color grading during ours, returning clear notes ready for their morning call with zero downtime.</p>
                 </div>
               </div>
             </div>
@@ -2672,13 +2694,12 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="CE_6yMilMIs">
+          <div class="video-wrapper custom-facade" data-yt-id="CE_6yMilMIs" data-title="Showreel of YouTube video playlist">
             <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
               <source src="video/htw_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
           </div>
-          <div class="media-caption">Showreel of YouTube video playlist</div>
         </div>
 
         <div class="media-grid-3">
@@ -3140,16 +3161,12 @@
               <h3 class="case-study-title">Reconnecting Families</h3>
               <div class="case-study-grid">
                 <div>
-                  <h4>National Public Health Brief</h4>
-                  <p>Led creative direction for a nationwide public health mandate during the peak of the pandemic, rebuilding everyday hygiene awareness and brand trust.</p>
-                  <h4>Unified Product Lineup</h4>
-                  <p>Brought together five distinct personal and home care categories (sprays, sanitizers, surface cleaners, wipes, and antiseptic liquid) under one clear, caring brand identity.</p>
                   <h4>Storyboarding &amp; Hybrid Direction</h4>
                   <p>After personally storyboarding the master video, I had to split production under strict safety rules. Directing half the shoot on set and the rest remotely from home via live feeds was unusual, but our team made it work seamlessly.</p>
-                </div>
-                <div>
                   <h4>Teamwork Under Pressure</h4>
                   <p>Working remotely required complete trust and clear communication with our on-site crew. Their focus and professionalism turned a huge technical challenge into something we were all proud of.</p>
+                </div>
+                <div>
                   <h4>Reframing Public Health</h4>
                   <p>We skipped cold stats to lean into genuine emotion, turning everyday moments of affection into an honest reminder that hygiene is an act of care.</p>
                   <h4>Cinematic Art Direction</h4>
@@ -4538,6 +4555,25 @@
           const skillsNode = block.querySelector('.project-skills');
           const skillsHtml = skillsNode ? skillsNode.outerHTML : '';
 
+          // 1st slide of each project: clone hero video with looping playback, no play icon overlay, not clickable to enlarge, no caption
+          let heroMediaContent = '';
+          if (heroMedia) {
+            const heroClone = heroMedia.cloneNode(true);
+            heroClone.querySelectorAll('.facade-play').forEach(el => el.remove());
+            heroClone.querySelectorAll('.media-caption').forEach(el => el.remove());
+            heroClone.querySelectorAll('.video-wrapper').forEach(vw => {
+              vw.classList.remove('custom-facade');
+              vw.classList.remove('lightbox-card');
+              vw.classList.remove('js-lightbox-trigger');
+              vw.removeAttribute('data-yt-id');
+              vw.style.cursor = 'default';
+              if (projId === 'proj-kyc') {
+                vw.style.border = '1px solid #e0e0e0';
+              }
+            });
+            heroMediaContent = heroClone.innerHTML;
+          }
+
           // SLIDE 1: Hero & Strategic Overview (Project Summary)
           const slide1 = document.createElement('section');
           slide1.className = 'pres-slide pres-slide--hero';
@@ -4554,11 +4590,11 @@
                 <h2 class="pres-title">${projectTitle}</h2>
                 ${clientMeta ? `<div class="pres-meta">${clientMeta.innerHTML}</div>` : ''}
                 ${details ? `<div class="pres-details">${details.innerHTML}</div>` : ''}
-                ${skillsHtml ? skillsHtml : ''}
                 ${!caseStudyWrapper && sourcesHtml ? sourcesHtml : ''}
               </div>
               <div class="pres-hero-media">
-                ${heroMedia ? heroMedia.innerHTML : ''}
+                ${heroMediaContent}
+                ${skillsHtml ? skillsHtml : ''}
               </div>
             </div>
           `;
@@ -4822,7 +4858,7 @@
                     </div>
                     <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
                       ${thumbSrc ? `
-                      <div class="pres-casestudy-ambient-wrapper">
+                      <div class="pres-casestudy-ambient-wrapper"${projId === 'proj-kyc' ? ' style="border: 1px solid #e0e0e0 !important;"' : ''}>
                         <img src="${thumbSrc}" alt="${projectTitle} Visual" loading="lazy">
                       </div>` : ''}
                     </div>
@@ -5114,8 +5150,10 @@
               try {
                 vid.currentTime = 0;
                 const isShowreel = slide.classList.contains('pres-slide--showreel') || slide.getAttribute('data-slide') === 'showreel' || idx === 0;
-                if (isShowreel) {
+                const isMutedPreview = isShowreel || slide.classList.contains('pres-slide--hero');
+                if (isMutedPreview) {
                   vid.muted = true;
+                  vid.loop = true;
                   const playPromise = vid.play();
                   if (playPromise !== undefined) {
                     playPromise.catch(() => {
@@ -5651,7 +5689,7 @@
 
         // 1. Custom video facade -> open in video modal popup layer
         const facade = e.target.closest('.video-wrapper.custom-facade');
-        if (facade) {
+        if (facade && !e.target.closest('.pres-hero-media')) {
           e.preventDefault();
           const videoId = facade.getAttribute('data-yt-id');
           if (videoId) {
@@ -5667,7 +5705,7 @@
 
         // 2. Lightbox video trigger -> forward click to original in main-container
         const lbTrigger = e.target.closest('.js-lightbox-trigger');
-        if (lbTrigger) {
+        if (lbTrigger && !e.target.closest('.pres-hero-media')) {
           e.preventDefault();
           const ytId = lbTrigger.getAttribute('data-yt-id');
           const orig = document.querySelector(`.main-container .js-lightbox-trigger[data-yt-id="${ytId}"]`);
