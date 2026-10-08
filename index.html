@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,600;1,6..96,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
   <!-- Antigravity verified on Intel Mac -->
   <style>
     :root {
@@ -270,6 +270,23 @@
     .project-details { font-size: 0.8125rem; letter-spacing: 0.04em; line-height: 1.6; }
     .project-details h3 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1.125rem; margin-bottom: 0.25rem; }
     .project-details p { margin-bottom: 0.75rem; }
+    .project-details ul { padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.25rem; margin-bottom: 0.75rem; }
+    .project-details ul li { line-height: 1.55; color: #333333; }
+
+    /* Project Skills Block */
+    .project-skills {
+      width: 100%;
+      margin-top: 0.25rem;
+    }
+    .project-skills h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+      color: #111111;
+    }
 
     /* Pill Tags */
     .pill-tags-container { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
@@ -324,6 +341,62 @@
     .case-study-grid h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1rem; margin-bottom: 0.35rem; color: #111; }
     .case-study-grid h4:first-of-type { margin-top: 0; }
     .case-study-grid ul { padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;}
+    /* Project Sources Footnote */
+    .project-sources,
+    .case-study-sources {
+      margin-top: 0.35rem;
+      padding-top: 0;
+      border-top: none;
+      width: 100%;
+    }
+    .project-sources h4,
+    .case-study-sources h4 {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+      color: #b0b0b0;
+    }
+    .project-sources ul,
+    .case-study-sources ul {
+      padding-left: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-top: 0.15rem;
+      margin-bottom: 0;
+      font-size: 0.65rem;
+      line-height: 1.5;
+      color: #aaaaaa;
+    }
+    .project-sources ul ul,
+    .case-study-sources ul ul {
+      margin-top: 0.15rem;
+      margin-bottom: 0.15rem;
+      padding-left: 0.85rem;
+      gap: 0.15rem;
+    }
+    .project-sources li,
+    .case-study-sources li {
+      color: #aaaaaa;
+    }
+    .project-sources li::marker,
+    .case-study-sources li::marker {
+      color: #cccccc;
+    }
+    .project-sources a,
+    .case-study-sources a {
+      color: #999999;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.2s ease;
+    }
+    .project-sources a:hover,
+    .case-study-sources a:hover {
+      color: #444444;
+    }
 
     /* Lightbox Modal */
     .video-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 999999; opacity: 0; transition: opacity 0.25s ease; }
@@ -399,6 +472,8 @@
       .project-media > .media-item:first-child { order: 3; margin-bottom: 1.25rem !important; }
       .project-details { order: 4; margin-top: 0.5rem !important; margin-bottom: 1.75rem !important; max-width: 780px; }
       .project-media > *:not(:first-child) { order: 5; margin-bottom: 0.85rem !important; }
+      .project-skills { order: 5 !important; margin-top: 0.35rem; margin-bottom: 0.85rem !important; }
+      .project-sources, .case-study-sources { order: 6 !important; margin-top: 1rem !important; }
       .archive-grid { grid-template-columns: repeat(3, 1fr); }
       .gallery-filter-bar { flex-direction: row; align-items: center; justify-content: flex-start; overflow-x: auto; white-space: nowrap; scrollbar-width: none; gap: 1rem; }
       .gallery-nav-left { display: none !important; }
@@ -574,6 +649,7 @@
       background: #ffffff;
       color: #111111;
       font-family: var(--font-stack);
+      font-size: 1.2rem;
       overflow-y: auto;
       overflow-x: hidden;
       scroll-snap-type: y mandatory;
@@ -607,8 +683,10 @@
       box-sizing: border-box;
       scroll-snap-align: start;
       scroll-snap-stop: always;
-      --pres-slide-pad-top: 2.25rem;
-      --pres-slide-pad-x: 3.5rem;
+      --pres-logo-w: min(260px, 40vw);
+      --pres-logo-h: calc(var(--pres-logo-w) * 242 / 2264);
+      --pres-slide-pad-top: var(--pres-logo-h);
+      --pres-slide-pad-x: max(7rem, calc(env(safe-area-inset-left, 0px) + 5.5rem));
       --pres-slide-pad-bottom: 2.75rem;
       padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x);
       display: flex;
@@ -635,15 +713,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      margin-top: calc(-1 * var(--pres-slide-pad-top, 2.25rem));
-      margin-left: calc(-1 * var(--pres-slide-pad-x, 3.5rem));
-      margin-right: calc(-1 * var(--pres-slide-pad-x, 3.5rem));
-      width: calc(100% + 2 * var(--pres-slide-pad-x, 3.5rem)) !important;
-      /* Provide ample clearance past the native iPad overlay pill */
-      padding-left: max(4.5rem, calc(env(safe-area-inset-left, 0px) + 3rem)) !important;
-      padding-right: max(4.5rem, calc(env(safe-area-inset-right, 0px) + 3rem)) !important;
-      padding-top: max(1.5rem, env(safe-area-inset-top, 0px)) !important;
-      padding-bottom: 0.85rem;
+      margin-top: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100% !important;
+      padding: 0 !important;
+      height: var(--pres-logo-h) !important;
+      min-height: var(--pres-logo-h) !important;
       margin-bottom: 1.25rem;
       border-bottom: none !important;
       box-shadow: none !important;
@@ -666,7 +742,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      font-size: 0.6875rem;
+      font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -687,7 +763,7 @@
     }
 
     .pres-slide-title-bar {
-      font-size: 0.875rem;
+      font-size: 1.05rem;
       font-weight: 500;
       color: #555555;
       white-space: nowrap;
@@ -702,12 +778,13 @@
       justify-content: flex-end;
       flex-shrink: 0;
       margin-left: auto;
+      height: var(--pres-logo-h);
     }
 
     .pres-slide-logo img {
-      width: min(260px, 40vw);
+      width: var(--pres-logo-w);
       max-width: 260px;
-      height: auto;
+      height: var(--pres-logo-h);
       display: block;
       filter: brightness(0);
       pointer-events: none;
@@ -722,7 +799,7 @@
       border-radius: 999px;
       color: #444444;
       padding: 0.2rem 0.55rem;
-      font-size: 0.65rem;
+      font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -739,7 +816,7 @@
     }
 
     .pres-slide-counter {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       color: #888888;
@@ -760,7 +837,7 @@
       min-height: 0;
       max-height: calc(100vh - 130px);
       overflow-y: auto;
-      padding: 0.5rem 0.5rem 1rem 0;
+      padding: 0.5rem 0 1rem 0;
       width: 100%;
       box-sizing: border-box;
     }
@@ -798,7 +875,7 @@
 
     .pres-hero-info .pres-title {
       font-family: var(--font-stack);
-      font-size: clamp(1.25rem, 2vw, 1.8rem);
+      font-size: clamp(1.5rem, 2.4vw, 2.16rem);
       font-weight: 500;
       line-height: 1.25;
       color: #111111;
@@ -808,7 +885,7 @@
     }
 
     .pres-hero-info .pres-meta {
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       line-height: 1.55;
       color: #555555;
       margin-bottom: 1rem;
@@ -820,7 +897,7 @@
     }
 
     .pres-hero-info .pres-details h3 {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -830,10 +907,36 @@
     }
 
     .pres-hero-info .pres-details p {
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       line-height: 1.6;
       color: #444444;
       margin-bottom: 0.65rem;
+    }
+
+    .pres-hero-info .pres-details ul {
+      padding-left: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.975rem;
+      line-height: 1.5;
+      color: #444444;
+    }
+
+    .pres-hero-info .project-skills {
+      margin-top: 0.85rem;
+      width: 100%;
+    }
+    .pres-hero-info .project-skills h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #111111;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
     }
 
     .pres-hero-info .pill-tags-container {
@@ -849,7 +952,7 @@
       border-radius: 999px;
       color: #444444;
       padding: 0.2rem 0.55rem;
-      font-size: 0.65rem;
+      font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -886,8 +989,32 @@
 
     .pres-hero-media .media-caption {
       color: #666666;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       margin-top: 0.5rem;
+    }
+
+        .pres-assets-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .pres-assets-header .pres-slide-title-bar {
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .pres-casestudy-text-col .pres-slide-title-bar {
+      white-space: normal;
+      margin-bottom: 2.2rem;
+      line-height: 1.3;
+    }
+
+    .pres-casestudy-text-col .pres-subsection-pill {
+      margin-top: 0;
+      margin-bottom: 1.1rem;
     }
 
     /* SLIDE 2: Campaign Assets Slide Layout */
@@ -895,13 +1022,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.1rem;
       flex-grow: 1;
       min-height: 0;
       max-height: calc(100vh - 130px);
       overflow-y: auto;
-      padding: 0.5rem 0.5rem 1rem 0;
+      padding: 0.5rem 0 1rem 0;
       width: 100%;
+      box-sizing: border-box;
     }
 
     .pres-assets-body .media-grid-2 {
@@ -930,7 +1058,7 @@
 
     .pres-assets-body .media-caption {
       color: #666666;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       margin-top: 0.35rem;
     }
 
@@ -990,7 +1118,7 @@
 
     .pres-web-group-card .media-caption {
       color: #666666;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       margin-top: 0.5rem;
       line-height: 1.4;
       text-align: left;
@@ -1174,7 +1302,7 @@
     .pres-slide[data-slide="showreel"] .hero-brand-title,
     .presentation-slide[data-slide="showreel"] .hero-brand-title {
       font-family: var(--font-stack, "Roboto", sans-serif) !important;
-      font-size: clamp(0.78rem, 1.15vw, 1.05rem) !important;
+      font-size: clamp(0.936rem, 1.38vw, 1.26rem) !important;
       font-weight: 400 !important;
       letter-spacing: 0.08em !important;
       text-transform: none !important;
@@ -1197,8 +1325,8 @@
       right: 0 !important;
       width: 100% !important;
       margin: 0 !important;
-      padding-left: max(4.5rem, calc(env(safe-area-inset-left, 0px) + 3rem)) !important;
-      padding-right: max(4.5rem, calc(env(safe-area-inset-right, 0px) + 3rem)) !important;
+      padding-left: var(--pres-slide-pad-x, 7rem) !important;
+      padding-right: var(--pres-slide-pad-x, 7rem) !important;
       padding-top: max(1.5rem, env(safe-area-inset-top, 0px)) !important;
       box-sizing: border-box !important;
       z-index: 100 !important;
@@ -1245,7 +1373,7 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
       padding: 0.45rem 1.15rem;
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       color: #ffffff;
       display: inline-flex;
       align-items: center;
@@ -1275,7 +1403,7 @@
       min-height: 0;
       max-height: calc(100vh - 130px);
       overflow-y: auto;
-      padding: 0.5rem 0.5rem 1rem 0;
+      padding: 0.5rem 0 1rem 0;
       width: 100%;
       box-sizing: border-box;
     }
@@ -1296,7 +1424,7 @@
 
     .pres-casestudy-text-col .case-study-title {
       font-family: var(--font-stack);
-      font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+      font-size: clamp(1.38rem, 1.92vw, 1.74rem);
       font-weight: 600;
       color: #111111;
       margin-top: 0;
@@ -1319,7 +1447,7 @@
     }
 
     .pres-casestudy-text-col .case-study-grid h4 {
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -1333,7 +1461,7 @@
     }
 
     .pres-casestudy-text-col .case-study-grid p {
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       line-height: 1.6;
       color: #444444;
       margin-bottom: 0.65rem;
@@ -1346,8 +1474,85 @@
       gap: 0.3rem;
       margin-top: 0.2rem;
       margin-bottom: 0.65rem;
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       line-height: 1.6;
+      color: #444444;
+    }
+
+    .pres-casestudy-text-col .case-study-sources,
+    .pres-casestudy-text-col .project-sources,
+    .pres-hero-info .case-study-sources,
+    .pres-hero-info .project-sources {
+      margin-top: 1rem;
+      padding-top: 0;
+      border-top: none;
+      width: 100%;
+    }
+
+    .pres-casestudy-text-col .case-study-sources h4,
+    .pres-casestudy-text-col .project-sources h4,
+    .pres-hero-info .case-study-sources h4,
+    .pres-hero-info .project-sources h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #b0b0b0;
+      margin-top: 0;
+      margin-bottom: 0.2rem;
+    }
+
+    .pres-casestudy-text-col .case-study-sources ul,
+    .pres-casestudy-text-col .project-sources ul,
+    .pres-hero-info .case-study-sources ul,
+    .pres-hero-info .project-sources ul {
+      padding-left: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-top: 0.15rem;
+      margin-bottom: 0;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #aaaaaa;
+    }
+
+    .pres-casestudy-text-col .case-study-sources ul ul,
+    .pres-casestudy-text-col .project-sources ul ul,
+    .pres-hero-info .case-study-sources ul ul,
+    .pres-hero-info .project-sources ul ul {
+      margin-top: 0.15rem;
+      margin-bottom: 0.15rem;
+      padding-left: 0.85rem;
+      gap: 0.15rem;
+    }
+
+    .pres-casestudy-text-col .case-study-sources li,
+    .pres-casestudy-text-col .project-sources li,
+    .pres-hero-info .case-study-sources li,
+    .pres-hero-info .project-sources li {
+      color: #aaaaaa;
+    }
+
+    .pres-casestudy-text-col .case-study-sources li::marker,
+    .pres-casestudy-text-col .project-sources li::marker,
+    .pres-hero-info .case-study-sources li::marker,
+    .pres-hero-info .project-sources li::marker {
+      color: #cccccc;
+    }
+
+    .pres-casestudy-text-col .case-study-sources a,
+    .pres-casestudy-text-col .project-sources a,
+    .pres-hero-info .case-study-sources a,
+    .pres-hero-info .project-sources a {
+      color: #999999;
+      text-decoration: underline;
+    }
+
+    .pres-casestudy-text-col .case-study-sources a:hover,
+    .pres-casestudy-text-col .project-sources a:hover,
+    .pres-hero-info .case-study-sources a:hover,
+    .pres-hero-info .project-sources a:hover {
       color: #444444;
     }
 
@@ -1418,7 +1623,7 @@
 
     .pres-casestudy-media-col .media-caption {
       color: #666666;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       margin-top: 0.5rem;
       line-height: 1.4;
     }
@@ -1476,8 +1681,9 @@
       min-height: 0;
       max-height: calc(100vh - 130px);
       overflow-y: auto;
-      padding: 0.5rem 0.5rem 1rem 0;
+      padding: 0.5rem 0 1rem 0;
       width: 100%;
+      box-sizing: border-box;
     }
 
     .pres-intro-photo-col {
@@ -1520,7 +1726,7 @@
       font-family: 'Bodoni Moda', Georgia, serif;
       font-optical-sizing: none;
       font-variation-settings: 'opsz' 10;
-      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-size: clamp(2.4rem, 4.2vw, 3.3rem);
       font-weight: 600;
       color: #111111;
       line-height: 1.1;
@@ -1529,7 +1735,7 @@
     }
 
     .pres-intro-role {
-      font-size: 1.2rem;
+      font-size: 1.44rem;
       font-weight: 500;
       color: #111111;
       margin-bottom: 1.25rem;
@@ -1537,7 +1743,7 @@
     }
 
     .pres-intro-heading {
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -1551,7 +1757,7 @@
     }
 
     .pres-intro-text {
-      font-size: 0.84375rem;
+      font-size: 1.0125rem;
       line-height: 1.65;
       color: #444444;
       margin-bottom: 0.75rem;
@@ -1569,7 +1775,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8125rem;
+      font-size: 0.975rem;
       color: #333333;
       background: #f4f5f7;
       border: 1px solid #d8dade;
@@ -1601,15 +1807,16 @@
       min-height: 0;
       max-height: calc(100vh - 130px);
       overflow-y: auto;
-      padding: 0.25rem 0.5rem 1rem 0;
+      padding: 0.25rem 0 1rem 0;
       width: 100%;
+      box-sizing: border-box;
       margin: auto 0;
     }
 
     .pres-gallery-container {
       width: 100%;
-      max-width: 95vw;
-      padding: 0 1rem;
+      max-width: 100%;
+      padding: 0;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -1634,27 +1841,32 @@
       text-align: center;
     }
 
-    .pres-thankyou-content {
-      width: 100%;
-      max-width: 680px;
+        .pres-thankyou-content {
+      width: 50vw;
+      max-width: 50vw;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .pres-thankyou-title {
       font-family: 'Bodoni Moda', Georgia, serif;
+      font-weight: 600;
       font-optical-sizing: none;
       font-variation-settings: 'opsz' 10;
-      font-size: clamp(3.8rem, 7.5vw, 5.8rem);
-      font-weight: 600;
+      font-size: clamp(6.2rem, 9.8vw, 13.5rem);
       color: #111111;
       line-height: 1;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       margin: 0;
-      text-align: center;
+      white-space: nowrap;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      box-sizing: border-box;
     }
 
     .thankyou-contact-block {
@@ -1662,14 +1874,19 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      max-width: 620px;
       width: 100%;
-      margin: 2rem auto 0 auto; /* stays centered on the canvas, but content inside is left-aligned */
+      max-width: 100%;
+      margin: 2.25rem 0 0 0;
+      padding: 0;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+      box-sizing: border-box;
     }
 
     .thankyou-contact-block h3,
     .pres-thankyou-heading {
-      font-size: 1.15rem;
+      font-size: 1.38rem;
       font-weight: 500;
       color: #111111;
       margin-top: 0;
@@ -1679,11 +1896,12 @@
 
     .thankyou-contact-block p,
     .pres-thankyou-text {
-      font-size: 0.9375rem;
+      font-size: 1.125rem;
       line-height: 1.65;
       letter-spacing: 0.03em;
       color: #333333;
-      max-width: 620px;
+      width: 100%;
+      max-width: 100%;
       margin: 0 0 1.5rem 0;
       text-align: left;
     }
@@ -1706,7 +1924,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.875rem;
+      font-size: 1.05rem;
       text-decoration: none !important;
       color: #1a1a1a;
       transition: opacity 0.2s ease;
@@ -1743,7 +1961,7 @@
       max-height: 100vh !important;
       max-height: 100dvh !important;
       box-sizing: border-box !important;
-      padding: 2.25rem 3.5rem 2rem 3.5rem !important;
+      padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x) !important;
       overflow-y: auto !important;
     }
 
@@ -1768,22 +1986,24 @@
       max-width: 100% !important;
       margin: 0 !important;
       text-align: left !important;
-      font-size: clamp(0.68rem, 0.8vw, 0.76rem) !important;
-      line-height: 1.55 !important;
-      color: #8c8c8c !important;
+      font-size: 0.65rem !important;
+      line-height: 1.5 !important;
+      color: #a8a8a8 !important;
+      font-weight: 400 !important;
       white-space: normal !important;
     }
 
     .presentation-divider {
       border: none;
-      border-top: 1px solid #eaeaea;
+      border-top: 1px solid #f0f0f0;
       margin: 0 0 0.85rem 0;
       width: 100%;
     }
 
     /* PORTFOLIO GALLERY SLIDE IN PRESENTATION MODE */
     .presentation-slide[data-slide="portfolio-archive"] {
-      padding: 4rem 4vw 2rem 4vw !important;
+      position: relative !important;
+      padding: 0 var(--pres-slide-pad-x) !important;
       width: 100vw !important;
       width: 100% !important;
       height: 100vh !important;
@@ -1792,34 +2012,34 @@
       min-height: 100dvh !important;
       max-height: 100vh !important;
       max-height: 100dvh !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
       background: #ffffff;
       overflow: hidden;
-      position: relative !important;
     }
 
-    .presentation-slide[data-slide="portfolio-archive"] .pres-gallery-top-logo {
-      position: absolute;
-      top: 2.25rem;
-      right: 3.5rem;
-      z-index: 100;
-      margin: 0;
-      pointer-events: none;
-    }
-
-    @media (max-width: 991px) {
-      .presentation-slide[data-slide="portfolio-archive"] .pres-gallery-top-logo {
-        top: 1.25rem !important;
-        right: 1.25rem !important;
-      }
+    .presentation-slide[data-slide="portfolio-archive"] .pres-slide-header {
+      position: absolute !important;
+      top: var(--pres-slide-pad-top) !important;
+      left: var(--pres-slide-pad-x) !important;
+      right: var(--pres-slide-pad-x) !important;
+      width: calc(100% - 2 * var(--pres-slide-pad-x)) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      z-index: 10 !important;
     }
 
     .presentation-slide[data-slide="portfolio-archive"] .deck-webgallery-wrapper {
-      max-width: 92vw !important;
+      max-width: 100% !important;
       width: 100% !important;
+      margin: auto 0 !important;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     /* Executive Project Counter: Hide on Thank You slide */
@@ -1845,7 +2065,7 @@
       -webkit-backdrop-filter: blur(8px);
       color: #ffffff;
       font-family: inherit;
-      font-size: 0.72rem;
+      font-size: 0.864rem;
       font-weight: 500;
       letter-spacing: 0.04em;
       padding: 0.35rem 0.65rem;
@@ -1958,7 +2178,7 @@
 
     .pres-gallery-body .archive-card-title {
       color: #ffffff;
-      font-size: 0.725rem;
+      font-size: 0.87rem;
       font-weight: 500;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
@@ -1991,14 +2211,16 @@
         right: calc(1.5rem + env(safe-area-inset-right, 0px)) !important;
       }
       .pres-slide {
-        --pres-slide-pad-top: 1.75rem;
-        --pres-slide-pad-x: 2.5rem;
+        --pres-logo-w: min(240px, 40vw);
+        --pres-logo-h: calc(var(--pres-logo-w) * 242 / 2264);
+        --pres-slide-pad-top: var(--pres-logo-h);
+        --pres-slide-pad-x: max(5rem, calc(env(safe-area-inset-left, 0px) + 4rem));
         --pres-slide-pad-bottom: 2rem;
         padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x);
       }
       .presentation-slide-thankyou,
       .pres-slide--thankyou {
-        padding: 1.75rem 2.5rem 1.75rem 2.5rem !important;
+        padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x) !important;
       }
       .presentation-slide-footer {
         padding-right: 130px !important;
@@ -2007,8 +2229,10 @@
 
     @media (max-width: 991px) {
       .pres-slide {
-        --pres-slide-pad-top: 1.25rem;
-        --pres-slide-pad-x: 1.25rem;
+        --pres-logo-w: min(200px, 45vw);
+        --pres-logo-h: calc(var(--pres-logo-w) * 242 / 2264);
+        --pres-slide-pad-top: var(--pres-logo-h);
+        --pres-slide-pad-x: max(2.5rem, calc(env(safe-area-inset-left, 0px) + 1.5rem));
         --pres-slide-pad-bottom: 4rem;
         padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x) !important;
       }
@@ -2024,7 +2248,7 @@
       }
       .presentation-slide-thankyou,
       .pres-slide--thankyou {
-        padding: 1.25rem 1.25rem 4rem 1.25rem !important;
+        padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) 4rem var(--pres-slide-pad-x) !important;
       }
       .presentation-slide-footer {
         position: relative !important;
@@ -2034,7 +2258,9 @@
         margin-top: auto !important;
       }
       .presentation-legal-text {
-        font-size: 0.68rem !important;
+        font-size: 0.65rem !important;
+        line-height: 1.5 !important;
+        color: #a8a8a8 !important;
         max-width: 100% !important;
       }
       .thankyou-top-logo {
@@ -2050,12 +2276,22 @@
         right: calc(1.25rem + env(safe-area-inset-right, 0px)) !important;
       }
       .presentation-slide[data-slide="portfolio-archive"] {
-        padding: 2rem 1.25rem !important;
-        overflow-y: auto;
+        padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) 4rem var(--pres-slide-pad-x) !important;
+        overflow-y: auto !important;
+        justify-content: flex-start !important;
+      }
+      .presentation-slide[data-slide="portfolio-archive"] .pres-slide-header {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        margin-bottom: 1rem !important;
       }
       .presentation-slide[data-slide="portfolio-archive"] .deck-webgallery-wrapper {
         max-width: 100% !important;
         width: 100% !important;
+        margin: 0 !important;
       }
       .pres-slide--video .pres-slide-header {
         margin: 0;
@@ -2087,7 +2323,14 @@
         overflow-y: visible;
         padding-right: 0;
       }
-      .pres-hero-info, .pres-hero-media, .pres-assets-body, .pres-casestudy-body, .pres-gallery-body {
+      .pres-thankyou-content {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .pres-thankyou-title {
+        font-size: clamp(3.2rem, 11vw, 5.5rem) !important;
+      }
+            .pres-hero-info, .pres-hero-media, .pres-assets-body, .pres-casestudy-body, .pres-gallery-body {
         max-height: none;
         overflow-y: visible;
       }
@@ -2182,24 +2425,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Launch the all-new Chevrolet Montana 2025 trim across South American markets with a centralized Global Asset Package (GAP) adaptable for multi-market broadcast, print, OOH, and digital portals.</p>
+          <p>Launch the new Chevrolet Montana 2025 trim across South America using a master Global Asset Package built for TV, print, billboards, and web portals.</p>
           <h3>Strategy</h3>
-          <p>Reframe utility into modern escapism through Rodrigo, an urban entrepreneur balancing trade and family. The visual tone curated a pan-regional look, avoiding country-specific tropes so imagery felt natural in every South American market.</p>
+          <p>We focused on everyday escape through Rodrigo, a local business owner balancing work and family. We kept the visual style clean and regional so it felt natural in every South American market without relying on clichés.</p>
           <h3>Execution</h3>
-          <p>Directed a seamless global virtual production effort. Realism was built through addition rather than subtraction: guiding the 3D pipeline to add road physics, tire compression on asphalt, road dust, and authentic light bounces alongside live talent.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">CGI Supervision</span>
-            <span class="pill-tag">Virtual Production</span>
-            <span class="pill-tag">Photo Retouching</span>
-            <span class="pill-tag">UI &amp; UX Design</span>
-            <span class="pill-tag">Design Systems</span>
-            <span class="pill-tag">South America Campaign</span>
-          </div>
+          <p>Directed the global virtual production step-by-step. We built realism back in by hand, guiding the 3D team to show tire compression on asphalt, subtle road dust, and real lighting reflections alongside live actors.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 24.3 million views on the official Chevrolet Brasil YouTube channel for the 16-second master commercial cutdown.</li>
+            <li>Over 6.08 million views across regional Spanish-language South American broadcasts.</li>
+            <li>Sold out the 2,000-unit presale in hours and passed 30,000 registrations in its debut year.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2240,14 +2476,14 @@
         </div>
 
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content js-website-drawer">
             <div>
               <h3 class="case-study-title">The Virtual Pipeline &amp; 24-Hour Cycle</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>Pan-Regional Art Direction</h4>
-                  <p>To serve Brazil, Mexico, Colombia, and regional South American distributors from a single asset suite, location scouting had to be strategic. Workshop spaces, street architecture, and coastal plates were selected to reflect a shared modern South American aesthetic instead of identifiable landmarks tied to one country.</p>
+                  <p>To support teams in Brazil, Mexico, Colombia, and regional distributors from one core asset package, we scouted workshops, streets, and coastal spots that felt authentically South American without pointing to any single country.</p>
                   <h4>Concept to Storyboard</h4>
                   <ul>
                     <li>Mapped vehicle engineering highlights to real-world tasks for small business owners.</li>
@@ -2257,13 +2493,13 @@
                 </div>
                 <div>
                   <h4>Realism by Addition</h4>
-                  <p>Standard automotive retouching is subtractive: removing rigs, reflections, and road grit. A virtual CGI shoot is the exact opposite. Pure renders look sterile, so realism had to be added back manually:</p>
+                  <p>Standard retouching removes camera rigs and road grit, but virtual CGI shoots work the opposite way. Clean renders look sterile, so we built believable details back in by hand:</p>
                   <ul>
-                    <li>Directed the CGI team to compress the tires against the asphalt so the vehicle sat with genuine road weight.</li>
+                    <li>Directed the 3D team to compress tires against the road so the vehicle felt weighted and grounded.</li>
                     <li>Integrated subtle atmospheric haze, authentic light spill onto the body panels, and motion blur.</li>
                   </ul>
                   <h4>The 24-Hour "Follow-the-Sun" Workflow</h4>
-                  <p>Production ran continuously across opposite sides of the world. The 3D team in the Americas rendered and shipped files at the end of their day. Our art team reviewed passes, marked up frames, and adjusted color grading during our daytime hours. Notes arrived in the Americas at their morning call, ready to implement with zero lost time.</p>
+                  <p>Production ran around the clock across time zones. The 3D team in the Americas handed off renders at the end of their workday. Our art team reviewed the frames, marked up feedback, and adjusted color during ours, leaving clear notes ready for their morning call.</p>
                 </div>
               </div>
             </div>
@@ -2281,6 +2517,29 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">CGI Supervision</span>
+  <span class="pill-tag">Virtual Production</span>
+  <span class="pill-tag">Photo Retouching</span>
+  <span class="pill-tag">UI &amp; UX Design</span>
+  <span class="pill-tag">Design Systems</span>
+  <span class="pill-tag">South America Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Chevrolet Brasil Channel: Bora com a Nova Chevrolet Montana RS (16s TVC) – 24.3M+ views. <a href="https://www.youtube.com/watch?v=RpGTnq7S4To" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li>South America Regional Broadcast Syndication: 6.08M+ aggregate regional digital views across Spanish-language launch markets (Colombia, Chile, and regional dealer networks).</li>
+            <li>GM Launch Records: 2,000 pre-sale units sold in hours; 30,000+ year-one registrations. <a href="https://gmauthority.com/blog/2022/12/all-new-chevy-montana-reservations-filled-in-a-day/" target="_blank" rel="noopener noreferrer">GM Authority</a></li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -2295,24 +2554,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Position Chevrolet Spin 2025 as the premier 7-seater crossover in South America, highlighting cabin versatility, comfort, and safety across regional launch channels.</p>
+          <p>Position Chevrolet Spin 2025 as the go-to 7-seater crossover in South America, highlighting cabin versatility, comfort, and safety across regional launch channels.</p>
           <h3>Strategy</h3>
-          <p>Showcase adaptable family life through a narrative of effortless transformation. The creative approach highlighted the vehicle shifting from daily school runs and grocery duties into a spacious weekend road-trip cruiser.</p>
+          <p>Showcase adaptable family life through easy transformations, highlighting how the vehicle shifts smoothly from daily school runs and errands into a comfortable weekend road-trip cruiser.</p>
           <h3>Execution</h3>
-          <p>Directed an all-virtual CGI pipeline and master digital portal framework. Guided 3D artists to capture authentic cabin textures, configurable 7-seat layouts, and natural lighting, while designing modular responsive website templates for regional dealer networks.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">CGI Supervision</span>
-            <span class="pill-tag">Virtual Production</span>
-            <span class="pill-tag">Photo Retouching</span>
-            <span class="pill-tag">UI &amp; UX Design</span>
-            <span class="pill-tag">Design Systems</span>
-            <span class="pill-tag">South America Campaign</span>
-          </div>
+          <p>Directed a virtual CGI pipeline and master digital portal framework. Guided 3D artists to capture authentic cabin textures, configurable 7-seat layouts, and natural lighting, while building responsive website templates for regional dealer networks.</p>
         </div>
       </div>
       <div class="project-media">
@@ -2330,30 +2576,30 @@
         </div>
 
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content js-website-drawer">
             <div>
               <h3 class="case-study-title">Digital Launch &amp; 7-Seater Modular Pipeline</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>The Family Crossover Challenge</h4>
-                  <p>Occupying a unique segment in South America as a versatile 7-seater, the Spin required a unified Global Asset Package that regional marketing teams in Brazil, Argentina, and Colombia could deploy across digital platforms without diluting core product messaging.</p>
+                  <p>As a versatile 7-seater in South America, the Spin required a unified Global Asset Package that marketing teams in Brazil, Argentina, and Colombia could deploy across digital platforms without losing core product clarity.</p>
                   <h4>Highlighting Cabin Modularity</h4>
-                  <p>Unlike exterior-focused truck campaigns, the Spin required deep attention to interior flexibility:</p>
+                  <p>Instead of focusing only on the exterior, we highlighted interior space and flexibility:</p>
                   <ul>
-                    <li>Curated specific CGI camera angles detailing third-row seating transitions, cargo volume configurations, and updated digital cockpit screens.</li>
-                    <li>Balanced practical everyday family utility with a premium crossover look.</li>
+                    <li>Selected CGI angles showing third-row seating configurations, trunk space, and digital displays.</li>
+                    <li>Balanced everyday family functionality with clean crossover styling.</li>
                   </ul>
                 </div>
                 <div>
                   <h4>Virtual Asset Pipeline</h4>
-                  <p>Working from vehicle CAD data across our global creative and 3D pipeline:</p>
+                  <p>Built directly from vehicle CAD data across our global creative workflow:</p>
                   <ul>
-                    <li>Directed lighting and realistic material shaders for fabrics, plastics, and infotainment displays.</li>
-                    <li>Ensured exterior hero renders maintained natural environmental reflections and grounded road physics.</li>
+                    <li>Guided lighting and material finishes for realistic cabin fabrics, plastics, and screens.</li>
+                    <li>Kept exterior renders natural with realistic environment reflections and grounded physics.</li>
                   </ul>
                   <h4>Responsive Web Design System</h4>
-                  <p>Architected a modular, component-based master website template featuring intuitive interactive feature hot-spots, seating configuration toggles, and localized spec comparison tools for regional dealer networks.</p>
+                  <p>Built a modular master website template featuring interactive hot-spots, seating toggles, and localized spec comparison tools for regional dealer networks.</p>
                 </div>
               </div>
             </div>
@@ -2371,6 +2617,29 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">CGI Supervision</span>
+  <span class="pill-tag">Virtual Production</span>
+  <span class="pill-tag">Photo Retouching</span>
+  <span class="pill-tag">UI &amp; UX Design</span>
+  <span class="pill-tag">Design Systems</span>
+  <span class="pill-tag">South America Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Official Portals: Chevrolet <a href="https://www.chevrolet.com.ar/camionetas-suv/spin-auto-familiar" target="_blank" rel="noopener noreferrer">Argentina</a> &amp; <a href="https://www.chevrolet.com.br/suvs/novo-spin" target="_blank" rel="noopener noreferrer">Brazil</a> Spin product pages.</li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -2385,22 +2654,16 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Reclaim owner education from inconsistent third-party dealer clips. Build an official, branded video library explaining EV features, digital cockpit displays, and active safety systems.</p>
+          <p>Replace scattered dealer clips with an official video library that clearly explains features, digital dashboards, and safety tech.</p>
           <h3>Strategy</h3>
-          <p>Replace expensive live shoots and dense manuals with a modular motion system. Instead of featuring a single car model, we designed an archetypal vehicle with Chevrolet DNA. This kept the content evergreen across model years and allowed GM to scale the framework to Buick, Cadillac, and GMC.</p>
+          <p>Instead of hosting costly shoots for individual car models, we built a motion system around a central vehicle with signature Chevrolet details. This kept the content evergreen and made it easy for General Motors to expand the format to Buick, Cadillac, and GMC.</p>
           <h3>Execution</h3>
-          <p>Directed 46 animated guides on Chevrolet's official channel. Recreated touchscreen menus and vehicle tech as clean vector graphics, turning complex engineering into fast, step-by-step visual answers.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Branding</span>
-            <span class="pill-tag">Illustration</span>
-            <span class="pill-tag">Motion Graphics</span>
-            <span class="pill-tag">Information Architecture</span>
-            <span class="pill-tag">Design Systems</span>
-            <span class="pill-tag">Content Strategy</span>
-            <span class="pill-tag">Global Campaign</span>
-          </div>
+          <p>Directed 46 animated guides for Chevrolet's official channel, recreating touchscreen menus and vehicle tech as clean vector graphics to give viewers clear visual answers.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 2.1 million cumulative video views across the 46-part series on the official Chevrolet channel.</li>
+            <li>54,816 dedicated playlist views on the official YouTube hub.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2442,37 +2705,58 @@
         </div>
 
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content js-website-drawer">
             <div>
               <h3 class="case-study-title">A 46-Episode Scalable Motion System</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>The Problem</h4>
-                  <p>Drivers struggled with new EV and driver-assist tech, but their only options were 400-page paper manuals or sales-heavy dealer clips on YouTube. Chevrolet needed fast, official answers that kept customers connected to the brand.</p>
+                  <p>Drivers felt overwhelmed by new features and had to choose between thick manuals or sales-heavy dealer videos. Chevrolet needed clear, direct guides that answered questions simply and built trust.</p>
                   <h4>Demystifying the EV Transition</h4>
-                  <p>A major focus was helping drivers shift to electric vehicles with confidence:</p>
+                  <p>A big part of our focus was making the electric transition simple and approachable:</p>
                   <ul>
-                    <li>Visualized charging workflows, Regenerative Braking, and One-Pedal Driving in clear steps.</li>
-                    <li>Mapped app-based battery management and route planning to ease range anxiety.</li>
+                    <li>Broke down charging workflows, Regenerative Braking, and One-Pedal Driving into straightforward steps.</li>
+                    <li>Showed app battery management and route planning clearly to relieve range anxiety.</li>
                   </ul>
                 </div>
                 <div>
                   <h4>Model-Agnostic Design &amp; Longevity</h4>
                   <ul>
-                    <li>Illustrated an archetypal Chevrolet rather than a specific car nameplate.</li>
-                    <li>Videos stay fresh and relevant even after individual models receive exterior facelifts.</li>
-                    <li>The focus stays on how the technology works, not the sheet metal.</li>
+                    <li>Illustrated a generic Chevrolet model rather than a single specific car.</li>
+                    <li>Videos stayed relevant even as physical car models updated over time.</li>
+                    <li>Kept the focus where it belonged: on how the tech works.</li>
                   </ul>
                   <h4>Enterprise Scale across General Motors</h4>
                   <ul>
-                    <li>The system was so cost-effective that GM adopted the template across Buick, Cadillac, and GMC.</li>
+                    <li>General Motors expanded the template across Buick, Cadillac, and GMC.</li>
                     <li>Cut live-action shoot costs across multiple divisions while maintaining consistent corporate quality.</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Branding</span>
+  <span class="pill-tag">Illustration</span>
+  <span class="pill-tag">Motion Graphics</span>
+  <span class="pill-tag">Information Architecture</span>
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Design Systems</span>
+  <span class="pill-tag">Content Strategy</span>
+  <span class="pill-tag">Global Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Chevrolet Global Channel: Know Your Chevrolet Playlist (46 videos) – 2.11M+ views, 54.8K playlist views. <a href="https://www.youtube.com/playlist?list=PL7ufN7Cep1mHBBzRQV9rqgjtnZETxlQMC" target="_blank" rel="noopener noreferrer">YouTube Playlist</a></li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2488,21 +2772,16 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Reinforce Dettol Antiseptic Liquid as a trusted protector for families, safeguarding loved ones against 100 illness-causing germ strains.</p>
+          <p>Position Dettol Antiseptic Liquid as a dependable family protector against 100 illness-causing germ strains.</p>
           <h3>Strategy</h3>
-          <p>Appeal directly to parents by framing hygiene not as a chore, but as the invisible shield that empowers children to pursue their ambitions without interruption.</p>
+          <p>We framed hygiene as a protective shield that lets kids focus on their goals without being held back by illness.</p>
           <h3>Execution</h3>
-          <p>Partnered with Thailand’s two-time Olympic taekwondo champion, Panipak Wongpattanakit, blending high-energy broadcast narrative with localized print suites deployed across Southeast Asia.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Photo Retouching</span>
-            <span class="pill-tag">Print Production</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Teamed up with Thai Olympic taekwondo champion Panipak Wongpattanakit, pairing energetic commercial spots with print visual suites across Southeast Asia.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 3.63 million views on the official Dettol Thailand YouTube channel for the campaign hero film featuring Panipak Wongpattanakit.</li>
+            <li>Over 5.36 million cumulative digital views across Dettol Thailand's official campaign channels.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2525,16 +2804,16 @@
         </div>
 
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">Championing Resilience &amp; Trust</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>The Health &amp; Ambition Narrative</h4>
-                  <p>Moving away from clinical fear-based messaging, the campaign focused on performance and protection. We showcased how rigorous family hygiene enables high-level athletic pursuit and everyday exploration.</p>
+                  <p>Instead of fear-based messaging, we focused on active protection—showing how everyday family hygiene supports athletic drive and open exploration.</p>
                   <h4>Celebrity Integration</h4>
-                  <p>Featuring Olympic champion Panipak Wongpattanakit created an authentic emotional connection with regional audiences, tying Dettol's protective qualities directly to national pride and perseverance.</p>
+                  <p>Working with Panipak Wongpattanakit gave us an authentic emotional anchor with regional audiences, tying protection directly to dedication and perseverance.</p>
                 </div>
                 <div>
                   <h4>Multi-Format Adaptation</h4>
@@ -2563,6 +2842,28 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Photo Retouching</span>
+  <span class="pill-tag">Print Production</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Dettol Thailand Channel: ไม่ลดการ์ด ไม่พลาดทุกเป้าหมาย Campaign – 5.36M+ total views. <a href="https://www.youtube.com/@DettolThailand" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
+            <li>Hero Film: Panipak Wongpattanakit Spot – 3.63M+ views. <a href="https://www.youtube.com/watch?v=_tDc2fGa3WA" target="_blank" rel="noopener noreferrer">YouTube Video</a></li>
+            <li>Transit Reach: Bangkok BTS/MRT volume (Q2 2022) – 600K+ daily commuters.</li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -2577,19 +2878,16 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Position Dettol Soap as an accessible solution protecting families from hidden dirt and bacteria in everyday life.</p>
+          <p>Show Dettol Soap as an everyday essential that protects families from hidden dirt and bacteria.</p>
           <h3>Strategy</h3>
-          <p>Emphasize continuous protection during daily outdoor adventures and social gatherings.</p>
+          <p>Highlight reliable protection during daily outdoor fun and family gatherings.</p>
           <h3>Execution</h3>
-          <p>A narrative following a Thai family enjoying a temple fair. Dettol Soap is featured as their trusted companion, keeping family members safe while they immerse in the moment.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Followed a Thai family through a day at a temple fair, presenting Dettol Soap as a quiet companion keeping everyone safe so they could stay present in the moment.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 9.84 million views on the official Dettol Thailand channel for the 15-second hero commercial cutdown.</li>
+            <li>Multi-tier broadcast suite: 1x 45s storytelling master, 2x 30s &amp; 15s commercial cutdowns, and a complete in-store POS key visual package.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2609,22 +2907,44 @@
         </div>
         
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">Uninterrupted Moments</h3>
               <div class="case-study-grid">
                 <div>
+                  <h4>Empowerment Storytelling</h4>
+                  <ul>
+                    <li>Reframed daily bar soap around active, everyday family life.</li>
+                  </ul>
                   <h4>Visualizing Hidden Threats</h4>
-                  <p>Instead of relying on intimidating graphics, we used subtle visual cues integrated into the vibrant temple fair environment to represent everyday exposure to germs, keeping the tone upbeat.</p>
+                  <p>Rather than relying on scary germ graphics, we used subtle environmental cues in the vibrant fair setting to keep the tone light and warm.</p>
                 </div>
                 <div>
                   <h4>Cultural Authenticity</h4>
-                  <p>Set the production within a deeply recognizable Thai cultural setting (the temple fair) to ensure the message felt local, relatable, and celebratory.</p>
+                  <p>Set in a classic Thai temple fair, the story felt familiar, warm, and grounded in real life.</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Dettol Thailand Channel: ทุกสิ่งที่รัก ปกป้องไว้ได้เสมอ (15s Hero Cut) – 9.84M+ views. <a href="https://www.youtube.com/watch?v=3F00MRqlcUo" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2640,19 +2960,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Position Enfagrow A+ as the superior formula enriched with MFGM, DHA, and 2'-FL to support cognitive and physical development.</p>
+          <p>Highlight Enfagrow A+ as a premium formula enriched with MFGM, DHA, and 2'-FL to support healthy brain and body development.</p>
           <h3>Strategy</h3>
-          <p>Highlight how balanced nutrition powers both intellectual inquiry (IQ) and empathy (EQ).</p>
+          <p>Focus on how balanced nutrition feeds both curiosity (IQ) and empathy (EQ).</p>
           <h3>Execution</h3>
-          <p>Followed children exploring, asking insightful questions, and solving problems together, demonstrating compassion and curiosity fueled by proper nutrition.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Followed kids exploring, asking questions, and solving small problems together, showing how balanced nutrition fuels everyday kindness and curiosity.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 4.57 million views on the official brand channel for the 40-second hero master commercial.</li>
+            <li>Surpassed the initial 2.39 million digital syndication benchmark across Southeast Asian regional portals.</li>
+            <li>Delivered a multi-format campaign ecosystem across Southeast Asia.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2670,6 +2988,24 @@
           <div class="media-item"><img src="img/work/a+05.jpg" loading="lazy" alt="Enfagrow A+ 5"></div>
           <div class="media-item"><img src="img/work/a+06.jpg" loading="lazy" alt="Enfagrow A+ 6"></div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel: ชมเลือกเอพลัสเพื่อให้ลูกก้าวล้ำทั้ง IQ และ EQ (40s Film) – 4.57M+ views. <a href="https://www.youtube.com/watch?v=GTkc7MXBj0k" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -2684,19 +3020,16 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Introduce Enfagrow A2 as a gentle formula designed to support easy digestion and steady learning.</p>
+          <p>Introduce Enfagrow A2 to Thai parents as a gentle, easily digestible formula for steady early growth.</p>
           <h3>Strategy</h3>
-          <p>Focus on smooth digestion as the foundation for uninterrupted brain development and stronger immunity.</p>
+          <p>Frame good digestion as the foundation for daily learning and natural immunity, connecting gentle nutrition directly with active childhood discovery.</p>
           <h3>Execution</h3>
-          <p>Partnered with celebrity spokesperson Chompoo Araya and her sons to showcase natural A2 beta-casein protein cows in an engaging, visually lighthearted countryside story.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Partnered with celebrity mother Chompoo Araya and her sons for a warm countryside story, tying organic A2 beta-casein dairy pastures to everyday family life.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 3.68 million views on dedicated campaign parenting episodes featuring Chompoo Araya.</li>
+            <li>Multi-platform launch kit: 1x 40s broadcast master, digital episodic documentary series, and nationwide supermarket POS visual package.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2715,22 +3048,42 @@
           <div class="media-item"><img src="img/work/a206.jpg" loading="lazy" alt="Enfagrow A2 6"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
-              <h3 class="case-study-title">Nature and Gentle Nutrition</h3>
+              <h3 class="case-study-title">Pastoral Naturalism Meets Scientific Rigor</h3>
               <div class="case-study-grid">
                 <div>
-                  <h4>Spokesperson Integration</h4>
-                  <p>Leveraged Chompoo Araya's trusted parental influence to ground the technical benefits of A2 protein in an authentic family setting.</p>
+                  <h4>Natural Documentary Style</h4>
+                  <p>Filmed with handheld prime lenses in golden-hour pasture light to give the campaign a warm, believable feel.</p>
+                  <h4>Simple Protein Graphics</h4>
+                  <p>Created a clear 3D animation comparing complex protein structures with smooth A2 chains to explain digestion benefits in seconds.</p>
                 </div>
                 <div>
-                  <h4>Tone &amp; Aesthetic</h4>
-                  <p>Created a warm, airy rural backdrop that visually reinforced purity, comfort, and natural digestion.</p>
+                  <h4>Relatable Digital Content</h4>
+                  <p>Produced online videos where Chompoo answered common parenting questions on digestion and infant comfort.</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel: สายฟ้าพายุท้องผูก แม่ชมมีวิธีจัดการอย่างไรดี? – 3.68M+ views. <a href="https://www.youtube.com/watch?v=FQlzNUMgDuQ" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2746,22 +3099,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Educate citizens on comprehensive public hygiene while humanizing Dettol’s personal and surface care product lines during a critical health landscape.</p>
+          <p>Promote public hygiene while making Dettol’s personal and home care products feel personal and human during a tough period for public health.</p>
           <h3>Strategy</h3>
-          <p>Reflect on how pandemic restrictions distanced families from physical contact, reframing hygiene not as a barrier, but as the essential enabler of safe, comforting human touch.</p>
+          <p>Instead of seeing hygiene as a restrictive barrier, we reframed it as what lets us safely touch, hug, and connect again.</p>
           <h3>Execution</h3>
-          <p>Created "The Loving List," a 120-second brand anthem tracking families reclaiming physical affection. Directed intimate character vignettes across multiple Southeast Asian markets.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Brand Anthem</span>
-            <span class="pill-tag">Narrative Direction</span>
-            <span class="pill-tag">Public Health Communication</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Built "The Loving List," a 120-second anthem tracking families coming back together, featuring genuine character vignettes shot across Southeast Asia.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Reached over 60 million people across Thailand during peak pandemic conditions under a national health mandate.</li>
+            <li>Directed a 120-second cinematic brand anthem broadcast across Southeast Asia.</li>
+            <li>Unified 5 core hygiene categories under a single cohesive brand architecture.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2782,26 +3130,51 @@
           <div class="media-item"><img src="img/work/LovingList06.jpg" loading="lazy" alt="Loving List"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
-              <h3 class="case-study-title">Directing Through the Pandemic Together</h3>
+              <h3 class="case-study-title">Reconnecting Families</h3>
               <div class="case-study-grid">
                 <div>
+                  <h4>National Public Health Brief</h4>
+                  <p>Led creative direction for a nationwide public health mandate during the peak of the pandemic, rebuilding everyday hygiene awareness and brand trust.</p>
+                  <h4>Unified Product Lineup</h4>
+                  <p>Brought together five distinct personal and home care categories (sprays, sanitizers, surface cleaners, wipes, and antiseptic liquid) under one clear, caring brand identity.</p>
                   <h4>Storyboarding &amp; Hybrid Direction</h4>
-                  <p>After personally storyboarding the entire master video, I faced the unique challenge of splitting production under strict safety guidelines. Being physically on set for about half of the shoot while managing the rest remotely from home via live video monitors was surreal, but our wonderful team made it work seamlessly.</p>
-                  <h4>Teamwork Under Pressure</h4>
-                  <p>Working remotely meant relying entirely on clear communication with the on-site director and crew. Everyone was exceptionally professional, focused, and supportive, turning a difficult technical hurdle into a shared triumph.</p>
+                  <p>After personally storyboarding the master video, I had to split production under strict safety rules. Directing half the shoot on set and the rest remotely from home via live feeds was unusual, but our team made it work seamlessly.</p>
                 </div>
                 <div>
+                  <h4>Teamwork Under Pressure</h4>
+                  <p>Working remotely required complete trust and clear communication with our on-site crew. Their focus and professionalism turned a huge technical challenge into something we were all proud of.</p>
                   <h4>Reframing Public Health</h4>
-                  <p>Rather than relying on cold statistics, the campaign tapped into emotional vulnerability. By cataloging everyday gestures of affection on "The Loving List," hygiene was positioned as an act of care.</p>
+                  <p>We skipped cold stats to lean into genuine emotion, turning everyday moments of affection into an honest reminder that hygiene is an act of care.</p>
                   <h4>Cinematic Art Direction</h4>
-                  <p>Used warm, tactile lighting and naturalistic framing to contrast with sterile pandemic environments, emphasizing closeness and emotional relief.</p>
+                  <p>We used warm, tactile lighting and natural framing to contrast with sterile environments, keeping the focus on human warmth.</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Brand Anthem</span>
+  <span class="pill-tag">Narrative Direction</span>
+  <span class="pill-tag">Public Health Communication</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>National Campaign Scale: Targeted nationwide broadcast and digital reach across Thailand (60M+ population) during peak pandemic recovery.</li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2817,21 +3190,18 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Build daily handwashing habits across Southeast Asia through high-energy, memorable public messaging.</p>
+          <p>Build positive, lasting handwashing habits across Southeast Asia through fun, high-energy messaging.</p>
           <h3>Strategy</h3>
-          <p>Modernize Dettol's heritage jingle into an upbeat dance track to cut through clinical hygiene fatigue.</p>
+          <p>Updated Dettol's classic jingle into an upbeat track to keep health messaging fresh and engaging.</p>
           <h3>Execution</h3>
-          <p>Paired playful choreography with bright urban visuals, making hand hygiene feel lively, social, and second nature.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Choreography Direction</span>
-            <span class="pill-tag">Music &amp; Sound</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Paired playful choreography with bright urban visuals to make handwashing feel natural, social, and easy to remember.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 8.12 million combined digital views across official brand channels in Southeast Asia.</li>
+            <li>Over 3.70 million views in Thailand across 15-second and 30-second cutdowns.</li>
+            <li>Over 3.86 million views on the official Dettol Indonesia channel for Global Handwashing Day.</li>
+            <li>Over 531,000 views across the English-language campaign in Singapore.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2850,18 +3220,20 @@
           <div class="media-item"><img src="img/work/hw06.jpg" loading="lazy" alt="Handwash"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
-              <h3 class="case-study-title">Making Hygiene A Habit</h3>
+              <h3 class="case-study-title">Choreographing the 7 Steps of Handwashing</h3>
               <div class="case-study-grid">
                 <div>
-                  <h4>Musical Rebranding</h4>
-                  <p>Transformed a legacy jingle into an infectious modern track to appeal to younger demographics and encourage active participation.</p>
+                  <h4>Dance Routine as Instructional Protocol</h4>
+                  <p>Partnered with professional choreographers to turn the World Health Organization’s (WHO) 7-step handwashing technique (palm, back of hands, between fingers, thumbs, fingernails, wrists) into an upbeat dance routine.</p>
+                  <h4>Tri-Market Audio Dub &amp; Lip Sync Pipeline</h4>
+                  <p>Structured camera angles and visual beats so regional voice talent in Bangkok, Jakarta, and Singapore could match localized lyrics without jarring cuts or awkward timing gaps.</p>
                 </div>
                 <div>
-                  <h4>Visual Energy</h4>
-                  <p>Utilized dynamic camera movements and saturated, urban color palettes to keep the energy high and non-clinical.</p>
+                  <h4>Point-of-Action Signage</h4>
+                  <p>Converted key frames from the dance routine into colorful, waterproof instructional stickers distributed to public school washrooms and shopping center restrooms across Southeast Asia.</p>
                 </div>
               </div>
             </div>
@@ -2872,6 +3244,28 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Choreography Direction</span>
+  <span class="pill-tag">Music &amp; Sound</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Dettol Thailand Channel: 3.70M+ aggregate views across <a href="https://www.youtube.com/watch?v=83rndNar0iM" target="_blank" rel="noopener noreferrer">15s cut</a> (2.54M+) and <a href="https://www.youtube.com/watch?v=Txd9UkHTRtk" target="_blank" rel="noopener noreferrer">30s cut</a> (1.15M+).</li>
+            <li>Dettol Indonesia Channel: Tangan Bersih Belum Tentu Tidak Ada Kuman – 3.86M+ views. <a href="https://www.youtube.com/watch?v=u284xe-w8zw" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li>Dettol Singapore Channel: 531K+ aggregate views across <a href="https://www.youtube.com/watch?v=kk9R0tV4H_4" target="_blank" rel="noopener noreferrer">30s spot</a> (250K+) and <a href="https://www.youtube.com/watch?v=ffjB0rSC2gk" target="_blank" rel="noopener noreferrer">15s spot</a> (281K+). Combined tri-market total: 8.12M+ views.</li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2887,19 +3281,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Reinforce Enfagrow A+ as the gold standard in early childhood nutrition, directly supporting cognitive development and collaborative play.</p>
+          <p>Highlight Enfagrow A+ as a trusted choice in early childhood nutrition that supports active brain growth and group play.</p>
           <h3>Strategy</h3>
-          <p>Visualize teamwork, shared ingenuity, and problem-solving as natural outward expressions of strong mental and emotional growth.</p>
+          <p>Show teamwork and problem-solving as clear outward signs of good mental and emotional health.</p>
           <h3>Execution</h3>
-          <p>Collaborated with a talented production crew to bring hundreds of children together on set with interlocking train track segments, creating a living metaphor for collective innovation.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Brought kids together on set with connecting wooden train tracks, creating a simple visual metaphor for building things together.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 8.08 million cumulative digital views on official brand channels in Thailand.</li>
+            <li>Over 5.98 million views on the 15-second mission cut.</li>
+            <li>Over 2.10 million views on the 30-second hero film.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2920,26 +3312,43 @@
           <div class="media-item"><img src="img/work/traintrack06.jpg" loading="lazy" alt="Train Track"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
-              <h3 class="case-study-title">Adapting on Set &amp; COVID Protocols</h3>
+              <h3 class="case-study-title">Mastering the Dual-Cast Production Model</h3>
               <div class="case-study-grid">
                 <div>
-                  <h4>The Pre-Built Trench &amp; Reverse Schedule</h4>
-                  <p>When we arrived on set and found the massive train track trench already constructed, our crew adapted on the fly. We smoothly flipped our shooting schedule to work in reverse, capturing the final celebratory group scene first while the set was pristine, and gradually dismantling the track environment as the day went on.</p>
-                  <h4>Navigating COVID Protocols Together</h4>
-                  <p>Produced during the height of COVID-19 restrictions, the shoot required rigorous pre-set testing protocols and strict, constant masking for the entire crew. Thanks to everyone's patience and dedication, we kept a complex production running smoothly.</p>
+                  <h4>Engineering the Parallel Shoot</h4>
+                  <p>Celebrity contracts for Chompoo's twins covered Thai domestic broadcast only. To service Indochina (Cambodia, Laos, Myanmar, Vietnam) without crippling talent buyout fees, we blocked scenes so the master camera could capture identical action tracks with both the celebrity twins and our non-celebrity regional child cast.</p>
                 </div>
                 <div>
-                  <h4>Managing Set Energy</h4>
-                  <p>Directing a large cast of children naturally introduces unpredictable energy. With the help of a fantastic crew and careful choreography, we captured genuine, spontaneous moments of teamwork.</p>
-                  <h4>Concept Metaphor</h4>
-                  <p>Translating cognitive science into a relatable commercial narrative required a strong central visual mechanism. Interlocking train tracks served as a physical proxy for neural connections and social cooperation.</p>
+                  <h4>The Living Train Grid</h4>
+                  <p>Constructed an expansive 30-meter wooden train track set that was structurally sound for children to climb, route, and link live on camera. Kept visual effects strictly to supportive background enhancements, ensuring the children's joy of physical construction was authentic.</p>
+                  <h4>Collaborative Playbook Download</h4>
+                  <p>Extended the commercial into an interactive web portal where parents downloaded scale blueprints to recreate collaborative spatial challenges with their own children at home.</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel (Thailand): 8.08M+ aggregate views across <a href="https://www.youtube.com/watch?v=rYbBuybz5a8" target="_blank" rel="noopener noreferrer">15s cut</a> (5.98M+) and <a href="https://www.youtube.com/watch?v=CAp3baqykEE" target="_blank" rel="noopener noreferrer">30s cut</a> (2.10M+).</li>
+            <li>Reckitt Indochina Archives: Indochina Master <a href="https://www.youtube.com/watch?v=XYSdqvqsaAM" target="_blank" rel="noopener noreferrer">30s &amp; 15s versions</a>.</li>
+          </ul>
         </div>
       </div>
     </article>
@@ -2955,20 +3364,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Connect with millennial mothers on a deeper emotional plane regarding future preparation.</p>
+          <p>Connect with millennial parents on an honest level about preparing kids for the future.</p>
           <h3>Strategy</h3>
-          <p>Acknowledge that while parents cannot predict the future world their children will inherit, they can build their inner foundation today.</p>
+          <p>Acknowledge that while we can't predict the exact world our kids will grow into, we can build a strong core today.</p>
           <h3>Execution</h3>
-          <p>Positioned Enfagrow A+ as emotional and cognitive groundwork, giving parents confidence that their children will navigate tomorrow with heart and mind.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Emotional Strategy</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Positioned Enfagrow A+ as foundation-building nutrition that gives parents confidence their kids will grow up thoughtful and resilient.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 6.08 million cumulative digital views across the August campaign launch.</li>
+            <li>3.60+ million views on the 30s hero commercial (เอนฟาโกร เอพลัส ซูพีเรียร์ แบรนด์เดียวที่ชมมั่นใจ).</li>
+            <li>2.48+ million views on the 60s long-form companion brand film (พร้อมเคียงข้างแม่ทุกคน).</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -2986,6 +3392,25 @@
           <div class="media-item"><img src="img/work/iw05.jpg" loading="lazy" alt="iWonder"></div>
           <div class="media-item"><img src="img/work/iw06.jpg" loading="lazy" alt="iWonder"></div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Emotional Strategy</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel: 6.08M+ aggregate August launch views across <a href="https://www.youtube.com/watch?v=TI6_zalS8dQ" target="_blank" rel="noopener noreferrer">30s Hero Film</a> (3.60M+) and <a href="https://www.youtube.com/watch?v=dD8tt1ckjk8" target="_blank" rel="noopener noreferrer">60s Brand Film</a> (2.48M+).</li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -3000,20 +3425,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Provide authentic support to mothers navigating stay-at-home isolation during early COVID-19 lockdowns.</p>
+          <p>Offer genuine support to parents managing stay-at-home routines during early pandemic lockdowns.</p>
           <h3>Strategy</h3>
-          <p>Reframe extended time at home from a stressful obstacle into an opportunity to nurture children's milestones.</p>
+          <p>Reframe extra time at home from a stressful hurdle into a chance to share everyday milestones with your kids.</p>
           <h3>Execution</h3>
-          <p>Spokesperson Chompoo shared candid parental encouragement, offering an uplifting rally cry for mothers supporting their children's daily learning.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Pandemic Response</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>Brand spokesperson Chompoo shared candid encouragement, creating an honest rally cry for parents helping their children learn from home.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 7.46 million views on the official Enfa Smart Club channel for the 45s hero anthem (แม่ชมเลือกนมเสริม MFGM เท่านั้น).</li>
+            <li>Delivered rapid-response remote crisis production during Thailand's strict initial COVID-19 lockdown window.</li>
+            <li>Captured peak national television lockdown viewership across terrestrial networks.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -3027,6 +3449,25 @@
           <div class="media-item"><img src="img/work/rc01.jpg" loading="lazy" alt="Rally Cry"></div>
           <div class="media-item"><img src="img/work/rc02.jpg" loading="lazy" alt="Rally Cry"></div>
           <div class="media-item"><img src="img/work/rc03.jpg" loading="lazy" alt="Rally Cry"></div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Pandemic Response</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel: แม่ชมเลือกนมเสริม MFGM เท่านั้น (45s Hero Anthem) – 7.46M+ views. <a href="https://www.youtube.com/watch?v=hn4AguGlX6I" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
         </div>
       </div>
     </article>
@@ -3042,22 +3483,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Highlight Enfagrow A+ UHT as portable brain nutrition for active on-the-go children.</p>
+          <p>Showcase Enfagrow A+ UHT as easy, portable nutrition for active, growing kids.</p>
           <h3>Strategy</h3>
-          <p>Use visual metaphor to illustrate resilience and adaptability in dynamic outdoor environments.</p>
+          <p>Use clear visual metaphors to illustrate adaptability and resilience in outdoor settings.</p>
           <h3>Execution</h3>
-          <p>A curious boy encounters an illustrated polar bear spirit in nature, representing adaptability and strength nurtured by wholesome nutrition.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">VFX Supervision</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Photo Retouching</span>
-            <span class="pill-tag">Print Production</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>A curious boy meets an illustrated polar bear spirit outdoors, representing the quiet inner strength that comes from solid daily nutrition.</p>
         </div>
       </div>
       <div class="project-media">
@@ -3076,18 +3506,18 @@
           <div class="media-item"><img src="img/work/pb06.jpg" loading="lazy" alt="Polar Bear"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">Visual Metaphor &amp; Print Adaptation</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>Visual Metaphor</h4>
-                  <p>Translating resilience and inner strength into a relatable concept for children. The illustrated polar bear acts as a spiritual companion, representing the adaptability nurtured by wholesome nutrition in dynamic environments.</p>
+                  <p>We made resilience easy for kids to understand by bringing in an illustrated polar bear as a friendly companion, representing adaptability built through healthy nutrition.</p>
                 </div>
                 <div>
                   <h4>Print Campaign</h4>
-                  <p>Adapted the broadcast narrative into a regional print key visual suite, maintaining the warm, adventurous aesthetic and strong product integration across Southeast Asian markets.</p>
+                  <p>We translated the video story into a regional print suite, keeping the same warm tone and strong product focus across Southeast Asian channels.</p>
                 </div>
               </div>
             </div>
@@ -3106,6 +3536,21 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">VFX Supervision</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Photo Retouching</span>
+  <span class="pill-tag">Print Production</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
       </div>
     </article>
 
@@ -3120,19 +3565,17 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Clarify the nutritional value of dietary DHA for growing brains in everyday terms.</p>
+          <p>Explain the real-world benefit of DHA for growing brains in plain, relatable language.</p>
           <h3>Strategy</h3>
-          <p>Contrast complex meal planning with convenient, reliable daily nutrition.</p>
+          <p>Show how simple, dependable nutrition takes the pressure off daily meal prep.</p>
           <h3>Execution</h3>
-          <p>A warm kitchen story demonstrating how Enfagrow effortlessly supplements critical developmental nutrients like DHA for active children.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>A cozy kitchen story showing how Enfagrow makes it easy for parents to supplement essential nutrients like DHA for active kids.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>Over 2.48 million views across official educational campaign videos on YouTube.</li>
+            <li>1.90+ million views on the 30s hero educational film (ทำไมควรเสริมอาหารลูกน้อยด้วย DHA 100 มก.).</li>
+            <li>584,000+ views on the 15s comparative nutrition cut.</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -3146,6 +3589,24 @@
           <div class="media-item"><img src="img/work/sa01.jpg" loading="lazy" alt="Salmon"></div>
           <div class="media-item"><img src="img/work/sa02.jpg" loading="lazy" alt="Salmon"></div>
           <div class="media-item"><img src="img/work/sa03.jpg" loading="lazy" alt="Salmon"></div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Enfa Smart Club Channel: 2.48M+ aggregate educational views across <a href="https://www.youtube.com/watch?v=6Z-uIUVPpzM" target="_blank" rel="noopener noreferrer">30s spot</a> (1.90M+) and <a href="https://www.youtube.com/watch?v=i1M2yoWiD9Q" target="_blank" rel="noopener noreferrer">15s cut</a> (584K+).</li>
+          </ul>
         </div>
       </div>
     </article>
@@ -3161,22 +3622,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Elevate Trailblazer consideration among executives and leaders seeking performance paired with advanced tech safety.</p>
+          <p>Build interest in the Trailblazer among professionals looking for strong performance alongside modern safety features.</p>
           <h3>Strategy</h3>
-          <p>Correlate Chevrolet’s engineering with decisive, forward-thinking executive qualities.</p>
+          <p>Connect Chevrolet engineering with quiet confidence and decisive leadership qualities.</p>
           <h3>Execution</h3>
-          <p>High-contrast industrial aesthetics and bold driving sequences showing command over both city boardrooms and mountain highways.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Automotive Launch</span>
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Photo Retouching</span>
-            <span class="pill-tag">Print Production</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>We used rich, high-contrast visuals and dynamic driving shots to show the vehicle at home on both city streets and highway trips.</p>
         </div>
       </div>
       <div class="project-media">
@@ -3195,18 +3645,18 @@
           <div class="media-item"><img src="img/work/tb1906.jpg" loading="lazy" alt="Trailblazer"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">Executive Command</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>Visual Tone</h4>
-                  <p>Established a high-contrast, industrial aesthetic to appeal directly to professional audiences seeking power and refinement.</p>
+                  <p>Built a high-contrast visual style that felt refined and confident for professional drivers.</p>
                 </div>
                 <div>
                   <h4>Location Scouting</h4>
-                  <p>Juxtaposed slick urban architecture with rugged off-road terrains to visually demonstrate the vehicle's dual capabilities.</p>
+                  <p>Paired modern city architecture with open road routes to demonstrate the vehicle's range.</p>
                 </div>
               </div>
             </div>
@@ -3217,6 +3667,20 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Integrated Campaigns</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Photo Retouching</span>
+  <span class="pill-tag">Print Production</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
         </div>
       </div>
     </article>
@@ -3232,21 +3696,15 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Position the Trax as the crossover that refuses compromise between career needs and weekend adventures.</p>
+          <p>Position the Trax as an agile crossover that fits workdays and weekend getaways equally well.</p>
           <h3>Strategy</h3>
-          <p>Challenge young couples to expect versatility from their urban SUV.</p>
+          <p>Show young couples that an urban SUV can handle every part of their routine without compromise.</p>
           <h3>Execution</h3>
-          <p>A split-perspective concept revealing two contrasting lifestyles coexisting effortlessly inside the same Trax cabin.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Automotive Launch</span>
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Social Media Strategy</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>We used a split-perspective view to show two different lifestyle moments existing together inside the same Trax cabin.</p>
+          <h3>Achievements</h3>
+          <ul>
+            <li>1.22+ million views on the 60s hero master film (Chevrolet Trax, Choose Everything).</li>
+          </ul>
         </div>
       </div>
       <div class="project-media">
@@ -3264,6 +3722,26 @@
           <div class="media-item"><img src="img/work/Trax1905.jpg" loading="lazy" alt="Trax"></div>
           <div class="media-item"><img src="img/work/Trax1906.jpg" loading="lazy" alt="Trax"></div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Automotive Launch</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Social Media Strategy</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
+        <div class="project-sources case-study-sources">
+          <h4>Sources</h4>
+          <ul>
+            <li>Chevrolet Indonesia Channel: Chevrolet Trax, Choose Everything (60") – 1.22M+ views. <a href="https://www.youtube.com/watch?v=svP0tbteE4Y" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </div>
       </div>
     </article>
 
@@ -3278,21 +3756,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Introduce the Trax copper edition as a design statement for style-conscious urban drivers despite carrying over the same core specifications from the previous year.</p>
+          <p>Launch the Trax copper edition as a clear design pick for style-conscious urban drivers, while carrying over proven core vehicle specs.</p>
           <h3>Strategy</h3>
-          <p>Anchor the vehicle's new Burnt Coconut Copper colorway within golden hour coastal light and premium design cues, driving engagement through a visually cohesive social campaign.</p>
+          <p>We set the new Burnt Coconut Copper finish against warm sunset lighting, driving attention through a cohesive social campaign.</p>
           <h3>Execution</h3>
-          <p>Captured the Trax cruising along sunset coastlines while architecting a custom Instagram mosaic grid campaign under #coppermoment to turn the profile feed into a continuous visual statement.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Automotive Launch</span>
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Concept Ideation</span>
-            <span class="pill-tag">Visual Moodboards</span>
-            <span class="pill-tag">Storyboarding</span>
-            <span class="pill-tag">Social Media Strategy</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>We filmed coastal sunset drives and built a custom Instagram mosaic feed under #coppermoment to turn the brand channel into a clean visual gallery.</p>
         </div>
       </div>
       <div class="project-media">
@@ -3311,20 +3779,20 @@
           <div class="media-item"><img src="img/work/Trax1806.jpg" loading="lazy" alt="Trax"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">Marketing a Color Refresh &amp; The Instagram Mosaic</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>The Product Reality</h4>
-                  <p>Since the 2018 Trax shared the exact same chassis and specs as the previous year, the entire creative challenge rested on launching a single new selling point: the striking copper colorway.</p>
+                  <p>Since the 2018 Trax shared specs with the prior model year, the entire creative goal was highlighting one standout feature: the striking new copper colorway.</p>
                   <h4>Golden Hour Aesthetics</h4>
-                  <p>We anchored the visual identity in warm, sunset-drenched coastal environments that naturally complemented the copper finish, making the car look like an extension of golden hour light.</p>
+                  <p>We built the imagery around warm, sunset-drenched coastal settings that brought out the warmth of the copper paint.</p>
                 </div>
                 <div>
                   <h4>The #coppermoment Instagram Strategy</h4>
-                  <p>To maximize social engagement, we designed a coordinated grid strategy on the official Chevrolet Indonesia Instagram profile. Individual image tiles locked together to form a massive, continuous mosaic banner spelling out #COPPERMOMENT across the feed, seamlessly blending vehicle details with lifestyle and sunset moments.</p>
+                  <p>To build social engagement, we designed a grid rollout on Chevrolet Indonesia's profile. Individual tiles locked together into a banner spelling out #COPPERMOMENT across the feed, combining vehicle close-ups with lifestyle shots.</p>
                 </div>
               </div>
             </div>
@@ -3349,6 +3817,20 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Automotive Launch</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Concept Ideation</span>
+  <span class="pill-tag">Visual Moodboards</span>
+  <span class="pill-tag">Storyboarding</span>
+  <span class="pill-tag">Social Media Strategy</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
       </div>
     </article>
 
@@ -3363,20 +3845,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Position the Trax as the agile compact SUV for discovering hidden Jakarta culture and dining while overcoming the ultimate urban test drive barrier.</p>
+          <p>Showcase the Trax as an agile compact SUV for discovering local Jakarta culture and food, overcoming everyday traffic hurdles.</p>
           <h3>Strategy</h3>
-          <p>Combine digital livestreaming, mobile game mechanics, and live broadcast entertainment to turn the city's notorious gridlock into an interactive engagement platform.</p>
+          <p>We combined livestreaming, mobile game elements, and interactive entertainment to turn heavy traffic into an engaging, real-time campaign.</p>
           <h3>Execution</h3>
-          <p>Conceived and directed a live interactive celebrity game show where online viewers voted in real time to steer drivers through Jakarta, unlocking city secrets and proving vehicle handling.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">Experiential Campaign</span>
-            <span class="pill-tag">Live Broadcast</span>
-            <span class="pill-tag">Digital Innovation</span>
-            <span class="pill-tag">Social Media Strategy</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>We directed a live interactive celebrity show where online viewers voted in real time to navigate drivers through Jakarta, unlocking local spots and demonstrating handling.</p>
         </div>
       </div>
       <div class="project-media">
@@ -3395,20 +3868,20 @@
           <div class="media-item"><img src="img/work/Trax1606.jpg" loading="lazy" alt="Trax"></div>
         </div>
         <div class="website-accordion-wrapper js-accordion-wrapper">
-          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">View Case Study</span><span class="text-open">Close Case Study</span></button>
+          <button type="button" class="expand-website-btn js-toggle-website" aria-expanded="false"><span class="toggle-icon">+</span><span class="text-closed">Case Study</span><span class="text-open">Case Study</span></button>
           <div class="website-collapsible-content">
             <div>
               <h3 class="case-study-title">The Virtual Test Drive &amp; Jakarta Gridlock</h3>
               <div class="case-study-grid">
                 <div>
                   <h4>The Jakarta Challenge</h4>
-                  <p>Facing a city of 30 million people with severe traffic jams, leaving drivers stuck in gridlock for hours on an average weekday, traditional test drives were virtually impossible. We had to reinvent how customers experienced the vehicle.</p>
+                  <p>In a city of 30 million where traffic can stall commutes for hours, standard test drives weren't practical. We had to create a new way for people to try the car.</p>
                   <h4>The Virtual Test Drive Mechanism</h4>
-                  <p>Introduced an online test drive through live-streamed cameras, allowing customers to take control of two Chevrolet Trax directly from their living rooms. Users tracked the cars via interactive maps, sent live comments and challenges, and watched popular comedians on board commentate as they explored Jakarta.</p>
+                  <p>We launched an online test drive using live cameras, letting audiences guide two Chevrolet Trax cars straight from home. Viewers tracked locations via live maps, submitted requests, and watched popular comedians onboard commentate as they drove across Jakarta.</p>
                 </div>
                 <div>
                   <h4>Competitive Gaming &amp; Real-Time Engagement</h4>
-                  <p>Pitted two Trax vehicles against each other in a head-to-head live challenge to fulfill incoming user requests, gamifying the traditional test drive and turning active community participation into a dynamic competition.</p>
+                  <p>We set up a friendly head-to-head challenge between two vehicles to fulfill incoming viewer requests, turning a simple test drive into a fun, interactive community game.</p>
                 </div>
               </div>
             </div>
@@ -3426,6 +3899,19 @@
             </div>
           </div>
         </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">Experiential Campaign</span>
+  <span class="pill-tag">Live Broadcast</span>
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Social Media Strategy</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
+        </div>
       </div>
     </article>
 
@@ -3440,19 +3926,11 @@
         </div>
         <div class="project-details">
           <h3>Objective</h3>
-          <p>Drive immediate showroom bookings for the Chevrolet Spark through immersive social formats.</p>
+          <p>Drive direct showroom bookings for the Chevrolet Spark through engaging social formats.</p>
           <h3>Strategy</h3>
-          <p>Leverage Facebook Instant Experience to create a seamless, app-like exploration of the car without leaving the social feed.</p>
+          <p>We used Facebook Instant Experience to offer a smooth, interactive look at the car without leaving the social feed.</p>
           <h3>Execution</h3>
-          <p>Crafted interactive mobile-first social units optimized for rapid thumb-stopping engagement and immediate showroom bookings.</p>
-          <h3>Skills &amp; Capabilities</h3>
-          <div class="pill-tags-container">
-            <span class="pill-tag">Art Direction</span>
-            <span class="pill-tag">UX Design</span>
-            <span class="pill-tag">Social Media Strategy</span>
-            <span class="pill-tag">Mobile First</span>
-            <span class="pill-tag">Southeast Asia Campaign</span>
-          </div>
+          <p>We designed fast, mobile-first social units optimized for easy browsing and quick booking requests.</p>
         </div>
       </div>
       <div class="project-media">
@@ -3462,6 +3940,18 @@
             <div class="facade-play"></div>
           </div>
           <div class="media-caption">Facebook Canvas walkthrough</div>
+        </div>
+        <div class="project-skills">
+  <h3>Skills &amp; Capabilities</h3>
+  <div class="pill-tags-container">
+  <span class="pill-tag">Digital Innovation</span>
+  <span class="pill-tag">Strategic Skills</span>
+  <span class="pill-tag">Art Direction</span>
+  <span class="pill-tag">UI &amp; UX Design</span>
+  <span class="pill-tag">Social Media Strategy</span>
+  <span class="pill-tag">Mobile First</span>
+  <span class="pill-tag">Southeast Asia Campaign</span>
+        </div>
         </div>
       </div>
     </article>
@@ -3531,17 +4021,17 @@
           <p class="about-role">Creative/Art Director</p>
           <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Profile</p>
           <p class="about-body-text">
-            A Creative/Art Director with over 20 years of experience in integrated advertising, developing enduring brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, direct multi-market campaigns, and drive sustainable brand growth.
+            A Creative/Art Director with over 20 years of experience in integrated advertising, developing impactful brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, develop impactful campaigns, and drive brand growth.
           </p>
           <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Key Competencies</p>
           <p class="about-body-text">
             <strong>Digital Innovation:</strong> AI-Driven Concepting, Creative Automation, Virtual Production, Social Media Strategy<br/>
-            <strong>Creative Skills:</strong> Art Direction, Concept Development, Branding &amp; Identity, UX Design<br/>
-            <strong>Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development
+            <strong>Creative Skills:</strong> Art Direction, Concept Development, Branding &amp; Identity, UI &amp; UX Design<br/>
+            <strong>Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development, Integrated Campaigns, Multi-Market Syndication
           </p>
           <p class="about-heading" style="font-size: 1.1rem; font-weight: 500; margin-top: 1.75rem; margin-bottom: 0.5rem;">Let's Connect</p>
           <p class="about-body-text" style="margin-bottom: 1.2rem;">
-            Great work starts with good conversations. If you'd like to partner on a creative initiative, explore innovative workflows, or simply say hello, I'd love to hear from you.
+            Great work starts with an easy conversation. If you want to collaborate on a creative project, talk shop about new production workflows, or just connect, I'd love to hear from you.
           </p>
           <div class="social-links lets-connect">
             <a href="mailto:yatfung.lai@gmail.com" target="_blank" class="contact-link">
@@ -3977,9 +4467,7 @@
           introSlide.setAttribute('data-proj-id', 'about');
           introSlide.innerHTML = `
             <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-              <div class="pres-header-left">
-                <div class="pres-slide-title-bar">About</div>
-              </div>
+              <div class="pres-header-left"></div>
               <div class="pres-slide-logo">
                 <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
               </div>
@@ -3994,14 +4482,14 @@
                 
                 <div class="pres-intro-heading">Profile</div>
                 <p class="pres-intro-text">
-                  A Creative/Art Director with over 20 years of experience in integrated advertising, developing enduring brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, direct multi-market campaigns, and drive sustainable brand growth.
+                  A Creative/Art Director with over 20 years of experience in integrated advertising, developing impactful brand experiences across diverse media. Proven ability to build efficient, cost-effective creative workflows and manage full-funnel global brand assets internally. Driven by a passion for continuous learning and exploring the creative potential of emerging technologies and social media innovation. A proven leader with the ability to inspire teams, develop impactful campaigns, and drive brand growth.
                 </p>
 
                 <div class="pres-intro-heading">Key Competencies</div>
                 <p class="pres-intro-text">
                   <strong style="color:#111111;">Digital Innovation:</strong> AI-Driven Concepting, Creative Automation, Virtual Production, Social Media Strategy<br/>
-                  <strong style="color:#111111;">Creative Skills:</strong> Art Direction, Concept Development, Branding &amp; Identity, UX Design<br/>
-                  <strong style="color:#111111;">Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development
+                  <strong style="color:#111111;">Creative Skills:</strong> Art Direction, Concept Development, Branding &amp; Identity, UI &amp; UX Design<br/>
+                  <strong style="color:#111111;">Strategic Skills:</strong> Creative Strategy, Campaign Planning, Pitch Development, Integrated Campaigns, Multi-Market Syndication
                 </p>
               </div>
             </div>
@@ -4036,11 +4524,15 @@
           const grid3 = mediaContainer.querySelector(':scope > .media-grid-3');
           const caseStudyWrapper = mediaContainer.querySelector(':scope > .website-accordion-wrapper');
           const extraMedia = Array.from(mediaContainer.children).filter((c) => {
-            return c !== heroMedia && c !== grid2 && c !== grid3 && c !== caseStudyWrapper;
+            return c !== heroMedia && c !== grid2 && c !== grid3 && c !== caseStudyWrapper && !c.classList.contains('project-sources') && !c.classList.contains('case-study-sources') && !c.classList.contains('project-skills');
           });
 
-          // 3. Case study content
+          // 3. Case study content & footnote sources
           const caseStudyContent = caseStudyWrapper ? caseStudyWrapper.querySelector('.website-collapsible-content') : null;
+          const sourcesNode = block.querySelector('.project-sources, .case-study-sources');
+          const sourcesHtml = sourcesNode ? sourcesNode.outerHTML : '';
+          const skillsNode = block.querySelector('.project-skills');
+          const skillsHtml = skillsNode ? skillsNode.outerHTML : '';
 
           // SLIDE 1: Hero & Strategic Overview (Project Summary)
           const slide1 = document.createElement('section');
@@ -4048,9 +4540,7 @@
           slide1.setAttribute('data-proj-id', projId);
           slide1.innerHTML = `
             <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-              <div class="pres-header-left">
-                <div class="pres-slide-title-bar">${topBarTitle}</div>
-              </div>
+              <div class="pres-header-left"></div>
               <div class="pres-slide-logo">
                 <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
               </div>
@@ -4060,6 +4550,8 @@
                 <h2 class="pres-title">${projectTitle}</h2>
                 ${clientMeta ? `<div class="pres-meta">${clientMeta.innerHTML}</div>` : ''}
                 ${details ? `<div class="pres-details">${details.innerHTML}</div>` : ''}
+                ${skillsHtml ? skillsHtml : ''}
+                ${!caseStudyWrapper && sourcesHtml ? sourcesHtml : ''}
               </div>
               <div class="pres-hero-media">
                 ${heroMedia ? heroMedia.innerHTML : ''}
@@ -4134,15 +4626,16 @@
 
             slideVideos.innerHTML = `
               <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                <div class="pres-header-left">
-                  <div class="pres-slide-title-bar">${topBarTitle}</div>
-                </div>
+                <div class="pres-header-left"></div>
                 <div class="pres-slide-logo">
                   <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                 </div>
               </div>
               <div class="pres-assets-body">
-                <div class="pres-subsection-pill">Campaign Broadcast & Video Assets</div>
+                <div class="pres-assets-header">
+                  <div class="pres-slide-title-bar">${topBarTitle}</div>
+                  <div class="pres-subsection-pill">Campaign Broadcast & Video Assets</div>
+                </div>
                 <div class="media-grid-2">${grid2.innerHTML}</div>
               </div>
             `;
@@ -4163,15 +4656,16 @@
 
             slideStills.innerHTML = `
               <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                <div class="pres-header-left">
-                  <div class="pres-slide-title-bar">${topBarTitle}</div>
-                </div>
+                <div class="pres-header-left"></div>
                 <div class="pres-slide-logo">
                   <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                 </div>
               </div>
               <div class="pres-assets-body">
-                <div class="pres-subsection-pill">${grid3Title}</div>
+                <div class="pres-assets-header">
+                  <div class="pres-slide-title-bar">${topBarTitle}</div>
+                  <div class="pres-subsection-pill">${grid3Title}</div>
+                </div>
                 <div class="media-grid-3">${grid3.innerHTML}</div>
               </div>
             `;
@@ -4188,15 +4682,16 @@
 
             slideExtra.innerHTML = `
               <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                <div class="pres-header-left">
-                  <div class="pres-slide-title-bar">${topBarTitle}</div>
-                </div>
+                <div class="pres-header-left"></div>
                 <div class="pres-slide-logo">
                   <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                 </div>
               </div>
               <div class="pres-assets-body">
-                <div class="pres-subsection-pill">Campaign Assets & Media</div>
+                <div class="pres-assets-header">
+                  <div class="pres-slide-title-bar">${topBarTitle}</div>
+                  <div class="pres-subsection-pill">Campaign Assets & Media</div>
+                </div>
                 ${extraHtml}
               </div>
             `;
@@ -4205,10 +4700,12 @@
 
           // 4. CASE STUDY & REGIONAL WEB SYSTEMS SLIDES
           if (caseStudyContent) {
-            // Separate text content from media content
+            // Separate text content from media content and footnote sources
             const csChildren = Array.from(caseStudyContent.children);
             const textNode = csChildren[0] ? csChildren[0].cloneNode(true) : null;
-            const mediaNodes = csChildren.slice(1);
+            const sourcesNode = block.querySelector('.project-sources, .case-study-sources');
+            const sourcesHtml = sourcesNode ? sourcesNode.outerHTML : '';
+            const mediaNodes = csChildren.slice(1).filter(c => !c.classList.contains('case-study-sources') && !c.classList.contains('project-sources'));
             const webGrid2 = caseStudyContent.querySelector('.media-grid-2');
 
             // Slide 6 need to split in 2 as 6a "Regional Web Systems" & 6b "Case Study"
@@ -4221,15 +4718,16 @@
               slideWeb.setAttribute('data-proj-id', projId);
               slideWeb.innerHTML = `
                 <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                  <div class="pres-header-left">
-                    <div class="pres-slide-title-bar">${topBarTitle}</div>
-                  </div>
+                  <div class="pres-header-left"></div>
                   <div class="pres-slide-logo">
                     <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                   </div>
                 </div>
                 <div class="pres-assets-body">
-                  <div class="pres-subsection-pill">Regional Web Systems</div>
+                  <div class="pres-assets-header">
+                    <div class="pres-slide-title-bar">${topBarTitle}</div>
+                    <div class="pres-subsection-pill">Regional Web Systems</div>
+                  </div>
                   <div class="pres-web-group-card">
                     <div class="media-grid-2">${webGrid2.innerHTML}</div>
                   </div>
@@ -4247,17 +4745,17 @@
               slideCaseStudy.setAttribute('data-proj-id', projId);
               slideCaseStudy.innerHTML = `
                 <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                  <div class="pres-header-left">
-                    <div class="pres-slide-title-bar">${topBarTitle}</div>
-                  </div>
+                  <div class="pres-header-left"></div>
                   <div class="pres-slide-logo">
                     <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                   </div>
                 </div>
                 <div class="pres-casestudy-body">
                   <div class="pres-casestudy-text-col">
+                    <div class="pres-slide-title-bar">${topBarTitle}</div>
                     <div class="pres-subsection-pill">Case Study</div>
                     ${textNode ? textNode.innerHTML : ''}
+                    ${sourcesHtml}
                   </div>
                   <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
                     ${thumbSrc ? `
@@ -4281,17 +4779,17 @@
                 });
                 slideCaseStudy.innerHTML = `
                   <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                    <div class="pres-header-left">
-                      <div class="pres-slide-title-bar">${topBarTitle}</div>
-                    </div>
+                    <div class="pres-header-left"></div>
                     <div class="pres-slide-logo">
                       <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                     </div>
                   </div>
                   <div class="pres-casestudy-body">
                     <div class="pres-casestudy-text-col">
+                      <div class="pres-slide-title-bar">${topBarTitle}</div>
                       <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
+                      ${sourcesHtml}
                     </div>
                     <div class="pres-casestudy-media-col">
                       ${mediaHtml}
@@ -4306,17 +4804,17 @@
 
                 slideCaseStudy.innerHTML = `
                   <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
-                    <div class="pres-header-left">
-                      <div class="pres-slide-title-bar">${topBarTitle}</div>
-                    </div>
+                    <div class="pres-header-left"></div>
                     <div class="pres-slide-logo">
                       <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
                     </div>
                   </div>
                   <div class="pres-casestudy-body">
                     <div class="pres-casestudy-text-col">
+                      <div class="pres-slide-title-bar">${topBarTitle}</div>
                       <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
+                      ${sourcesHtml}
                     </div>
                     <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
                       ${thumbSrc ? `
@@ -4340,8 +4838,11 @@
           archiveSlide.setAttribute('data-slide', 'portfolio-archive');
           archiveSlide.setAttribute('data-proj-id', 'portfolio-archive');
           archiveSlide.innerHTML = `
-            <div class="pres-slide-logo pres-gallery-top-logo">
-              <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+            <div class="pres-slide-header presentation-slide-header deck-header deck-runner">
+              <div class="pres-header-left"></div>
+              <div class="pres-slide-logo">
+                <img src="img/PAVEELAI_logo.svg" alt="Pavee · Yat Fung LAI">
+              </div>
             </div>
             <div class="gallery-section-wrapper deck-webgallery-wrapper" style="margin: 0; padding: 0; width: 100%;">
               <div class="gallery-filter-bar">
@@ -4377,11 +4878,11 @@
           </div>
           <div class="pres-thankyou-body">
             <div class="pres-thankyou-content">
-              <h1 class="pres-thankyou-title">Thank You!</h1>
+              <h1 class="pres-thankyou-title"><span>Thank</span> <span>You!</span></h1>
               <div class="thankyou-contact-block">
                 <h3 class="pres-thankyou-heading">Let's Connect</h3>
                 <p class="pres-thankyou-text">
-                  Great work starts with good conversations. If you'd like to partner on a creative initiative, explore innovative workflows, or simply say hello, I'd love to hear from you.
+                  Great work starts with an easy conversation. If you want to collaborate on a creative project, talk shop about new production workflows, or just connect, I'd love to hear from you.
                 </p>
                 <div class="pres-thankyou-links contact-links">
                   <a href="mailto:yatfung.lai@gmail.com" target="_blank" class="contact-link">
