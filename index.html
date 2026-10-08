@@ -825,10 +825,10 @@
       flex-shrink: 0;
     }
 
-    /* SLIDE 1: Hero Slide Layout */
+    /* SLIDE 1: Hero Slide Layout (50% Left Text / 50% Right Media) */
     .pres-hero-body {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: flex-start;
       align-content: center;
@@ -1391,10 +1391,10 @@
       flex-shrink: 0;
     }
 
-    /* CASE STUDY SLIDE LAYOUT: 33% Left Text / 67% Right Media */
+    /* CASE STUDY SLIDE LAYOUT: 50% Left Text / 50% Right Media */
     .pres-casestudy-body {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: flex-start;
       align-content: center;
@@ -2221,6 +2221,10 @@
       .presentation-slide-thankyou,
       .pres-slide--thankyou {
         padding: var(--pres-slide-pad-top) var(--pres-slide-pad-x) var(--pres-slide-pad-bottom) var(--pres-slide-pad-x) !important;
+      }
+      .pres-hero-body,
+      .pres-casestudy-body {
+        gap: 2.25rem;
       }
       .presentation-slide-footer {
         padding-right: 130px !important;
@@ -4797,7 +4801,7 @@
                   </div>
                 `;
               } else {
-                // Projects without secondary deliverables: 16:9 ambient visual in 2fr (67%) column
+                // Projects without secondary deliverables: 16:9 ambient visual in 50% column
                 const archCard = document.querySelector(`.archive-card[href="#${projId}"]`);
                 const thumbImg = archCard ? archCard.querySelector('img') : null;
                 const thumbSrc = thumbImg ? thumbImg.getAttribute('src') : null;
