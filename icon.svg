@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+    /* Default / Light Mode: Black Disc, White P */
+    .bg { fill: #111111; }
+    .glyph { fill: #ffffff; }
+
+    /* Dark Mode: Invert to White Disc, Black P */
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #ffffff; }
+      .glyph { fill: #111111; }
+    }
+  </style>
+
+  <!-- Dynamic Disc Container -->
+  <circle class="bg" cx="32" cy="32" r="30" />
+
+  <!-- Bodoni P Glyph with Matching Classes -->
+  <path class="glyph" fill-rule="evenodd" d="
+    M 21.5 16.5
+    H 34.5
+    C 42 16.5 45.8 20.8 45.8 27
+    C 45.8 33.2 41.8 37.5 34.5 37.5
+    H 28.5
+    V 45
+    H 31.5
+    V 47.5
+    H 21.5
+    V 45
+    H 24.5
+    V 19
+    H 21.5
+    Z
+    M 28.5 19
+    V 35
+    H 34
+    C 38.6 35 41.2 32.2 41.2 27
+    C 41.2 21.8 38.6 19 34 19
+    Z
+  "/>
+</svg>
