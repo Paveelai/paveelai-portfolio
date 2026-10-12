@@ -323,10 +323,29 @@
 
     .media-caption, .gallery-lead-caption { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem; margin-bottom: 0; letter-spacing: 0.03em; line-height: 1.4; text-align: left; width: 100%; display: block; }
 
-    /* Video Embeds */
-    .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 2px; overflow: hidden; }
+    /* Video Embeds & Spotlight Master Film Modal */
+    .video-wrapper, .project-video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 2px; overflow: hidden; }
     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    .video-wrapper.custom-facade, .video-wrapper.lightbox-card { cursor: pointer; background-color: #111111; display: flex; align-items: center; justify-content: center; }
+    .project-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background-color: #000; display: block; outline: none; }
+
+    /* Ambient Project Preview Video & Watch Master Film CTA */
+    .project-video-wrapper { cursor: pointer; }
+    .project-video-trim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #000000;
+      display: block;
+      transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+    .project-video-wrapper:hover .project-video-trim {
+      transform: scale(1.02);
+      opacity: 0.88;
+    }
+    .video-wrapper.custom-facade, .video-wrapper.lightbox-card, .video-wrapper.r2-lightbox-trigger { cursor: pointer; background-color: #111111; display: flex; align-items: center; justify-content: center; }
     .facade-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: opacity 0.3s ease; }
     .video-wrapper:hover .facade-poster { opacity: 0.6; }
     .facade-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 255, 255, 0.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.45); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); display: flex; align-items: center; justify-content: center; z-index: 2; transition: all 0.25s ease; }
@@ -426,8 +445,9 @@
     .video-modal-content { position: relative; width: min(calc(100vw - 120px), calc((92vh - 60px) * 16 / 9)); max-width: 1750px; display: flex; flex-direction: column; transition: max-width 0.3s ease; }
     .video-modal.is-image-mode .video-modal-content { width: min(calc(100vw - 120px), 1600px); max-width: 1600px; }
     .modal-video-frame { position: relative; width: 100%; background: transparent; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .modal-video-frame.is-video { padding-bottom: 56.25%; background: #000000; }
-    .modal-video-frame.is-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .modal-video-frame.is-video { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; background: #000000; display: block; }
+    .modal-video-frame.is-video iframe,
+    .modal-video-frame.is-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; object-fit: contain; background: #000000; }
     .modal-video-frame.is-image { max-height: 85vh; overflow-y: auto; overflow-x: hidden; align-items: flex-start; background: #0a0a0a; }
     .modal-video-frame.is-image::-webkit-scrollbar { width: 6px; }
     .modal-video-frame.is-image::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
@@ -446,7 +466,8 @@
     .video-modal.is-single-item .modal-prev, .video-modal.is-single-item .modal-next { display: none !important; }
     .video-modal.is-vertical-mode .video-modal-content { width: min(calc(100vw - 120px), calc(85vh * 9 / 16)); max-width: 440px; }
     .modal-video-frame.is-vertical-video { position: relative; padding-bottom: 172.77%; height: 0; width: 100%; background: #000000; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden; }
-    .modal-video-frame.is-vertical-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .modal-video-frame.is-vertical-video iframe,
+    .modal-video-frame.is-vertical-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; object-fit: contain; }
 
     /* Gallery Section */
     .gallery-section-wrapper { margin-top: 4rem; padding-top: 1.5rem; border-top: none !important; width: 100%; }
@@ -1005,7 +1026,8 @@
       flex-direction: column;
     }
 
-    .pres-hero-media .video-wrapper {
+    .pres-hero-media .video-wrapper,
+    .pres-hero-media .project-video-wrapper {
       max-height: 68vh;
       border: none;
       border-radius: 2px;
@@ -2499,8 +2521,8 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="UGKPv-ERVbM" data-title="TV commercial (Brazil version) 15 sec">
-            <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
+          <div class="project-video-wrapper video-wrapper r2-lightbox-trigger" data-r2-src="https://media.paveelai.com/montana.mp4" data-title="Let's Go with Chevrolet Montana 2025">
+            <video autoplay muted loop playsinline preload="metadata" class="project-video-trim" poster="video/montana_trim.jpg">
               <source src="video/montana_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
@@ -2716,8 +2738,8 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="CE_6yMilMIs" data-title="Showreel of YouTube video playlist">
-            <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
+          <div class="project-video-wrapper video-wrapper r2-lightbox-trigger" data-r2-src="https://media.paveelai.com/htw.mp4" data-title="Know Your Chevrolet: How Things Work">
+            <video autoplay muted loop playsinline preload="metadata" class="project-video-trim" poster="video/htw_trim.jpg">
               <source src="video/htw_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
@@ -2833,8 +2855,8 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="_tDc2fGa3WA">
-            <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
+          <div class="project-video-wrapper video-wrapper r2-lightbox-trigger" data-r2-src="https://media.paveelai.com/dasl.mp4" data-title="Dettol Antiseptic Liquid : Protect Everything You Love">
+            <video autoplay muted loop playsinline preload="metadata" class="project-video-trim" poster="video/dasl_trim.jpg">
               <source src="video/dasl_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
@@ -3161,8 +3183,8 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="uTTx1q5WYVE">
-            <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
+          <div class="project-video-wrapper video-wrapper r2-lightbox-trigger" data-r2-src="https://media.paveelai.com/Dettol_Range.mp4" data-title="Dettol Range : The Loving List">
+            <video autoplay muted loop playsinline preload="metadata" class="project-video-trim" poster="video/Dettol_Range_trim.jpg">
               <source src="video/Dettol_Range_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
@@ -3339,8 +3361,8 @@
       </div>
       <div class="project-media">
         <div class="media-item">
-          <div class="video-wrapper custom-facade" data-yt-id="0yagjiWpGb4">
-            <video autoplay loop muted playsinline class="facade-poster" style="background: #111111;">
+          <div class="project-video-wrapper video-wrapper r2-lightbox-trigger" data-r2-src="https://media.paveelai.com/Enfa_TrainTrack.mp4" data-title="Enfagrow A+ : Train Track">
+            <video autoplay muted loop playsinline preload="metadata" class="project-video-trim" poster="video/Enfa_TrainTrack_trim.jpg">
               <source src="video/Enfa_TrainTrack_trim.mp4" type="video/mp4">
             </video>
             <div class="facade-play"></div>
@@ -4106,6 +4128,8 @@
     </div>
   </div>
 
+
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const heroVideo = document.querySelector('.hero-video');
@@ -4153,7 +4177,25 @@
       let currentIndex = 0;
       let activeGalleryType = 'video';
 
+      function stopModalMedia() {
+        const iframes = modalFrame.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+          try {
+            iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'stopVideo', args: [] }), '*');
+          } catch (_) {}
+          iframe.src = 'about:blank';
+        });
+        const vids = modalFrame.querySelectorAll('video');
+        vids.forEach(vid => {
+          vid.pause();
+          vid.removeAttribute('src');
+          vid.load();
+        });
+        modalFrame.innerHTML = '';
+      }
+
       function openModal(index) {
+        stopModalMedia();
         currentIndex = index;
         const item = galleryItems[currentIndex];
         
@@ -4176,6 +4218,13 @@
           const title = item.getAttribute('data-title') || '';
           modalFrame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
           modalCaption.textContent = title;
+        } else if (activeGalleryType === 'r2-video') {
+          modal.classList.remove('is-image-mode', 'is-vertical-mode');
+          modalFrame.className = 'modal-video-frame is-video';
+          const src = item.getAttribute('data-r2-src');
+          const title = item.getAttribute('data-title') || '';
+          modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: #000;"></video>`;
+          modalCaption.textContent = title;
         } else {
           modal.classList.remove('is-vertical-mode');
           modal.classList.add('is-image-mode');
@@ -4191,14 +4240,30 @@
       }
 
       function closeModal() {
-        modal.classList.remove('is-active');
+        stopModalMedia();
+        modal.classList.remove('is-active', 'is-image-mode', 'is-vertical-mode', 'is-single-item');
         modal.setAttribute('aria-hidden', 'true');
-        modalFrame.innerHTML = '';
         document.body.style.overflow = '';
       }
       window.closeLightboxModal = closeModal;
 
+      function openR2VideoModal(src, title) {
+        stopModalMedia();
+        galleryItems = [];
+        activeGalleryType = 'r2-video';
+        modal.classList.add('is-single-item');
+        modal.classList.remove('is-image-mode', 'is-vertical-mode');
+        modalFrame.className = 'modal-video-frame is-video';
+        modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: #000;"></video>`;
+        modalCaption.textContent = title || '';
+        modal.classList.add('is-active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      window.openR2VideoModal = openR2VideoModal;
+
       function openVideoModalFromYtId(ytId, title, isVertical) {
+        stopModalMedia();
         galleryItems = [];
         activeGalleryType = 'video';
         modal.classList.add('is-single-item');
@@ -4261,6 +4326,37 @@
           openVideoModalFromYtId(videoId, title, isVertical);
         });
       });
+
+      document.querySelectorAll('.r2-lightbox-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          const src = this.getAttribute('data-r2-src');
+          const title = this.getAttribute('data-title') || '';
+          openR2VideoModal(src, title);
+        });
+      });
+
+      // Ambient Preview Videos: IntersectionObserver (only play when card is visible in viewport)
+      const ambientTrimVideos = document.querySelectorAll('.project-video-trim');
+      if ('IntersectionObserver' in window && ambientTrimVideos.length > 0) {
+        const trimObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const vid = entry.target;
+            if (entry.isIntersecting) {
+              const playPromise = vid.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+              }
+            } else {
+              vid.pause();
+            }
+          });
+        }, {
+          threshold: 0.2
+        });
+
+        ambientTrimVideos.forEach((vid) => trimObserver.observe(vid));
+      }
 
       const toggleBtns = document.querySelectorAll('.js-toggle-website');
       toggleBtns.forEach((btn) => {
@@ -4583,15 +4679,25 @@
             const heroClone = heroMedia.cloneNode(true);
             heroClone.querySelectorAll('.facade-play').forEach(el => el.remove());
             heroClone.querySelectorAll('.media-caption').forEach(el => el.remove());
-            heroClone.querySelectorAll('.video-wrapper').forEach(vw => {
+            heroClone.querySelectorAll('.video-wrapper, .project-video-wrapper').forEach(vw => {
               vw.classList.remove('custom-facade');
               vw.classList.remove('lightbox-card');
               vw.classList.remove('js-lightbox-trigger');
+              vw.classList.remove('r2-lightbox-trigger');
               vw.removeAttribute('data-yt-id');
+              vw.removeAttribute('data-r2-src');
+              vw.removeAttribute('data-title');
               vw.style.cursor = 'default';
               if (projId === 'proj-kyc') {
                 vw.style.border = '1px solid #e0e0e0';
               }
+            });
+            heroClone.querySelectorAll('video').forEach(vid => {
+              vid.removeAttribute('controls');
+              vid.muted = true;
+              vid.loop = true;
+              vid.setAttribute('playsinline', '');
+              vid.setAttribute('autoplay', '');
             });
             heroMediaContent = heroClone.innerHTML;
           }
@@ -4622,14 +4728,19 @@
           `;
           presentationSlides.push(slide1);
 
-          // 2. FULLSCREEN BACKGROUND VIDEO SLIDE (YouTube of popup layer)
-          const heroVideoWrapper = (heroMedia && heroMedia.querySelector('.video-wrapper')) || block.querySelector('.video-wrapper');
+          // 2. FULLSCREEN BACKGROUND VIDEO SLIDE (YouTube of popup layer or R2 master video)
+          const heroVideoWrapper = (heroMedia && heroMedia.querySelector('.video-wrapper, .project-video-wrapper')) || block.querySelector('.video-wrapper, .project-video-wrapper');
           const heroVideoTag = (heroMedia && heroMedia.querySelector('video')) || block.querySelector('video');
-          const heroVideoSrc = heroVideoTag ? (heroVideoTag.querySelector('source') ? heroVideoTag.querySelector('source').getAttribute('src') : heroVideoTag.getAttribute('src')) : null;
+          const r2Trigger = (heroMedia && heroMedia.querySelector('.r2-lightbox-trigger')) || block.querySelector('.r2-lightbox-trigger');
+          const r2FilmSrc = r2Trigger ? r2Trigger.getAttribute('data-r2-src') : null;
+          const heroVideoSrc = r2FilmSrc || (heroVideoTag ? (heroVideoTag.querySelector('source') ? heroVideoTag.querySelector('source').getAttribute('src') : heroVideoTag.getAttribute('src')) : null);
           const heroYtId = heroVideoWrapper ? heroVideoWrapper.getAttribute('data-yt-id') : (heroMedia ? heroMedia.getAttribute('data-yt-id') : null);
           const heroCaptionElem = heroMedia ? heroMedia.querySelector('.media-caption') : null;
 
           let heroCaption = heroCaptionElem ? heroCaptionElem.textContent.trim() : '';
+          if (!heroCaption && r2Trigger) {
+            heroCaption = r2Trigger.getAttribute('data-title') || '';
+          }
           if (!heroCaption && heroVideoWrapper) {
             heroCaption = heroVideoWrapper.getAttribute('data-title') || '';
           }
@@ -4667,7 +4778,7 @@
               `;
             } else if (heroVideoSrc) {
               bgVideoHtml = `
-                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="" data-title="${heroCaption}">
+                <div class="pres-video-bg-container js-video-slide-bg" data-yt-id="" data-r2-src="${heroVideoSrc}" data-title="${heroCaption}">
                   <video class="pres-fullscreen-bg-video" loop playsinline preload="metadata">
                     <source src="${heroVideoSrc}" type="video/mp4">
                   </video>
@@ -5667,6 +5778,12 @@
             window.openVideoModalFromYtId(videoId, title, false);
             return;
           }
+          const r2Src = videoSlideBg.getAttribute('data-r2-src');
+          if (r2Src && window.openR2VideoModal) {
+            e.preventDefault();
+            window.openR2VideoModal(r2Src, title);
+            return;
+          }
         }
 
         // 0. Click on project thumbnail in Portfolio Archive slide -> navigate to slide or exit to web
@@ -5733,6 +5850,18 @@
           const orig = document.querySelector(`.main-container .js-lightbox-trigger[data-yt-id="${ytId}"]`);
           if (orig) {
             orig.click();
+            return;
+          }
+        }
+
+        // 2b. Lightbox R2 video trigger
+        const r2DeckTrigger = e.target.closest('.r2-lightbox-trigger');
+        if (r2DeckTrigger && !e.target.closest('.pres-hero-media')) {
+          e.preventDefault();
+          const r2Src = r2DeckTrigger.getAttribute('data-r2-src');
+          const title = r2DeckTrigger.getAttribute('data-title') || '';
+          if (window.openR2VideoModal && r2Src) {
+            window.openR2VideoModal(r2Src, title);
             return;
           }
         }
