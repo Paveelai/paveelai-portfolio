@@ -5430,6 +5430,10 @@
         updateButtonUI(true);
         syncDeckTheme(0);
 
+        try {
+          history.replaceState(null, '', '#deck');
+        } catch (_) {}
+
         const heroVideo = document.querySelector('.hero-video');
         if (heroVideo) heroVideo.pause();
 
@@ -5521,6 +5525,12 @@
         document.documentElement.classList.remove('is-dark-slide');
         presDeck.classList.remove('pres-deck--dark');
         updateButtonUI(false);
+
+        try {
+          if (window.location.hash.toLowerCase() === '#deck') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        } catch (_) {}
 
         const heroVideo = document.querySelector('.hero-video');
         if (heroVideo) heroVideo.play().catch(() => {});
@@ -5904,6 +5914,36 @@
           }
         }
       }, true);
+
+      // URL hash deep linking for #deck
+      window.addEventListener('hashchange', () => {
+        const isDeckHash = window.location.hash.toLowerCase() === '#deck';
+        if (isDeckHash) {
+          if (!isPresenting()) {
+            enterPresentation();
+          }
+        } else {
+          if (isPresenting()) {
+            exitPresentation();
+          }
+        }
+      });
+
+      function initDeckFromUrlHash() {
+        if (window.location.hash.toLowerCase() === '#deck') {
+          if (!isPresenting()) {
+            enterPresentation();
+          }
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(initDeckFromUrlHash, 100);
+        });
+      } else {
+        setTimeout(initDeckFromUrlHash, 100);
+      }
     })();
   </script>
 </body>
