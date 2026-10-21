@@ -1552,7 +1552,9 @@
     .pres-casestudy-text-col .case-study-sources,
     .pres-casestudy-text-col .project-sources,
     .pres-hero-info .case-study-sources,
-    .pres-hero-info .project-sources {
+    .pres-hero-info .project-sources,
+    .pres-hero-media .case-study-sources,
+    .pres-hero-media .project-sources {
       margin-top: 0.75rem;
       padding-top: 0;
       border-top: none;
@@ -1562,7 +1564,9 @@
     .pres-casestudy-text-col .case-study-sources h4,
     .pres-casestudy-text-col .project-sources h4,
     .pres-hero-info .case-study-sources h4,
-    .pres-hero-info .project-sources h4 {
+    .pres-hero-info .project-sources h4,
+    .pres-hero-media .case-study-sources h4,
+    .pres-hero-media .project-sources h4 {
       font-size: 0.68rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -1575,7 +1579,9 @@
     .pres-casestudy-text-col .case-study-sources ul,
     .pres-casestudy-text-col .project-sources ul,
     .pres-hero-info .case-study-sources ul,
-    .pres-hero-info .project-sources ul {
+    .pres-hero-info .project-sources ul,
+    .pres-hero-media .case-study-sources ul,
+    .pres-hero-media .project-sources ul {
       padding-left: 0.95rem;
       display: flex;
       flex-direction: column;
@@ -1590,7 +1596,9 @@
     .pres-casestudy-text-col .case-study-sources ul ul,
     .pres-casestudy-text-col .project-sources ul ul,
     .pres-hero-info .case-study-sources ul ul,
-    .pres-hero-info .project-sources ul ul {
+    .pres-hero-info .project-sources ul ul,
+    .pres-hero-media .case-study-sources ul ul,
+    .pres-hero-media .project-sources ul ul {
       margin-top: 0.15rem;
       margin-bottom: 0.15rem;
       padding-left: 0.85rem;
@@ -1600,21 +1608,27 @@
     .pres-casestudy-text-col .case-study-sources li,
     .pres-casestudy-text-col .project-sources li,
     .pres-hero-info .case-study-sources li,
-    .pres-hero-info .project-sources li {
+    .pres-hero-info .project-sources li,
+    .pres-hero-media .case-study-sources li,
+    .pres-hero-media .project-sources li {
       color: #aaaaaa;
     }
 
     .pres-casestudy-text-col .case-study-sources li::marker,
     .pres-casestudy-text-col .project-sources li::marker,
     .pres-hero-info .case-study-sources li::marker,
-    .pres-hero-info .project-sources li::marker {
+    .pres-hero-info .project-sources li::marker,
+    .pres-hero-media .case-study-sources li::marker,
+    .pres-hero-media .project-sources li::marker {
       color: #cccccc;
     }
 
     .pres-casestudy-text-col .case-study-sources a,
     .pres-casestudy-text-col .project-sources a,
     .pres-hero-info .case-study-sources a,
-    .pres-hero-info .project-sources a {
+    .pres-hero-info .project-sources a,
+    .pres-hero-media .case-study-sources a,
+    .pres-hero-media .project-sources a {
       color: #999999;
       text-decoration: underline;
     }
@@ -1622,7 +1636,9 @@
     .pres-casestudy-text-col .case-study-sources a:hover,
     .pres-casestudy-text-col .project-sources a:hover,
     .pres-hero-info .case-study-sources a:hover,
-    .pres-hero-info .project-sources a:hover {
+    .pres-hero-info .project-sources a:hover,
+    .pres-hero-media .case-study-sources a:hover,
+    .pres-hero-media .project-sources a:hover {
       color: #444444;
     }
 
@@ -2838,7 +2854,6 @@
                   <h4>The Problem</h4>
                   <p>Drivers felt overwhelmed by new features and had to choose between thick manuals or sales-heavy dealer videos. Chevrolet needed clear, direct guides that answered questions simply and built trust.</p>
                   <h4>Demystifying the EV Transition</h4>
-                  <p>A big part of our focus was making the electric transition simple and approachable:</p>
                   <ul>
                     <li>Broke down charging workflows, Regenerative Braking, and One-Pedal Driving into straightforward steps.</li>
                     <li>Showed app battery management and route planning clearly to relieve range anxiety.</li>
@@ -4773,11 +4788,11 @@
                 <h2 class="pres-title">${projectTitle}</h2>
                 ${clientMeta ? `<div class="pres-meta">${clientMeta.innerHTML}</div>` : ''}
                 ${details ? `<div class="pres-details">${details.innerHTML}</div>` : ''}
-                ${!caseStudyWrapper && sourcesHtml ? sourcesHtml : ''}
               </div>
               <div class="pres-hero-media">
                 ${heroMediaContent}
                 ${skillsHtml ? skillsHtml : ''}
+                ${sourcesHtml ? sourcesHtml : ''}
               </div>
             </div>
           `;
@@ -4983,7 +4998,6 @@
                     <div class="pres-slide-title-bar">${topBarTitle}</div>
                     <div class="pres-subsection-pill">Case Study</div>
                     ${textNode ? textNode.innerHTML : ''}
-                    ${sourcesHtml}
                   </div>
                   <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
                     ${thumbSrc ? `
@@ -5017,7 +5031,6 @@
                       <div class="pres-slide-title-bar">${topBarTitle}</div>
                       <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
-                      ${sourcesHtml}
                     </div>
                     <div class="pres-casestudy-media-col">
                       ${mediaHtml}
@@ -5042,7 +5055,6 @@
                       <div class="pres-slide-title-bar">${topBarTitle}</div>
                       <div class="pres-subsection-pill">Case Study</div>
                       ${textNode ? textNode.innerHTML : ''}
-                      ${sourcesHtml}
                     </div>
                     <div class="pres-casestudy-media-col pres-casestudy-media-col--ambient">
                       ${thumbSrc ? `
