@@ -63,7 +63,8 @@
     a:hover { color: var(--text-highlight); }
 
     /* Full-Screen Hero Showreel */
-    .hero-showreel-container {
+    .hero-showreel-container,
+    #hero-showreel {
       position: relative;
       width: 100%;
       height: 100vh;
@@ -76,7 +77,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #000;
+      background: #ffffff !important;
+      background-color: #ffffff !important;
       box-sizing: border-box;
     }
 
@@ -88,6 +90,8 @@
       height: 100%;
       object-fit: cover;
       transform: translate(-50%, -50%);
+      background: #ffffff !important;
+      background-color: #ffffff !important;
       z-index: 1;
     }
 
@@ -95,8 +99,15 @@
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.32);
+      opacity: 0;
+      transition: opacity 0.3s ease;
       z-index: 2;
       pointer-events: none;
+    }
+
+    .hero-showreel-container.is-video-ready .hero-overlay,
+    .pres-slide--showreel.is-video-ready .hero-overlay {
+      opacity: 1 !important;
     }
 
     .hero-center-brand {
@@ -317,7 +328,8 @@
     /* Media & Grids */
     .project-media { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
     .media-item { display: flex; flex-direction: column; width: 100%; min-width: 0; margin: 0; padding: 0; }
-    .media-item img { width: 100%; height: auto; display: block; }
+    .media-item img, .media-item video { width: 100%; height: auto; display: block; }
+    .media-item video { border-radius: 2px; background-color: #000; }
     .media-grid-2 { display: grid; grid-template-columns: 1fr; gap: 0.75rem; width: 100%; }
     .media-grid-3 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; width: 100%; }
 
@@ -440,34 +452,160 @@
     }
 
     /* Lightbox Modal */
-    .video-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 999999; opacity: 0; transition: opacity 0.25s ease; }
-    .video-modal.is-active { display: flex !important; opacity: 1; }
-    .video-modal-content { position: relative; width: min(calc(100vw - 120px), calc((92vh - 60px) * 16 / 9)); max-width: 1750px; display: flex; flex-direction: column; transition: max-width 0.3s ease; }
-    .video-modal.is-image-mode .video-modal-content { width: min(calc(100vw - 120px), 1600px); max-width: 1600px; }
-    .modal-video-frame { position: relative; width: 100%; background: transparent; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .modal-video-frame.is-video { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; background: #000000; display: block; }
-    .modal-video-frame.is-video iframe,
-    .modal-video-frame.is-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; object-fit: contain; background: #000000; }
-    .modal-video-frame.is-image { max-height: 85vh; overflow-y: auto; overflow-x: hidden; align-items: flex-start; background: #0a0a0a; }
+    .video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: rgba(15, 15, 15, 0.65);
+      backdrop-filter: blur(20px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .video-modal.is-active {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      opacity: 1;
+    }
+    .video-modal-content,
+    .video-modal.is-vertical-mode .video-modal-content {
+      position: relative;
+      background: transparent !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: flex !important;
+      flex-direction: column;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .video-modal.is-image-mode .video-modal-content {
+      width: min(calc(100vw - 180px), 1600px) !important;
+      height: auto !important;
+      max-width: 90vw !important;
+    }
+    .modal-video-frame,
+    .modal-video-frame.is-video,
+    .modal-video-frame.is-vertical-video {
+      position: relative;
+      background: transparent !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      overflow: hidden;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .modal-video-frame.is-video iframe {
+      width: min(90vw, calc(85vh * 16 / 9));
+      height: min(85vh, calc(90vw * 9 / 16));
+      max-width: 90vw;
+      max-height: 85vh;
+      border: 0;
+      display: block;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+    }
+    .modal-video-frame.is-vertical-video iframe {
+      width: min(90vw, calc(85vh * 9 / 16));
+      height: min(85vh, calc(90vw * 16 / 9));
+      max-width: 90vw;
+      max-height: 85vh;
+      border: 0;
+      display: block;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+    }
+    .modal-video-frame video,
+    .modal-video-frame.is-video video {
+      position: static !important;
+      width: min(90vw, calc(85vh * 16 / 9)) !important;
+      height: min(85vh, calc(90vw * 9 / 16)) !important;
+      max-width: 90vw !important;
+      max-height: 85vh !important;
+      object-fit: contain !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+    .modal-video-frame.is-vertical-video video {
+      position: static !important;
+      width: min(90vw, calc(85vh * 607 / 1080)) !important;
+      height: min(85vh, calc(90vw * 1080 / 607)) !important;
+      max-width: 90vw !important;
+      max-height: 85vh !important;
+      object-fit: contain !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+    .modal-video-frame.is-image { width: 100% !important; height: auto !important; max-height: 85vh !important; overflow-y: auto; overflow-x: hidden; align-items: flex-start !important; background: #0a0a0a !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; border-radius: 4px !important; }
     .modal-video-frame.is-image::-webkit-scrollbar { width: 6px; }
     .modal-video-frame.is-image::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
     .modal-video-frame.is-image img { width: 100%; height: auto; object-fit: contain; display: block; border-radius: 4px; }
-    .modal-caption { color: #ffffff; font-size: 0.85rem; letter-spacing: 0.04em; margin-top: 0.75rem; text-align: left; font-weight: 500; opacity: 0.9; }
+    .modal-caption { position: fixed; bottom: 16px; left: 25px; z-index: 1000002; color: #ffffff; font-size: 0.85rem; letter-spacing: 0.04em; margin: 0; padding: 0; text-align: left; font-weight: 500; opacity: 0.9; width: auto; max-width: calc(100vw - 50px); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75); pointer-events: none; }
+    .video-modal.is-image-mode .modal-caption { position: static; margin-top: 0.75rem; width: 100%; text-shadow: none; }
+    .video-modal.is-vertical-mode .modal-caption { left: 50%; transform: translateX(-50%); text-align: center; }
     
-    .modal-close, .modal-prev, .modal-next { position: absolute; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.85; transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease; z-index: 10; user-select: none; }
-    .modal-close { top: -54px; right: 0; font-size: 1.25rem; line-height: 1; }
-    .modal-prev { left: -60px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
-    .modal-next { right: -60px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
+    .modal-close, .modal-prev, .modal-next {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.85;
+      transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+      z-index: 1000002;
+      user-select: none;
+    }
+    .modal-close { top: 20px; right: 25px; font-size: 1.25rem; line-height: 1; }
+    .modal-prev { left: 25px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
+    .modal-next { right: 25px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; }
     
     .modal-close:hover { opacity: 1; background: rgba(255, 255, 255, 0.3); transform: scale(1.08); }
     .modal-prev:hover { opacity: 1; background: rgba(255, 255, 255, 0.3); transform: translateY(-50%) scale(1.08) !important; }
     .modal-next:hover { opacity: 1; background: rgba(255, 255, 255, 0.3); transform: translateY(-50%) scale(1.08) !important; }
     
     .video-modal.is-single-item .modal-prev, .video-modal.is-single-item .modal-next { display: none !important; }
-    .video-modal.is-vertical-mode .video-modal-content { width: min(calc(100vw - 120px), calc(85vh * 9 / 16)); max-width: 440px; }
-    .modal-video-frame.is-vertical-video { position: relative; padding-bottom: 172.77%; height: 0; width: 100%; background: #000000; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden; }
-    .modal-video-frame.is-vertical-video iframe,
-    .modal-video-frame.is-vertical-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; object-fit: contain; }
 
     /* Gallery Section */
     .gallery-section-wrapper { margin-top: 4rem; padding-top: 1.5rem; border-top: none !important; width: 100%; }
@@ -522,10 +660,6 @@
       .gallery-nav-left { display: none !important; }
       .gallery-nav-middle { display: contents; }
       .gallery-nav-right { flex-shrink: 0; display: inline-flex; }
-      .modal-close { top: -46px; right: 0; }
-      .modal-prev { left: 8px; }
-      .modal-next { right: 8px; }
-      .video-modal-content { width: 92%; }
       .about-row { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; }
       .about-photo-col { width: 100% !important; max-width: 220px; }
       .about-content { width: 100% !important; }
@@ -1116,7 +1250,8 @@
       width: 100%;
     }
 
-    .pres-assets-body .media-item img {
+    .pres-assets-body .media-item img,
+    .pres-assets-body .media-item video {
       border-radius: 2px;
       border: none;
     }
@@ -1156,12 +1291,17 @@
       min-width: 0;
     }
 
-    .pres-web-group-card .video-wrapper {
+    .pres-web-group-card .video-wrapper,
+    .pres-web-group-card video {
       width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 2px;
-      overflow: hidden;
       border: none;
+      display: block;
+    }
+
+    .pres-web-group-card .video-wrapper {
+      overflow: hidden;
       position: relative;
     }
 
@@ -1276,11 +1416,14 @@
 
     .pres-slide--video .pres-fullscreen-bg-video {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
-      background: #000000 !important;
-      background-color: #000000 !important;
+      background: transparent !important;
+      background-color: transparent !important;
       display: block;
+      margin: 0 auto;
     }
 
     /* Slide 1: Showreel Fullscreen Cover */
@@ -1300,8 +1443,8 @@
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      background: #000000 !important;
-      background-color: #000000 !important;
+      background: #ffffff !important;
+      background-color: #ffffff !important;
       padding: 0 !important;
       margin: 0 !important;
       box-sizing: border-box !important;
@@ -1324,7 +1467,8 @@
       z-index: 1 !important;
       margin: 0 !important;
       padding: 0 !important;
-      background: #000000 !important;
+      background: #ffffff !important;
+      background-color: #ffffff !important;
     }
 
     .pres-slide--showreel .hero-overlay,
@@ -1333,6 +1477,8 @@
       position: absolute !important;
       inset: 0 !important;
       background: rgba(0, 0, 0, 0.32) !important;
+      opacity: 0;
+      transition: opacity 0.3s ease;
       z-index: 2 !important;
       pointer-events: none !important;
     }
@@ -2447,7 +2593,7 @@
 
   <!-- Full-Screen Hero Showreel -->
   <section class="hero-showreel-container" id="hero-showreel">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="video/poster.jpg">
       <source src="video/showreel.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -2531,14 +2677,14 @@
 
         <div class="media-grid-2">
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="Q7ZPyb1cS28" data-gallery="montana-video" data-title="TV commercial (Master version) 60 sec">
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/montana_TVCMaster.mp4" data-gallery="montana-video" data-title="TV commercial (Master version) 60 sec">
               <img src="video/Montana_Master_frame.jpg" alt="TV commercial" class="facade-poster">
               <div class="facade-play"></div>
             </div>
             <div class="media-caption">TV commercial (Master version) 60 sec</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="uGsz04gzr8I" data-gallery="montana-video" data-title="Product features video 24 sec">
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/montana_ProductFeature.mp4" data-gallery="montana-video" data-title="Product features video 24 sec">
               <img src="video/Montana_Product_frame.jpg" alt="Product features" class="facade-poster">
               <div class="facade-play"></div>
             </div>
@@ -2576,7 +2722,10 @@
             <div style="background: #f4f5f7; padding: 0.85rem; border-radius: 4px;">
               <div class="media-grid-2">
                 <div class="media-item">
-                  <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="mVSWGZzU930" data-gallery="montana-web-video" data-title="Chevrolet Montana 2025 Brazil website walk-through"><img src="img/work/montana_web.jpg" alt="Web Portal" class="facade-poster"><div class="facade-play"></div></div>
+                  <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/montana_BrazilWeb.mp4" data-title="Chevrolet Montana 2025 Brazil website walk-through">
+                    <img src="img/work/montana_web.jpg" alt="Web Portal" class="facade-poster">
+                    <div class="facade-play"></div>
+                  </div>
                   <div class="media-caption">Brazil website walk-through</div>
                 </div>
                 <div class="media-item">
@@ -2676,7 +2825,10 @@
             <div style="background: #f4f5f7; padding: 0.85rem; border-radius: 4px;">
               <div class="media-grid-2">
                 <div class="media-item">
-                  <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="ELfEkfptyt8" data-gallery="spin-web-video" data-title="Chevrolet Spin 2025 Argentina product website walk-through"><img src="video/spin_trim.jpg" alt="Spin Web" class="facade-poster" style="background: #111111;"><div class="facade-play"></div></div>
+                  <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/spin_ArgentinaWeb.mp4" data-title="Chevrolet Spin 2025 Argentina product website walk-through">
+                    <img src="video/spin_trim.jpg" alt="Spin Web" class="facade-poster" style="background: #111111;">
+                    <div class="facade-play"></div>
+                  </div>
                   <div class="media-caption">Argentina product website walk-through</div>
                 </div>
                 <div class="media-item">
@@ -2748,27 +2900,45 @@
 
         <div class="media-grid-3">
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="g5e7KSYrTsg" data-gallery="kyc-videos" data-title="Regenerative braking and one pedal driving"><img src="img/work/kyc01.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_01RegenerativeBraking.mp4" data-gallery="kyc-videos" data-title="Regenerative braking and one pedal driving">
+              <img src="img/work/kyc01.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">Regenerative braking and one pedal driving</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="NZqqa9L_QpY" data-gallery="kyc-videos" data-title="Super Cruise"><img src="img/work/kyc02.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_02SuperCruise.mp4" data-gallery="kyc-videos" data-title="Super Cruise">
+              <img src="img/work/kyc02.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">Super Cruise</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="iH8nufrzVXM" data-gallery="kyc-videos" data-title="Navigating your 17.7 inch diagonal color touchscreen"><img src="img/work/kyc03.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_03NavigatingYourTouchscreen.mp4" data-gallery="kyc-videos" data-title="Navigating your 17.7 inch diagonal color touchscreen">
+              <img src="img/work/kyc03.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">Navigating your 17.7 inch diagonal color touchscreen</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="M2PAEyWr6F0" data-gallery="kyc-videos" data-title="EV driver information center"><img src="img/work/kyc04.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_04EV_DIC.mp4" data-gallery="kyc-videos" data-title="EV driver information center">
+              <img src="img/work/kyc04.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">EV driver information center</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="wvuz2dtN2bA" data-gallery="kyc-videos" data-title="Your EV with the myChevrolet mobile app"><img src="img/work/kyc05.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_05myChevroletMobileApp.mp4" data-gallery="kyc-videos" data-title="Your EV with the myChevrolet mobile app">
+              <img src="img/work/kyc05.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">Your EV with the myChevrolet mobile app</div>
           </div>
           <div class="media-item">
-            <div class="video-wrapper lightbox-card js-lightbox-trigger" data-yt-id="dH4WkcuwhKA" data-gallery="kyc-videos" data-title="Charging on the go DC fast charging"><img src="img/work/kyc06.jpg" loading="lazy" alt="KYC" class="facade-poster"><div class="facade-play"></div></div>
+            <div class="video-wrapper lightbox-card r2-lightbox-trigger" data-r2-src="video/htw_06DC_FastCharging.mp4" data-gallery="kyc-videos" data-title="Charging on the go DC fast charging">
+              <img src="img/work/kyc06.jpg" loading="lazy" alt="KYC" class="facade-poster">
+              <div class="facade-play"></div>
+            </div>
             <div class="media-caption">Charging on the go DC fast charging</div>
           </div>
         </div>
@@ -4000,7 +4170,7 @@
       </div>
       <div class="project-media">
         <div class="media-item" style="max-width: 420px; background: #f4f5f7; padding: 0.85rem; border-radius: 4px;">
-          <div class="video-wrapper mobile-vertical lightbox-card js-lightbox-trigger" data-yt-id="8QHzUT3Je7U" data-gallery="spark-video" data-title="Chevrolet Spark 2018: Facebook Canvas walkthrough" data-orientation="vertical">
+          <div class="video-wrapper mobile-vertical lightbox-card r2-lightbox-trigger" data-r2-src="video/spark.mp4" data-title="Chevrolet Spark 2018: Facebook Canvas walkthrough" data-orientation="vertical">
             <img src="video/spark_trim.jpg" alt="Spark" class="facade-poster" style="background: #111111;">
             <div class="facade-play"></div>
           </div>
@@ -4119,10 +4289,10 @@
 
   <!-- Lightbox Modal Container -->
   <div id="videoModal" class="video-modal" aria-hidden="true" role="dialog">
+    <button class="modal-close" aria-label="Close modal">&#x2715;</button>
+    <button class="modal-prev" aria-label="Previous item">&#10094;</button>
+    <button class="modal-next" aria-label="Next item">&#10095;</button>
     <div class="video-modal-content">
-      <button class="modal-close" aria-label="Close modal">&#x2715;</button>
-      <button class="modal-prev" aria-label="Previous item">&#10094;</button>
-      <button class="modal-next" aria-label="Next item">&#10095;</button>
       <div class="modal-video-frame" id="modalFrame"></div>
       <div class="modal-caption" id="modalCaption"></div>
     </div>
@@ -4133,7 +4303,17 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const heroVideo = document.querySelector('.hero-video');
+      const heroContainer = document.querySelector('.hero-showreel-container');
       if (heroVideo) {
+        const markHeroReady = () => {
+          if (heroContainer) heroContainer.classList.add('is-video-ready');
+        };
+        if (heroVideo.readyState >= 2) {
+          markHeroReady();
+        } else {
+          heroVideo.addEventListener('loadeddata', markHeroReady, { once: true });
+          heroVideo.addEventListener('playing', markHeroReady, { once: true });
+        }
         heroVideo.play().catch(() => {});
       }
 
@@ -4195,17 +4375,51 @@
       }
 
       function openModal(index) {
-        stopModalMedia();
         currentIndex = index;
         const item = galleryItems[currentIndex];
+        if (!item) return;
         
         if (galleryItems.length <= 1) {
           modal.classList.add('is-single-item');
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
         } else {
           modal.classList.remove('is-single-item');
+          prevBtn.style.display = '';
+          nextBtn.style.display = '';
         }
 
-        if (activeGalleryType === 'video') {
+        if (activeGalleryType === 'r2-video') {
+          modal.classList.remove('is-image-mode');
+          const isVertical = item.getAttribute('data-orientation') === 'vertical';
+          if (isVertical) {
+            modal.classList.add('is-vertical-mode');
+            modalFrame.className = 'modal-video-frame is-vertical-video';
+          } else {
+            modal.classList.remove('is-vertical-mode');
+            modalFrame.className = 'modal-video-frame is-video';
+          }
+          const src = item.getAttribute('data-r2-src') || item.getAttribute('data-video-src');
+          const title = item.getAttribute('data-title') || '';
+          modalCaption.textContent = title;
+
+          const existingVideo = modalFrame.querySelector('video');
+          if (existingVideo) {
+            existingVideo.pause();
+            existingVideo.src = src;
+            const sourceEl = existingVideo.querySelector('source');
+            if (sourceEl) sourceEl.src = src;
+            existingVideo.load();
+            const playPromise = existingVideo.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(() => {});
+            }
+          } else {
+            stopModalMedia();
+            modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
+          }
+        } else if (activeGalleryType === 'video') {
+          stopModalMedia();
           modal.classList.remove('is-image-mode');
           if (item.getAttribute('data-orientation') === 'vertical') {
             modal.classList.add('is-vertical-mode');
@@ -4218,20 +4432,20 @@
           const title = item.getAttribute('data-title') || '';
           modalFrame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
           modalCaption.textContent = title;
-        } else if (activeGalleryType === 'r2-video') {
-          modal.classList.remove('is-image-mode', 'is-vertical-mode');
-          modalFrame.className = 'modal-video-frame is-video';
-          const src = item.getAttribute('data-r2-src');
-          const title = item.getAttribute('data-title') || '';
-          modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: #000;"></video>`;
-          modalCaption.textContent = title;
         } else {
           modal.classList.remove('is-vertical-mode');
           modal.classList.add('is-image-mode');
           modalFrame.className = 'modal-video-frame is-image';
           const src = item.getAttribute('data-img');
           const caption = item.getAttribute('data-caption') || '';
-          modalFrame.innerHTML = `<img src="${src}" alt="${caption}">`;
+          const existingImg = modalFrame.querySelector('img');
+          if (existingImg) {
+            existingImg.src = src;
+            existingImg.alt = caption;
+          } else {
+            stopModalMedia();
+            modalFrame.innerHTML = `<img src="${src}" alt="${caption}">`;
+          }
           modalCaption.textContent = caption;
         }
         modal.classList.add('is-active');
@@ -4242,19 +4456,30 @@
       function closeModal() {
         stopModalMedia();
         modal.classList.remove('is-active', 'is-image-mode', 'is-vertical-mode', 'is-single-item');
+        prevBtn.style.display = '';
+        nextBtn.style.display = '';
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
       window.closeLightboxModal = closeModal;
 
-      function openR2VideoModal(src, title) {
+      function openR2VideoModal(src, title, isVertical) {
         stopModalMedia();
         galleryItems = [];
+        currentIndex = 0;
         activeGalleryType = 'r2-video';
         modal.classList.add('is-single-item');
-        modal.classList.remove('is-image-mode', 'is-vertical-mode');
-        modalFrame.className = 'modal-video-frame is-video';
-        modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: #000;"></video>`;
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        modal.classList.remove('is-image-mode');
+        if (isVertical) {
+          modal.classList.add('is-vertical-mode');
+          modalFrame.className = 'modal-video-frame is-vertical-video';
+        } else {
+          modal.classList.remove('is-vertical-mode');
+          modalFrame.className = 'modal-video-frame is-video';
+        }
+        modalFrame.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
         modalCaption.textContent = title || '';
         modal.classList.add('is-active');
         modal.setAttribute('aria-hidden', 'false');
@@ -4265,8 +4490,11 @@
       function openVideoModalFromYtId(ytId, title, isVertical) {
         stopModalMedia();
         galleryItems = [];
+        currentIndex = 0;
         activeGalleryType = 'video';
         modal.classList.add('is-single-item');
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
         modal.classList.remove('is-image-mode');
         if (isVertical) {
           modal.classList.add('is-vertical-mode');
@@ -4286,11 +4514,19 @@
       document.querySelectorAll('.js-lightbox-trigger').forEach((trigger) => {
         trigger.addEventListener('click', function(e) {
           e.preventDefault();
-          activeGalleryType = 'video';
           const galleryName = this.getAttribute('data-gallery');
-          galleryItems = Array.from(document.querySelectorAll(`.js-lightbox-trigger[data-gallery="${galleryName}"]`));
-          currentIndex = galleryItems.indexOf(this);
-          openModal(currentIndex);
+          const matching = galleryName ? Array.from(document.querySelectorAll(`.js-lightbox-trigger[data-gallery="${galleryName}"]`)) : [];
+          if (matching.length > 1) {
+            activeGalleryType = 'video';
+            galleryItems = matching;
+            currentIndex = galleryItems.indexOf(this);
+            openModal(currentIndex);
+          } else {
+            const ytId = this.getAttribute('data-yt-id');
+            const title = this.getAttribute('data-title') || '';
+            const isVertical = this.getAttribute('data-orientation') === 'vertical';
+            openVideoModalFromYtId(ytId, title, isVertical);
+          }
         });
       });
 
@@ -4299,21 +4535,42 @@
           e.preventDefault();
           activeGalleryType = 'image';
           const galleryName = this.getAttribute('data-gallery');
-          galleryItems = Array.from(document.querySelectorAll(`.js-image-modal[data-gallery="${galleryName}"]`));
-          currentIndex = galleryItems.indexOf(this);
-          openModal(currentIndex);
+          const matching = galleryName ? Array.from(document.querySelectorAll(`.js-image-modal[data-gallery="${galleryName}"]`)) : [];
+          if (matching.length > 1) {
+            galleryItems = matching;
+            currentIndex = galleryItems.indexOf(this);
+            openModal(currentIndex);
+          } else {
+            galleryItems = [this];
+            currentIndex = 0;
+            openModal(0);
+          }
         });
       });
 
       closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
-      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length; openModal(currentIndex); });
-      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % galleryItems.length; openModal(currentIndex); });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.classList.contains('video-modal-content') || e.target === modalFrame) closeModal();
+      });
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (galleryItems.length <= 1) return;
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        openModal(currentIndex);
+      });
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (galleryItems.length <= 1) return;
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        openModal(currentIndex);
+      });
       document.addEventListener('keydown', (e) => {
         if (!modal.classList.contains('is-active')) return;
         if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft') prevBtn.click();
-        if (e.key === 'ArrowRight') nextBtn.click();
+        if (galleryItems.length > 1) {
+          if (e.key === 'ArrowLeft') prevBtn.click();
+          if (e.key === 'ArrowRight') nextBtn.click();
+        }
       });
 
       document.querySelectorAll('.video-wrapper.custom-facade').forEach((facade) => {
@@ -4330,9 +4587,19 @@
       document.querySelectorAll('.r2-lightbox-trigger').forEach((trigger) => {
         trigger.addEventListener('click', function(e) {
           e.preventDefault();
-          const src = this.getAttribute('data-r2-src');
-          const title = this.getAttribute('data-title') || '';
-          openR2VideoModal(src, title);
+          const galleryName = this.getAttribute('data-gallery');
+          const matchingItems = galleryName ? Array.from(document.querySelectorAll(`.r2-lightbox-trigger[data-gallery="${galleryName}"]`)) : [];
+          if (matchingItems.length > 1) {
+            activeGalleryType = 'r2-video';
+            galleryItems = matchingItems;
+            currentIndex = galleryItems.indexOf(this);
+            openModal(currentIndex);
+          } else {
+            const src = this.getAttribute('data-r2-src') || this.getAttribute('data-video-src');
+            const title = this.getAttribute('data-title') || '';
+            const isVertical = this.getAttribute('data-orientation') === 'vertical';
+            openR2VideoModal(src, title, isVertical);
+          }
         });
       });
 
@@ -4366,6 +4633,9 @@
           if (wrapper) {
             const isOpen = wrapper.classList.toggle('is-open');
             btn.setAttribute('aria-expanded', isOpen);
+            if (!isOpen) {
+              wrapper.querySelectorAll('video').forEach(v => v.pause());
+            }
           }
         });
       });
@@ -4576,7 +4846,7 @@
         showreelSlide.setAttribute('data-slide', 'showreel');
         showreelSlide.setAttribute('data-proj-id', 'hero-showreel');
         showreelSlide.innerHTML = `
-          <video class="pres-fullscreen-bg-video pres-showreel-video" autoplay muted loop playsinline preload="auto">
+          <video class="pres-fullscreen-bg-video pres-showreel-video" autoplay muted loop playsinline preload="auto" poster="video/poster.jpg">
             <source src="video/showreel.mp4" type="video/mp4">
           </video>
           <div class="hero-overlay"></div>
@@ -4596,6 +4866,16 @@
             </div>
           </div>
         `;
+        const deckShowreelVid = showreelSlide.querySelector('video');
+        if (deckShowreelVid) {
+          const markDeckHeroReady = () => showreelSlide.classList.add('is-video-ready');
+          if (deckShowreelVid.readyState >= 2) {
+            markDeckHeroReady();
+          } else {
+            deckShowreelVid.addEventListener('loadeddata', markDeckHeroReady, { once: true });
+            deckShowreelVid.addEventListener('playing', markDeckHeroReady, { once: true });
+          }
+        }
         presentationSlides.push(showreelSlide);
 
         // SLIDE 2: Introduction & Profile (Image 1)
@@ -4821,7 +5101,7 @@
             slideStills.setAttribute('data-proj-id', projId);
 
             let grid3Title = 'TVC Keyframes';
-            if (grid3.querySelector('.video-wrapper, [data-yt-id]')) {
+            if (grid3.querySelector('.video-wrapper, [data-yt-id], video')) {
               grid3Title = 'Selected Videos';
             } else if (grid3.querySelector('img[src*="cgi"]') || projId === 'proj-montana' || projId === 'proj-spin') {
               grid3Title = 'CGI Image Suite & Gallery';
@@ -5277,7 +5557,7 @@
           const isCurrent = idx === activeIndex;
 
           // 1. Local HTML5 video
-          const vid = slide.querySelector('video.pres-fullscreen-bg-video, video');
+          const vid = slide.querySelector('video.pres-fullscreen-bg-video, .pres-hero-media video');
           if (vid) {
             if (isCurrent) {
               try {
@@ -5309,6 +5589,12 @@
             } else {
               vid.pause();
             }
+          }
+
+          if (!isCurrent) {
+            slide.querySelectorAll('video').forEach((v) => {
+              if (v !== vid) v.pause();
+            });
           }
 
           // 2. YouTube embed iframe
@@ -5379,9 +5665,9 @@
         if (!presentationSlides.length) return;
         const curSlide = presentationSlides[slideIndex];
         if (!curSlide) return;
-        const isDark = curSlide.classList.contains('pres-slide--video') ||
-                       curSlide.classList.contains('pres-slide--showreel') ||
-                       curSlide.getAttribute('data-slide') === 'showreel';
+        const isShowreel = curSlide.classList.contains('pres-slide--showreel') ||
+                           curSlide.getAttribute('data-slide') === 'showreel';
+        const isDark = curSlide.classList.contains('pres-slide--video') && !isShowreel;
         if (isDark) {
           presDeck.classList.add('pres-deck--dark');
           document.body.classList.add('is-dark-slide');
@@ -5859,9 +6145,15 @@
         if (r2DeckTrigger && !e.target.closest('.pres-hero-media')) {
           e.preventDefault();
           const r2Src = r2DeckTrigger.getAttribute('data-r2-src');
+          const orig = r2Src ? document.querySelector(`.main-container .r2-lightbox-trigger[data-r2-src="${r2Src}"]`) : null;
+          if (orig) {
+            orig.click();
+            return;
+          }
           const title = r2DeckTrigger.getAttribute('data-title') || '';
+          const isVertical = r2DeckTrigger.getAttribute('data-orientation') === 'vertical';
           if (window.openR2VideoModal && r2Src) {
-            window.openR2VideoModal(r2Src, title);
+            window.openR2VideoModal(r2Src, title, isVertical);
             return;
           }
         }
@@ -5884,8 +6176,9 @@
         if (!isPresenting()) return;
         const video = e.target;
         if (video && video.tagName === 'VIDEO') {
-          // Never auto-fullscreen silent background teaser loops
+          // Never auto-fullscreen silent background teaser loops or modal popup videos
           if (
+            video.closest('#videoModal') ||
             video.classList.contains('facade-poster') ||
             video.muted ||
             video.hasAttribute('muted') ||
