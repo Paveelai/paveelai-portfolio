@@ -21,3 +21,15 @@ Before making any file edits at the start of a new session:
   ```
   *(If new media files in `img/` or `video/` were added, include them in `git add`.)*
 
+## Presentation Deck Mode Guidelines & Architecture
+- **Typography Scale (+10%)**: Presentation Deck Mode typography is calibrated at **+10%** relative to Webpage baseline (not +20%) with tightened vertical margins and padding. This ensures zero text cutoff on compact laptop screens (e.g. 1024×640) while maintaining clean visual weight on 1080p and 4K displays.
+- **Slide 1 Layout (50/50 Grid)**:
+  - **Left column (`.pres-hero-info`)**: Project title, metadata, and details (Objective, Strategy, Execution, Achievements).
+  - **Right column (`.pres-hero-media`)**: Looping hero video (no play icon overlay, non-clickable to enlarge), followed directly beneath by **"Skills & Capabilities"** (`.project-skills`), followed directly beneath by **"Sources"** (`.project-sources`).
+- **Case Study Slides**:
+  - The left column (`.pres-casestudy-text-col`) contains the top title bar, "Case Study" pill, and the 4 case study narrative blocks. Sources are not repeated here since they live on Slide 1.
+- **Deep-Linking via `#deck`**:
+  - Direct URL deep-linking into Presentation Mode is handled via `window.location.hash === '#deck'`. State transitions update browser history via `history.replaceState`.
+- **Spotlight Video Modals**:
+  - Master film modals use the unified lightbox modal with standard 16:9 ratio and high-res video posters.
+
